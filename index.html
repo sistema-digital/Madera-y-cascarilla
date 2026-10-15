@@ -139,13 +139,76 @@ button{-webkit-tap-highlight-color:transparent}
   display:none !important;
 }
 
+
+.sync-hint{display:inline-block;margin-left:12px;font-size:11px;color:#567273;font-weight:800}
+/* Metas por material: edición y seguimiento de cumplimiento */
+.goal-editor{border:1px solid #dfe9e7;border-radius:17px;background:linear-gradient(120deg,#f4faf8,#f7f9fc);padding:16px;margin:0 0 16px}
+.goal-editor-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:13px}
+.goal-editor-head h4{margin:0;color:#173e40;font-size:15px;font-weight:900}
+.goal-editor-head p{margin:5px 0 0;color:#718184;font-size:11px;line-height:1.45}
+.goal-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) repeat(2,minmax(0,1.17fr)) auto;gap:9px;align-items:end}
+.goal-field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.goal-field-label{font-size:10px;font-weight:900;text-transform:uppercase;color:#4d6265;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.goal-field-label i{width:8px;height:8px;border-radius:50%;display:block;flex:0 0 auto}
+.goal-field input{width:100%;min-width:0;min-height:40px;background:#fff;border:1px solid #d7e3e1;border-radius:10px;padding:9px 11px;font-size:13px;color:#253e40;font-weight:800;outline:none}
+.goal-field input:focus{border-color:#139789;box-shadow:0 0 0 3px rgba(19,151,137,.12)}
+.goal-total-field{grid-column:1/-1;background:#e7f3f0;border:1px solid #c7e4da;border-radius:12px;padding:11px 12px;max-width:100%}
+.goal-total-field .goal-field-label{font-size:12px;color:#173e40}
+.goal-total-field input{font-size:17px;font-weight:900;border-color:#bddad1}
+.detail-total-with-goal{min-width:248px}
+.goal-overall-status{border-top:1px solid #dce5eb;margin-top:12px;padding-top:10px;display:grid;gap:9px}
+.goal-overall-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.detail-total .goal-overall-row span{display:inline;font-size:11px;text-transform:none;color:#5c7074;font-weight:800}
+.detail-total .goal-overall-row strong{font-size:14px;color:#173e40;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.detail-total .goal-overall-row strong.goal-positive{color:#17825f}
+.detail-total .goal-overall-row strong.goal-negative{color:#c25945}
+.goal-overall-pending{font-size:11px;color:#a66239;margin-top:10px;font-weight:800}
+
+.goal-save{border:0;border-radius:10px;background:#173e40;color:#fff;min-height:40px;padding:10px 14px;font-size:12px;font-weight:900;cursor:pointer;white-space:nowrap}
+.goal-save:hover{background:#215657}
+.goal-editor-foot{margin-top:11px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.goal-summary{font-size:11px;color:#385457;font-weight:800;line-height:1.5}
+.goal-save-note{font-size:10px;color:#829192;font-weight:700}
+.goal-metric{margin-top:12px;min-height:0}
+.goal-info{padding:14px;background:#f8fbfb;border:1px solid #dce7e5;border-radius:15px}
+.goal-summary-title{font-size:11px;font-weight:900;color:#587074;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px}
+.goal-table-wrap{border:1px solid #d9e8e4;border-radius:12px;overflow:hidden;background:#fff}
+.goal-table{width:100%;border-collapse:collapse;table-layout:fixed}
+.goal-table th,.goal-table td{padding:12px 9px;border-bottom:1px solid #e3ecea}
+.goal-table tr:last-child th,.goal-table tr:last-child td{border-bottom:none}
+.goal-table th{width:45%;background:#eef6f5;font-size:11.5px;font-weight:900;color:#587074;text-align:left;line-height:1.35}
+.goal-table td{background:#fff;font-size:clamp(17px,1.75vw,23px);line-height:1.1;font-weight:900;color:#173e40;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.goal-table tr.diff-row th{background:#f5f8f8}
+.goal-table tr.diff-row td.goal-positive{color:#17825f}
+.goal-table tr.diff-row td.goal-negative{color:#c25945}
+.goal-no-config{font-size:12px;color:#6f8285;text-align:center;padding:14px 10px;border:1px dashed #d9e3e1;border-radius:12px;background:#fafcfc;margin-top:5px;font-weight:800}
+@media(max-width:900px){.goal-fields{grid-template-columns:repeat(2,minmax(0,1fr))}.goal-save{width:100%;grid-column:1/-1}}
+@media(max-width:520px){.goal-fields{grid-template-columns:1fr}.goal-editor{padding:12px}.goal-save{width:100%}.goal-table th,.goal-table td{padding:10px 8px}.goal-table td{font-size:21px}}
+
+
+/* Detalle por material: reporte y editor plegable */
+.detail-heading-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.detail-report-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#173e40;color:white;border:0;border-radius:11px;padding:11px 15px;font-size:12px;font-weight:900;min-height:42px;cursor:pointer;box-shadow:0 5px 12px rgba(23,62,64,.13)}
+.detail-report-btn:hover{background:#245758}
+.detail-report-btn:focus-visible,.goal-editor-toggle:focus-visible{outline:3px solid #42b3a0;outline-offset:3px}
+.goal-editor-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px;background:transparent;border:0;padding:0;cursor:pointer;color:#173e40;text-align:left;font:inherit}
+.goal-editor-toggle-copy{display:grid;gap:5px;min-width:0}
+.goal-editor-toggle-title{font-size:16px;font-weight:900}
+.goal-editor-toggle-description{font-size:11.5px;color:#687d80;font-weight:650;line-height:1.4}
+.goal-editor-chevron{height:34px;width:34px;flex:0 0 34px;display:grid;place-items:center;border:1px solid #cbdfdb;background:white;border-radius:10px;color:#173e40;transition:transform .18s ease}
+.goal-editor-chevron svg{height:19px;width:19px;display:block;transition:transform .18s ease}
+.goal-editor-toggle[aria-expanded="true"] .goal-editor-chevron svg{transform:rotate(180deg)}
+.goal-editor-content{margin-top:16px}
+.goal-editor-content[hidden]{display:none!important}
+@media(max-width:640px){.detail-report-btn{width:100%}.goal-editor-toggle-title{font-size:15px}.goal-editor-toggle-description{font-size:11px}}
+
 </style>
 </head>
 <body>
 <div class="loading" id="loading"><div><div class="spinner"></div><b>Cargando análisis…</b></div></div>
 <main class="page" id="dashboardView">
   <div class="top"><div class="title"><h1>Análisis de Toneladas</h1></div><div class="top-actions"><button class="btn btn-secondary" id="installPwa" hidden>⊕ <span>Instalar app</span></button><span class="db-status loading" id="dbStatus">Conectando BD…</span><button class="btn btn-secondary" id="openTrips">☷ <span>Consultar viajes</span></button><button class="btn" id="openUpload">⬆ <span>Actualizar datos</span></button></div></div>
-  <section class="section"><div class="head"><div><h2>Toneladas por año</h2></div></div><div class="cards" id="yearCards"></div><div class="chart" id="yearChart"></div><div class="chart-note">Toca una barra o una tarjeta del año para ver el detalle por material.</div></section>
+  <section class="section"><div class="head"><div><h2>Toneladas por año</h2></div></div><div class="cards" id="yearCards"></div><div class="chart" id="yearChart"></div><div class="chart-note">Toca una barra o una tarjeta del año para ver el detalle por material. <span class="sync-hint" id="syncStatus" aria-live="polite">Comprobando datos…</span></div></section>
   <section class="section"><div class="head"><div><h2>Comparación por tipo de material</h2></div><div class="status">2026 · 2027</div></div><div class="legend"><span><i style="background:#173f6b"></i>Cascarilla</span><span><i style="background:#2e8b57"></i>Madera</span><span><i style="background:#e67e22"></i>Raquín</span><span style="margin-left:auto;font-size:11px;color:var(--muted);font-weight:800;">Periodos: Material 2026 · Material 2027</span></div><div class="chart small" id="classChart"></div></section>
 </main>
 
@@ -321,13 +384,274 @@ function inferType(codigo,proveedor){const s=(codigo+' '+proveedor).toUpperCase(
 function setDbStatus(state,text){const el=$('#dbStatus');if(!el)return;el.className='db-status '+state;el.textContent=text}
 function dbToRecord(r){return{seq:norm(r.secuencia_salida),peso:Number(r.peso||0),codigo:norm(r.codigo),tc:Number(r.tn_cortas||0),viajes:Number(r.viajes||1),fecha:r.fecha||'',fechaTexto:norm(r.fecha_texto),placa:norm(r.placa),conductor:norm(r.conductor),destino:norm(r.destino),descripcion:norm(r.descripcion),proveedor:norm(r.proveedor),tipo:norm(r.tipo).toUpperCase()}}
 function recordToDb(r){return{secuencia_salida:String(r.seq),peso:Number(r.peso||0),codigo:norm(r.codigo)||null,tn_cortas:Number(r.tc||0),viajes:Math.max(1,Math.round(Number(r.viajes||1))),fecha:r.fecha||null,fecha_texto:norm(r.fechaTexto)||null,placa:norm(r.placa)||null,conductor:norm(r.conductor)||null,destino:norm(r.destino)||null,descripcion:norm(r.descripcion)||null,proveedor:norm(r.proveedor)||null,tipo:norm(r.tipo).toUpperCase()||null,updated_at:new Date().toISOString()}}
-async function fetchAllSupabaseRows(){if(!supabaseClient)throw new Error('No se pudo inicializar el cliente de Supabase.');const pageSize=1000;let from=0,rows=[];while(true){const{data,error}=await supabaseClient.from(SUPABASE_TABLE).select('secuencia_salida,peso,codigo,tn_cortas,viajes,fecha,fecha_texto,placa,conductor,destino,descripcion,proveedor,tipo').order('fecha',{ascending:true}).order('secuencia_salida',{ascending:true}).range(from,from+pageSize-1);if(error)throw error;rows.push(...(data||[]));if(!data||data.length<pageSize)break;from+=pageSize}return rows}
+// Sincronización incremental: solo se consulta una marca de cambio por hora.
+// Los viajes se conservan en IndexedDB; la descarga completa ocurre únicamente
+// en la primera carga del navegador (o si no hay una caché recuperable).
+const SYNC_INTERVAL_MS=60*60*1000;
+const SYNC_CACHE_DB='madera_viajes_cache_v1';
+const SYNC_COLUMNS='secuencia_salida,peso,codigo,tn_cortas,viajes,fecha,fecha_texto,placa,conductor,destino,descripcion,proveedor,tipo,updated_at';
+let syncRowsByKey=new Map();
+let cachedSyncState={lastChecked:0,watermark:'',rowCount:0};
+let syncCachePromise=null,cacheWriteQueue=Promise.resolve(),syncInProgress=null;
+function maxRowStamp(rows){return (rows||[]).reduce((stamp,row)=>{const value=row?.updated_at;return value&&String(value)>stamp?String(value):stamp},'')}
+function openSyncCache(){
+ if(!('indexedDB' in window))return Promise.resolve(null);
+ if(syncCachePromise)return syncCachePromise;
+ syncCachePromise=new Promise((resolve,reject)=>{
+   const request=indexedDB.open(SYNC_CACHE_DB,1);
+   request.onupgradeneeded=()=>{
+     const db=request.result;
+     if(!db.objectStoreNames.contains('rows'))db.createObjectStore('rows',{keyPath:'secuencia_salida'});
+     if(!db.objectStoreNames.contains('meta'))db.createObjectStore('meta',{keyPath:'key'});
+   };
+   request.onsuccess=()=>resolve(request.result);
+   request.onerror=()=>reject(request.error||new Error('IndexedDB no disponible'));
+   request.onblocked=()=>reject(new Error('Cierra otras pestañas antiguas de la aplicación.'));
+ }).catch(error=>{console.warn('Caché IndexedDB no disponible:',error);return null});
+ return syncCachePromise;
+}
+async function readSyncCache(){
+ const db=await openSyncCache();
+ if(!db)return {rows:[],state:null};
+ return new Promise((resolve,reject)=>{
+   const tx=db.transaction(['rows','meta'],'readonly');
+   const rows=tx.objectStore('rows').getAll(),state=tx.objectStore('meta').get('sync');
+   tx.oncomplete=()=>resolve({rows:rows.result||[],state:state.result?.value||null});
+   tx.onerror=()=>reject(tx.error||new Error('Error leyendo el caché'));
+   tx.onabort=()=>reject(tx.error||new Error('Lectura de caché cancelada'));
+ });
+}
+function writeSyncCache({upserts=[],removals=[],replace=false,state=cachedSyncState}={}){
+ const operation=async()=>{
+   const db=await openSyncCache();
+   if(!db)return;
+   await new Promise((resolve,reject)=>{
+     const tx=db.transaction(['rows','meta'],'readwrite'),store=tx.objectStore('rows');
+     if(replace)store.clear();
+     for(const id of removals)store.delete(String(id));
+     for(const row of upserts)if(row?.secuencia_salida)store.put(row);
+     tx.objectStore('meta').put({key:'sync',value:state});
+     tx.oncomplete=resolve;
+     tx.onerror=()=>reject(tx.error||new Error('Error escribiendo en el caché'));
+     tx.onabort=()=>reject(tx.error||new Error('Guardado en caché cancelado'));
+   });
+ };
+ const queued=cacheWriteQueue.then(operation);
+ cacheWriteQueue=queued.catch(error=>console.warn('No se pudo guardar el caché:',error));
+ return queued;
+}
+function setSyncStatus(message){const el=$('#syncStatus');if(el)el.textContent=message}
+function hydrateCachedRows(rows){
+ syncRowsByKey=new Map(rows.filter(row=>row?.secuencia_salida).map(row=>[String(row.secuencia_salida),row]));
+ allData=[...syncRowsByKey.values()].filter(row=>!isGoalDbRecord(row)).map(dbToRecord);
+ const dbGoals={};
+ for(const row of syncRowsByKey.values()){
+   if(!isGoalDbRecord(row))continue;
+   const parsed=readGoalDbRecord(row);
+   if(parsed)dbGoals[parsed.year]=parsed.config;
+ }
+ if(Object.keys(dbGoals).length){goalSettingsByYear={...goalSettingsByYear,...dbGoals};cacheGoalsLocally()}
+}
+async function fetchAllSupabaseRows(){
+ if(!supabaseClient)throw new Error('No se pudo inicializar el cliente de Supabase.');
+ let from=0,rows=[];const pageSize=1000;
+ while(true){
+   const{data,error}=await supabaseClient.from(SUPABASE_TABLE)
+     .select(SYNC_COLUMNS).order('fecha',{ascending:true}).order('secuencia_salida',{ascending:true})
+     .range(from,from+pageSize-1);
+   if(error)throw error;
+   rows.push(...(data||[]));
+   if(!data||data.length<pageSize)break;
+   from+=pageSize;
+ }
+ return rows;
+}
+async function fetchSyncHead(){
+ // count exact solo envía la fecha de la última actualización y el conteo, NO descarga viajes.
+ const {data,count,error}=await supabaseClient.from(SUPABASE_TABLE)
+   .select('updated_at',{count:'exact'})
+   .order('updated_at',{ascending:false,nullsFirst:false}).limit(1);
+ if(error)throw error;
+ return{watermark:String(data?.[0]?.updated_at||''),count:Number(count??0)};
+}
+async function fetchRowsSince(watermark){
+ let rows=[],from=0;const pageSize=1000;
+ while(true){
+   const {data,error}=await supabaseClient.from(SUPABASE_TABLE)
+     .select(SYNC_COLUMNS).gt('updated_at',watermark)
+     .order('updated_at',{ascending:true}).order('secuencia_salida',{ascending:true})
+     .range(from,from+pageSize-1);
+   if(error)throw error;
+   rows.push(...(data||[]));
+   if(!data||data.length<pageSize)break;
+   from+=pageSize;
+ }
+ return rows;
+}
+async function fetchSupabaseKeys(){
+ let keys=[],from=0;const pageSize=1000;
+ while(true){
+   const{data,error}=await supabaseClient.from(SUPABASE_TABLE)
+     .select('secuencia_salida').order('secuencia_salida',{ascending:true})
+     .range(from,from+pageSize-1);
+   if(error)throw error;
+   keys.push(...(data||[]).map(row=>String(row.secuencia_salida)));
+   if(!data||data.length<pageSize)break;
+   from+=pageSize;
+ }
+ return keys;
+}
+async function fetchSupabaseKeysById(ids){
+ let result=[];
+ for(let i=0;i<ids.length;i+=100){
+   const{data,error}=await supabaseClient.from(SUPABASE_TABLE)
+     .select(SYNC_COLUMNS).in('secuencia_salida',ids.slice(i,i+100));
+   if(error)throw error;
+   result.push(...(data||[]));
+ }
+ return result;
+}
 function isInitial2027Record(r){return String(r?.seq??r?.secuencia_salida??'')===INITIAL_2027_SEQ}
-async function ensureInitial2027Record(rows){if(!supabaseClient)throw new Error('No se pudo inicializar el cliente de Supabase.');const current=(rows||[]).find(isInitial2027Record);const needsSave=!current||Number(current.tn_cortas||0)!==INITIAL_2027_TONS||Number(current.viajes||0)!==0||String(current.fecha||'')!=='2027-01-01'||String(current.tipo||'').toUpperCase()!=='MADERA';if(needsSave){const{error}=await supabaseClient.from(SUPABASE_TABLE).upsert([{...INITIAL_2027_DB_RECORD,updated_at:new Date().toISOString()}],{onConflict:'secuencia_salida'});if(error)throw error;return await fetchAllSupabaseRows()}return rows}
-async function upsertRecords(records){if(!records.length)return;if(!supabaseClient)throw new Error('No se pudo inicializar el cliente de Supabase.');const chunkSize=400;for(let i=0;i<records.length;i+=chunkSize){const payload=records.slice(i,i+chunkSize).map(recordToDb);const{error}=await supabaseClient.from(SUPABASE_TABLE).upsert(payload,{onConflict:'secuencia_salida'});if(error)throw error}}
-async function migrateLegacyLocalData(){let legacy=[];try{legacy=JSON.parse(localStorage.getItem(STORE_KEY)||'[]')}catch{}if(!Array.isArray(legacy)||!legacy.length)return 0;const clean=legacy.filter(r=>r&&r.seq);if(!clean.length)return 0;await upsertRecords(clean);localStorage.removeItem(STORE_KEY);return clean.length}
-async function loadStored(){setDbStatus('loading','Conectando BD…');try{let rows=await fetchAllSupabaseRows();if(!rows.length){const migrated=await migrateLegacyLocalData();if(migrated)rows=await fetchAllSupabaseRows()}rows=await ensureInitial2027Record(rows);allData=rows.map(dbToRecord);setDbStatus('ok','Supabase conectado')}catch(e){console.error('Supabase:',e);setDbStatus('error','Error de BD');allData=[];let legacy=[];try{legacy=JSON.parse(localStorage.getItem(STORE_KEY)||'[]')}catch{}if(Array.isArray(legacy)&&legacy.length){allData=legacy;toast('No se pudo conectar con Supabase. Se muestran temporalmente los datos guardados en este navegador.')}else{toast('No se pudo conectar con Supabase. Verifica que la tabla y las políticas estén creadas.')}}}
-async function saveStored(records=allData){await upsertRecords(records)}
+async function ensureInitial2027Record(rows){
+ if(!supabaseClient)throw new Error('No se pudo inicializar el cliente de Supabase.');
+ const current=(rows||[]).find(isInitial2027Record);
+ const needsSave=!current||Number(current.tn_cortas||0)!==INITIAL_2027_TONS||Number(current.viajes||0)!==0||String(current.fecha||'')!=='2027-01-01'||String(current.tipo||'').toUpperCase()!=='MADERA';
+ if(!needsSave)return rows;
+ const payload={...INITIAL_2027_DB_RECORD,updated_at:new Date().toISOString()};
+ const{error}=await supabaseClient.from(SUPABASE_TABLE).upsert([payload],{onConflict:'secuencia_salida'});
+ if(error)throw error;
+ return [...rows.filter(row=>!isInitial2027Record(row)),payload];
+}
+async function upsertRecords(records){
+ if(!records.length)return [];
+ if(!supabaseClient)throw new Error('No se pudo inicializar el cliente de Supabase.');
+ let saved=[];
+ for(let i=0;i<records.length;i+=400){
+   const payload=records.slice(i,i+400).map(recordToDb);
+   const{error}=await supabaseClient.from(SUPABASE_TABLE).upsert(payload,{onConflict:'secuencia_salida'});
+   if(error)throw error;
+   saved.push(...payload);
+ }
+ return saved;
+}
+async function migrateLegacyLocalData(){
+ let legacy=[];try{legacy=JSON.parse(localStorage.getItem(STORE_KEY)||'[]')}catch{}
+ if(!Array.isArray(legacy)||!legacy.length)return 0;
+ const clean=legacy.filter(r=>r&&r.seq);if(!clean.length)return 0;
+ await upsertRecords(clean);localStorage.removeItem(STORE_KEY);return clean.length;
+}
+async function cacheLocalUpserts(rows){
+ if(!rows?.length)return;
+ for(const row of rows)syncRowsByKey.set(String(row.secuencia_salida),row);
+ cachedSyncState={...cachedSyncState,rowCount:syncRowsByKey.size};
+ try{await writeSyncCache({upserts:rows,state:{...cachedSyncState}})}
+ catch(error){console.warn('Cambios guardados en Supabase pero no en IndexedDB:',error)}
+}
+function refreshSyncedView(){
+ hydrateCachedRows([...syncRowsByKey.values()]);
+ render();
+ // Actualizar números de la ventana de materiales, sin borrar campos que se estén editando.
+ if($('#detailModal')?.classList.contains('show')&&currentDetailMode==='material'){
+   const total=$('#detailBody .detail-total > b');if(total)total.textContent=fmt0(yearTotal(currentDetailYear));
+   const breakdown=getYearBreakdown(currentDetailYear);
+   for(const type of GOAL_MATERIALS){
+     const card=$(`#detailBody .donut-card[data-provider-type="${type}"]`);
+     const current=card?.querySelector('.stat-box b');
+     if(current)current.textContent=fmt0(breakdown[type]||0);
+   }
+   refreshGoalPreview(currentDetailYear);
+ }
+ if(!$('#tripsView')?.hidden&&tripSearchPerformed){
+   // Conserva los filtros aplicados y vuelve a calcular la tabla si había una consulta activa.
+   const f=tripFilterState();const plateKeys=new Set(f.plates.map(normalizeKey));
+   tripSearchResults=tripData().filter(r=>r.fecha&&r.fecha>=f.from&&r.fecha<=f.to&&(!plateKeys.size||plateKeys.has(normalizeKey(r.placa)))&&(!f.descCode||tripDescriptionCode(r)===f.descCode));
+   tripSearchResults.sort((a,b)=>String(b.fecha||'').localeCompare(String(a.fecha||''))||String(b.seq||'').localeCompare(String(a.seq||''),undefined,{numeric:true}));
+   renderTripsTable();
+ }
+}
+async function syncRemoteRows(force=false){
+ if(syncInProgress)return syncInProgress;
+ const job=(async()=>{
+   const now=Date.now();
+   if(!force&&syncRowsByKey.size&&cachedSyncState.lastChecked&&now>=cachedSyncState.lastChecked&&now-cachedSyncState.lastChecked<SYNC_INTERVAL_MS){
+     setSyncStatus('Caché actualizado · revisión automática cada hora');
+     return false;
+   }
+   if(!supabaseClient)throw new Error('No se pudo inicializar Supabase.');
+   setDbStatus('loading','Comprobando cambios…');setSyncStatus('Comprobando actualizaciones…');
+   const head=await fetchSyncHead();
+   let modified=[],removed=[],replace=false;
+   if(!syncRowsByKey.size||!cachedSyncState.watermark){
+     let rows=await fetchAllSupabaseRows();
+     if(!rows.length){const migrated=await migrateLegacyLocalData();if(migrated)rows=await fetchAllSupabaseRows()}
+     rows=await ensureInitial2027Record(rows);
+     modified=rows;replace=true;
+   }else if(head.watermark!==cachedSyncState.watermark||head.count!==syncRowsByKey.size){
+     if(head.watermark&&head.watermark!==cachedSyncState.watermark)modified=await fetchRowsSince(cachedSyncState.watermark);
+     const updated=new Map(syncRowsByKey);
+     for(const row of modified)updated.set(String(row.secuencia_salida),row);
+     // Si la cantidad difiere, solo se consultan los identificadores para detectar borrados
+     // o altas sin updated_at. No se vuelve a descargar el historial completo.
+     if(updated.size!==head.count){
+       const remoteKeys=new Set(await fetchSupabaseKeys());
+       removed=[...updated.keys()].filter(key=>!remoteKeys.has(key));
+       for(const key of removed)updated.delete(key);
+       const absent=[...remoteKeys].filter(key=>!updated.has(key));
+       if(absent.length){
+         const extra=await fetchSupabaseKeysById(absent);
+         modified.push(...extra);
+         for(const row of extra)updated.set(String(row.secuencia_salida),row);
+       }
+       if(updated.size!==head.count)throw new Error('El número de registros cambió durante la sincronización. Se reintentará más tarde.');
+     }
+   }
+   const freshRows=replace?modified:null;
+   if(replace){syncRowsByKey=new Map(freshRows.map(row=>[String(row.secuencia_salida),row]))}
+   else{for(const key of removed)syncRowsByKey.delete(String(key));for(const row of modified)syncRowsByKey.set(String(row.secuencia_salida),row)}
+   // Nunca adelantar el watermark a una fecha que no se haya consultado.
+   // Si la propia app creó el registro inicial, tomar su updated_at confirmado.
+   // En la primera carga, preguntar por el timestamp real que confirmó el servidor.
+   // Así el cursor no depende del formato o del reloj local del dispositivo.
+   const finalHead=replace?await fetchSyncHead():head;
+   cachedSyncState={lastChecked:Date.now(),watermark:finalHead.watermark||maxRowStamp(modified),rowCount:syncRowsByKey.size};
+   try{await writeSyncCache({upserts:modified,removals:removed,replace,state:{...cachedSyncState}})}
+   catch(error){console.warn('Se mostraron los cambios, pero IndexedDB no pudo guardarlos:',error);setSyncStatus('Caché no disponible en este navegador')}
+   if(replace||modified.length||removed.length){
+     refreshSyncedView();
+     // Migrar configuraciones antiguas al servidor sin sobrescribir metas ya guardadas.
+     if(replace)await restoreGoalsFromRows([...syncRowsByKey.values()]);
+     setSyncStatus(`Actualizado · ${modified.length} registro(s) recibido(s)${removed.length?` · ${removed.length} eliminado(s)`:''}`);
+   }else{
+     if($('#detailModal')?.classList.contains('show')&&currentDetailMode==='material')refreshGoalPreview(currentDetailYear);
+     setSyncStatus('Sin cambios · datos conservados en caché');
+   }
+   setDbStatus('ok','Supabase sincronizado');
+   return Boolean(replace||modified.length||removed.length);
+ })();
+ syncInProgress=job;
+ try{return await job}
+ catch(error){console.warn('Sincronización Supabase:',error);setDbStatus('error',syncRowsByKey.size?'Sin conexión · caché disponible':'Error de BD');setSyncStatus(syncRowsByKey.size?'Sin conexión · mostrando caché local':'No se pudo descargar la información');if(!syncRowsByKey.size)toast('No se pudo conectar con Supabase. Comprueba la conexión.');return false}
+ finally{syncInProgress=null}
+}
+async function loadStored(){
+ setDbStatus('loading','Cargando datos guardados…');
+ try{
+   const cached=await readSyncCache();
+   if(cached.state&&typeof cached.state==='object')cachedSyncState={...cachedSyncState,...cached.state};
+   if(cached.rows.length){hydrateCachedRows(cached.rows);render();setSyncStatus('Datos recuperados de caché local');}
+ }catch(error){console.warn('No fue posible abrir los datos en caché:',error)}
+ await syncRemoteRows();
+}
+async function saveStored(records=allData){
+ const saved=await upsertRecords(records);
+ await cacheLocalUpserts(saved);
+}
+function startHourlySync(){
+ setInterval(()=>{if(!document.hidden)syncRemoteRows()},SYNC_INTERVAL_MS);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)syncRemoteRows()});
+ window.addEventListener('online',()=>syncRemoteRows());
+ window.addEventListener('focus',()=>syncRemoteRows());
+}
 function tons(rows){return rows.reduce((s,r)=>s+Number(r.tc||0),0)}
 function yearTotal(year){if(year!=='2027')return Number(FIXED_YEAR_TOTALS[year]||0);const b=getYearBreakdown('2027');return b.CASCARILLA+b.MADERA+b.RAQUIN}
 function getYearBreakdown(year){if(year!=='2027')return HISTORICAL_TYPE_TOTALS[year]||{CASCARILLA:0,MADERA:0,RAQUIN:0};const out={CASCARILLA:0,MADERA:0,RAQUIN:0};allData.forEach(r=>{const tipo=isInitial2027Record(r)?'MADERA':(r.tipo||inferType(r.codigo,r.proveedor)).toUpperCase();if(out[tipo]!=null)out[tipo]+=isInitial2027Record(r)?INITIAL_2027_TONS:Number(r.tc||0)});return out}
@@ -452,10 +776,271 @@ function renderClassChart(){
  for(let i=0;i<=4;i++){const y=T+plotH*i/4,val=max*(1-i/4);s+=`<line x1="${L}" y1="${y}" x2="${W-R}" y2="${y}" stroke="#e8eeee"/><text x="${L-10}" y="${y+4}" text-anchor="end" font-size="11" fill="#7a8a8d">${Math.round(val/1000)}k</text>`}
  types.forEach((type,i)=>{const c=TYPE_COLORS[type].main,label=type==='RAQUIN'?'RAQUÍN':type;const cx=L+groupW*i+groupW/2;[[a[type]||0,'2026',-bw-gap/2,.58],[b[type]||0,'2027',gap/2,1]].forEach(([v,yr,off,opacity])=>{const h=plotH*(v/max),x=cx+off,y=T+plotH-h;s+=`<rect x="${x}" y="${y}" width="${bw}" height="${h}" rx="8" fill="${c}" opacity="${opacity}"/><text x="${x+bw/2}" y="${Math.max(14,y-6)}" text-anchor="middle" font-size="11" font-weight="800" fill="#425558">${fmt0(v).replace(' t','')}</text><text x="${x+bw/2}" y="${T+plotH+18}" text-anchor="middle" font-size="10" font-weight="800" fill="#718184">${yr}</text>`});s+=`<text x="${cx}" y="${H-16}" text-anchor="middle" font-size="12" font-weight="900" fill="${c}">${label}</text>`});s+='</svg>';$('#classChart').innerHTML=s
 }
-function donutSVG(percent,color,soft,label){const p=Math.max(0,Math.min(100,percent)),r=62,c=2*Math.PI*r,dash=c*p/100;return `<svg class="donut-svg" viewBox="0 0 160 160"><circle class="donut-track" cx="80" cy="80" r="${r}" stroke="${soft}"/><circle class="donut-bar" cx="80" cy="80" r="${r}" stroke="${color}" stroke-dasharray="${dash} ${c-dash}"/><text class="donut-center-main" x="80" y="77" text-anchor="middle">${fmtPct(p)}</text><text class="donut-center-sub" x="80" y="96" text-anchor="middle">DEL AÑO</text></svg>`}
-function donutCard(type,value,total,year){const colors=TYPE_COLORS[type],percent=total>0?value/total*100:0,label=type==='RAQUIN'?'RAQUÍN':type,showInitialNote=String(year)==='2027'&&type==='MADERA';return `<div class="donut-card" data-provider-type="${type}" title="Toca para ver proveedores de ${label}"><div class="donut-head"><div class="donut-title">${label}</div><i class="dot-tag" style="background:${colors.main}"></i></div><div class="material-icon-wrap"><img class="material-icon" src="${MATERIAL_ICONS[type]}" alt="Icono de ${label}"></div><div class="donut-visual">${donutSVG(percent,colors.main,colors.soft,label)}</div><div class="stats-simple"><div class="stat-box"><span>Total toneladas</span><b>${fmt0(value)}</b>${showInitialNote?`<small style="display:block;margin-top:6px;color:#718184;font-weight:800;font-size:10px">Incluye registro inicial: ${fmt0(INITIAL_2027_TONS)}</small>`:''}</div></div></div>`}
+const GOAL_STORAGE_KEY='madera_metas_material_por_anio_v1';
+const GOAL_DB_PREFIX='METAS-CONFIG-'; // Registro de configuración en Supabase, no un viaje.
+const GOAL_MATERIALS=['CASCARILLA','MADERA','RAQUIN'];
+let goalEditorExpanded=true; // Preferencia de visualización durante la sesión; no afecta lo guardado.
+let goalSettingsByYear={};
+try{const raw=JSON.parse(localStorage.getItem(GOAL_STORAGE_KEY)||'{}');if(raw&&typeof raw==='object'&&!Array.isArray(raw))goalSettingsByYear=raw}catch(e){console.warn('No fue posible leer metas guardadas:',e)}
+
+// Las metas se guardan en registros reservados de la tabla ya existente "viajes".
+// No forman parte de los viajes ni de los totales (se filtran al cargar).
+function isGoalDbRecord(row){return /^METAS-CONFIG-\d{4}$/.test(String(row?.secuencia_salida??row?.seq??''))}
+function readGoalDbRecord(row){
+ if(!isGoalDbRecord(row))return null;
+ const year=String(row.secuencia_salida).slice(GOAL_DB_PREFIX.length);
+ try{
+   const raw=JSON.parse(row.descripcion||'{}');
+   if(!raw||typeof raw!=='object'||Array.isArray(raw))return null;
+   const goals={};
+   GOAL_MATERIALS.forEach(type=>{const amount=Number(raw?.goals?.[type]);if(Number.isFinite(amount)&&amount>0)goals[type]=amount});
+   const totalAmount=Number(raw.totalGoal);
+   return {year,config:{startDate:String(raw.startDate||`${year}-01-01`),deadline:String(raw.deadline||`${year}-12-31`),goals,totalGoal:Number.isFinite(totalAmount)&&totalAmount>0?totalAmount:null}};
+ }catch(err){console.warn('Configuración de metas dañada en Supabase:',year,err);return null}
+}
+async function saveGoalsToSupabase(year,config){
+ if(!supabaseClient)throw new Error('Sin conexión con Supabase.');
+ const key=GOAL_DB_PREFIX+String(year);
+ const payload={secuencia_salida:key,peso:0,codigo:'CONFIGMETAS',tn_cortas:0,viajes:0,
+   fecha:`${year}-01-01`,fecha_texto:null,placa:null,conductor:null,destino:null,
+   descripcion:JSON.stringify({startDate:config.startDate,deadline:config.deadline,goals:config.goals,totalGoal:config.totalGoal||null}),
+   proveedor:'CONFIGURACION METAS',tipo:null,updated_at:new Date().toISOString()};
+ const {data,error}=await supabaseClient.from(SUPABASE_TABLE)
+   .upsert([payload],{onConflict:'secuencia_salida'})
+   .select('secuencia_salida,descripcion').single();
+ if(error)throw error;
+ if(data?.secuencia_salida!==key)throw new Error('Supabase no confirmó el guardado.');
+ await cacheLocalUpserts([{...payload,...data}]);
+}
+function cacheGoalsLocally(){try{localStorage.setItem(GOAL_STORAGE_KEY,JSON.stringify(goalSettingsByYear))}catch(e){console.warn('No se pudo actualizar la caché local de metas:',e)}}
+async function restoreGoalsFromRows(rows){
+ const dbConfigs={};
+ for(const row of rows.filter(isGoalDbRecord)){
+   const parsed=readGoalDbRecord(row);
+   if(parsed)dbConfigs[parsed.year]=parsed.config;
+ }
+ // Migra metas anteriores guardadas solo en este navegador, sin sobrescribir las de Supabase.
+ const cachedConfigs={...goalSettingsByYear};
+ let pendingMigration=0;
+ for(const [year,config] of Object.entries(cachedConfigs)){
+   if(dbConfigs[year]||!/^[0-9]{4}$/.test(year)||(!Object.keys(config?.goals||{}).length&&!(Number(config?.totalGoal)>0)))continue;
+   try{await saveGoalsToSupabase(year,config);dbConfigs[year]=config}
+   catch(err){console.warn('No se pudo migrar meta local a Supabase:',year,err);pendingMigration++}
+ }
+ goalSettingsByYear={...cachedConfigs,...dbConfigs};
+ cacheGoalsLocally();
+ if(pendingMigration)toast('Hay metas antiguas que no pudieron sincronizarse. Revisa tu conexión y vuelve a guardar.');
+}
+function goalDateMs(iso){if(!/^\d{4}-\d{2}-\d{2}$/.test(String(iso||'')))return NaN;const [y,m,d]=iso.split('-').map(Number),ms=Date.UTC(y,m-1,d),dt=new Date(ms);return dt.getUTCFullYear()===y&&dt.getUTCMonth()===m-1&&dt.getUTCDate()===d?ms:NaN}
+function goalDefault(year){return{startDate:`${year}-01-01`,deadline:`${year}-12-31`,goals:{},totalGoal:null}}
+function goalConfig(year){const raw=goalSettingsByYear[String(year)];return raw&&typeof raw==='object'?{startDate:raw.startDate||`${year}-01-01`,deadline:raw.deadline||`${year}-12-31`,goals:raw.goals||{},totalGoal:Number(raw.totalGoal)>0?Number(raw.totalGoal):null}:goalDefault(year)}
+function goalCalculation(year,type,actual,config){
+ const amount=Number(config?.goals?.[type]);if(!Number.isFinite(amount)||amount<=0)return null;
+ const start=goalDateMs(config?.startDate||`${year}-01-01`),end=goalDateMs(config.deadline),now=goalDateMs(todayISO()),DAY=86400000;
+ if(!Number.isFinite(start)||!Number.isFinite(end)||end<start||!Number.isFinite(now))return null;
+ const days=Math.round((end-start)/DAY)+1,elapsed=Math.max(0,Math.min(days,Math.round((now-start)/DAY)+1));
+ const ideal=amount*elapsed/days,real=Number(actual||0),variance=real-ideal,progress=real/amount*100,idealPercent=elapsed/days*100;
+ return{amount,ideal,variance,progress,idealPercent,elapsed,days,notStarted:elapsed===0,expired:elapsed===days};
+}
+function totalGoalCalculation(year,actual,config){
+ const amount=Number(config?.totalGoal);
+ if(!Number.isFinite(amount)||amount<=0)return null;
+ return goalCalculation(year,'TOTAL',actual,{...config,goals:{TOTAL:amount}});
+}
+function goalOverallHtml(year,actual,config){
+ const calc=totalGoalCalculation(year,actual,config);
+ if(!calc)return '';
+ const difference=Math.abs(calc.variance),diffClass=calc.variance>=0?'goal-positive':'goal-negative';
+ const diff=calc.variance>0.5?'+'+fmt0(difference):calc.variance<-0.5?'−'+fmt0(difference):'0 t';
+ return `<div class="goal-overall-status" aria-label="Seguimiento de la meta total">
+   <div class="goal-overall-row"><span>Meta total</span><strong>${fmt0(calc.amount)}</strong></div>
+   <div class="goal-overall-row"><span>Ideal a la fecha</span><strong>${fmt0(calc.ideal)}</strong></div>
+   <div class="goal-overall-row"><span>Diferencia</span><strong class="${diffClass}">${diff}</strong></div>
+ </div>`;
+}
+function donutSVG(percent,color,soft,label,caption='DEL AÑO',idealText=''){
+ const p=Math.max(0,Math.min(100,percent)),r=62,c=2*Math.PI*r,dash=c*p/100;
+ // Solo se muestra el porcentaje centrado. Las toneladas ideales siguen visibles en la tabla inferior.
+ return `<svg class="donut-svg" viewBox="0 0 160 160" role="img" aria-label="${esc(label)}: ${fmtPct(percent)} ${esc(caption)}"><circle class="donut-track" cx="80" cy="80" r="${r}" stroke="${soft}"/><circle class="donut-bar" cx="80" cy="80" r="${r}" stroke="${color}" stroke-dasharray="${dash} ${c-dash}"/><text class="donut-center-main" x="80" y="87" text-anchor="middle">${fmtPct(percent)}</text></svg>`;
+}
+function goalMetricHtml(year,type,actual,total,config){
+ const result=goalCalculation(year,type,actual,config);
+ if(!result)return '<div class="goal-no-config">Configura una meta para ver el ideal a la fecha.</div>';
+ const totalTons=fmt0(Number(actual||0));
+ const idealTons=fmt0(result.ideal);
+ const diffAbs=fmt0(Math.abs(result.variance));
+ const diffClass=result.variance>=0?'goal-positive':'goal-negative';
+ const diffDisplay=result.variance>0.5?`+${diffAbs}`:result.variance<-0.5?`−${diffAbs}`:'0 t';
+ return `<div class="goal-info">
+   <div class="goal-summary-title">Resumen de avance</div>
+   <div class="goal-table-wrap">
+     <table class="goal-table" aria-label="Resumen de avance">
+       <tbody>
+         <tr><th>Total toneladas</th><td>${totalTons}</td></tr>
+         <tr><th>Ideal a la fecha</th><td>${idealTons}</td></tr>
+         <tr class="diff-row"><th>Diferencia</th><td class="${diffClass}">${diffDisplay}</td></tr>
+       </tbody>
+     </table>
+   </div>
+ </div>`;
+}
+function donutCard(type,value,total,year,config){
+ const colors=TYPE_COLORS[type],share=total>0?value/total*100:0,goal=goalCalculation(year,type,value,config),percent=goal?goal.progress:share;
+ const label=type==='RAQUIN'?'RAQUÍN':type,showInitialNote=String(year)==='2027'&&type==='MADERA';
+ return `<div class="donut-card" data-provider-type="${type}" title="Toca para ver proveedores de ${label}"><div class="donut-head"><div class="donut-title">${label}</div><i class="dot-tag" style="background:${colors.main}"></i></div><div class="material-icon-wrap"><img class="material-icon" src="${MATERIAL_ICONS[type]}" alt="Icono de ${label}"></div><div class="donut-visual">${donutSVG(percent,colors.main,colors.soft,label,goal?'DE LA META':'DEL AÑO',goal?fmt0(goal.ideal):'')}</div><div class="stats-simple"><div class="stat-box"><span>Total toneladas</span><b>${fmt0(value)}</b>${showInitialNote?`<small style="display:block;margin-top:6px;color:#718184;font-weight:800;font-size:10px">Incluye registro inicial: ${fmt0(INITIAL_2027_TONS)}</small>`:''}</div></div><div class="goal-metric">${goalMetricHtml(year,type,value,total,config)}</div></div>`;
+}
+function renderGoalEditor(year,config){
+ const labels={CASCARILLA:'Cascarilla',MADERA:'Madera',RAQUIN:'Raquín'};
+ return `<section class="goal-editor" aria-label="Configuración de metas del año ${year}">
+ <button class="goal-editor-toggle" id="toggleGoalEditor" type="button" aria-expanded="true" aria-controls="goalEditorContent"><span class="goal-editor-toggle-copy"><span class="goal-editor-toggle-title">🎯 Metas de producción · ${year}</span><span class="goal-editor-toggle-description">Meta total, metas por material y fechas. Toca para mostrar u ocultar.</span></span><span class="goal-editor-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button>
+ <div class="goal-editor-content" id="goalEditorContent">
+ <div class="goal-fields"><label class="goal-field goal-total-field"><span class="goal-field-label">🎯 META TOTAL · t</span><input id="goalTotalInput" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Escribe la meta total" value="${Number(config.totalGoal)>0?Number(config.totalGoal):''}" aria-label="Meta total en toneladas"></label>${GOAL_MATERIALS.map(type=>`<label class="goal-field"><span class="goal-field-label"><i style="background:${TYPE_COLORS[type].main}"></i>${labels[type]} · t</span><input type="number" min="0" step="0.01" inputmode="decimal" data-goal-input="${type}" placeholder="Sin meta" value="${Number(config.goals[type])>0?Number(config.goals[type]):''}" aria-label="Meta de ${labels[type]} en toneladas"></label>`).join('')}
+ <label class="goal-field"><span class="goal-field-label">📅 Fecha inicial</span><input id="goalStartDate" type="date" value="${esc(config.startDate)}" aria-label="Fecha inicial de las metas"></label>
+ <label class="goal-field"><span class="goal-field-label">📅 Fecha límite</span><input id="goalDeadline" type="date" value="${esc(config.deadline)}" aria-label="Fecha límite de las metas"></label><button class="goal-save" id="saveGoals" type="button">✓ Guardar metas</button></div>
+ <div class="goal-editor-foot"><span id="goalsSummary" class="goal-summary"></span><span class="goal-save-note">Al guardar, se sincroniza con Supabase para todos los dispositivos.</span></div>
+ </div></section>`;
+}
+function readGoalDraft(){
+ const goals={};
+ GOAL_MATERIALS.forEach(type=>{const input=$(`#detailBody [data-goal-input="${type}"]`);const raw=String(input?.value||'').trim();if(raw!==''){const v=Number(raw);if(Number.isFinite(v)&&v>0)goals[type]=v}});
+ const rawTotal=String($('#goalTotalInput')?.value||'').trim();
+ return{startDate:$('#goalStartDate')?.value||'',deadline:$('#goalDeadline')?.value||'',goals,totalGoal:rawTotal!==''?Number(rawTotal):null};
+}
+function refreshGoalPreview(year){
+ if(currentDetailMode!=='material'||String(year)!==currentDetailYear)return;
+ const draft=readGoalDraft(),br=getYearBreakdown(year),total=yearTotal(year),today=todayISO();
+ const startMs=goalDateMs(draft.startDate),endMs=goalDateMs(draft.deadline);
+ const invalidDates=!Number.isFinite(startMs)||!Number.isFinite(endMs)||endMs<startMs;
+ let materialGoalSum=0,materialIdealSum=0,configured=0;
+ GOAL_MATERIALS.forEach(type=>{
+   const value=Number(br[type]||0),calc=goalCalculation(year,type,value,draft),card=$(`#detailBody .donut-card[data-provider-type="${type}"]`);
+   if(!card)return;
+   const colors=TYPE_COLORS[type],share=total>0?value/total*100:0;
+   card.querySelector('.donut-visual').innerHTML=donutSVG(calc?calc.progress:share,colors.main,colors.soft,type,calc?'DE LA META':'DEL AÑO',calc?fmt0(calc.ideal):'');
+   card.querySelector('.goal-metric').innerHTML=invalidDates&&draft.goals[type]?'<div class="goal-no-config">Revisa las fechas del período.</div>':goalMetricHtml(year,type,value,total,draft);
+   if(calc){materialGoalSum+=calc.amount;materialIdealSum+=calc.ideal;configured++}
+ });
+ const overall=$('#goalOverallDisplay');
+ if(overall)overall.innerHTML=invalidDates?'<div class="goal-overall-pending">Revisa las fechas de la meta total.</div>':goalOverallHtml(year,total,draft);
+ const node=$('#goalsSummary');if(node){
+   node.textContent=invalidDates?'La fecha límite no puede ser anterior a la fecha inicial.':draft.totalGoal>0?`Meta total: ${fmt0(draft.totalGoal)} · Calculada desde la fecha inicial hasta la fecha límite.`:configured?`Metas por material configuradas: ${configured}.`:'Introduce una meta total o metas por material.';
+ }
+}
+async function saveGoalDraft(year){
+ const cfg=readGoalDraft(),start=goalDateMs(cfg.startDate),end=goalDateMs(cfg.deadline);
+ if(!Number.isFinite(start)){toast('Selecciona una fecha inicial válida.');return}
+ if(!Number.isFinite(end)){toast('Selecciona una fecha límite válida.');return}
+ if(end<start){toast('La fecha límite no puede ser anterior a la fecha inicial.');return}
+ const bad=GOAL_MATERIALS.find(type=>{const input=$(`#detailBody [data-goal-input="${type}"]`),raw=String(input?.value||'').trim();return raw!==''&&(!Number.isFinite(Number(raw))||Number(raw)<=0)});
+ if(bad){toast('Las metas deben ser mayores que cero. Déjalas vacías si no aplican.');return}
+ const rawTotal=String($('#goalTotalInput')?.value||'').trim();
+ if(rawTotal!==''&&(!Number.isFinite(Number(rawTotal))||Number(rawTotal)<=0)){toast('La meta total debe ser mayor que cero o quedar vacía.');return}
+ const btn=$('#saveGoals');if(btn?.disabled)return;
+ if(btn){btn.disabled=true;btn.textContent='Guardando en Supabase…'}
+ try{
+   await saveGoalsToSupabase(year,cfg);
+   // La BD es la fuente principal. Actualizamos la memoria solo al recibir confirmación.
+   goalSettingsByYear={...goalSettingsByYear,[String(year)]:cfg};
+   cacheGoalsLocally();
+   toast(Object.keys(cfg.goals).length||cfg.totalGoal?'Metas (incluida la meta total) y fechas guardadas en Supabase.':'Metas borradas y cambio guardado en Supabase.');
+   refreshGoalPreview(year);
+ }catch(err){
+   console.error('Guardar metas en Supabase:',err);
+   toast('No se guardaron las metas en Supabase: '+(err.message||'Revisa tu conexión.'));
+ }finally{if(btn){btn.disabled=false;btn.textContent='✓ Guardar metas'}}
+}
+function setGoalEditorExpanded(expanded){
+ goalEditorExpanded=Boolean(expanded);
+ const toggle=$('#toggleGoalEditor'),content=$('#goalEditorContent');
+ if(toggle)toggle.setAttribute('aria-expanded',String(goalEditorExpanded));
+ if(content)content.hidden=!goalEditorExpanded;
+}
+function bindGoalEditor(year){
+ $$('#detailBody [data-goal-input],#goalTotalInput,#goalStartDate,#goalDeadline').forEach(input=>input.addEventListener('input',()=>refreshGoalPreview(year)));
+ $('#saveGoals').addEventListener('click',e=>{e.stopPropagation();saveGoalDraft(year)});
+ $('#toggleGoalEditor').addEventListener('click',e=>{e.stopPropagation();setGoalEditorExpanded(!goalEditorExpanded)});
+ setGoalEditorExpanded(goalEditorExpanded);
+ refreshGoalPreview(year);
+}
+
+
+// PDF de detalle por material: valores reales y metas de la vista, no modifica Supabase.
+function generateMaterialReportPdf(year){
+ const jsPDF=window.jspdf?.jsPDF;
+ if(!jsPDF){toast('No se cargó el generador de PDF. Verifica tu conexión a internet e intenta nuevamente.');return}
+ if(currentDetailMode!=='material'||String(year)!==String(currentDetailYear))return;
+ try{
+  const config=readGoalDraft();
+  const total=Number(yearTotal(String(year))||0);
+  const breakdown=getYearBreakdown(String(year));
+  const overall=totalGoalCalculation(year,total,config);
+  const types=[{id:'CASCARILLA',label:'CASCARILLA'},{id:'MADERA',label:'MADERA'},{id:'RAQUIN',label:'RAQUÍN'}];
+  const pdf=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
+  const W=pdf.internal.pageSize.getWidth(),H=pdf.internal.pageSize.getHeight();
+  const fmt=n=>new Intl.NumberFormat('es-PA',{minimumFractionDigits:0,maximumFractionDigits:0}).format(Number(n||0))+' t';
+  const pct=n=>new Intl.NumberFormat('es-PA',{minimumFractionDigits:0,maximumFractionDigits:1}).format(Number(n||0))+'%';
+  const diff=n=>n>0.5?'+'+fmt(n):n<-.5?'-'+fmt(Math.abs(n)):'0 t';
+  const isoDate=iso=>/^\d{4}-\d{2}-\d{2}$/.test(iso||'')?`${iso.slice(8,10)}/${iso.slice(5,7)}/${iso.slice(0,4)}`:'No definida';
+  const generated=new Date().toLocaleString('es-PA');
+  const totalCols=[14,61,108,155,202,249,283];
+  const primary=[23,62,64],dark=[27,55,57],muted=[99,120,124],green=[28,130,91],red=[192,79,63];
+  function rgb(a){pdf.setTextColor(...a)}
+  function rectangle(x,y,w,h,color){pdf.setFillColor(...color);pdf.rect(x,y,w,h,'F')}
+  function str(text,x,y,size=10,color=dark,style='normal',align='left'){
+   pdf.setFont('helvetica',style);pdf.setFontSize(size);rgb(color);pdf.text(String(text),x,y,{align});
+  }
+  rectangle(0,0,W,38,primary);
+  str('REPORTE DE PRODUCCIÓN POR MATERIAL',14,17,18,[255,255,255],'bold');
+  str(`Año ${year}  |  Generado ${generated}`,14,27,10,[216,233,231]);
+  str('ANÁLISIS DE TONELADAS',W-14,17,9,[216,233,231],'bold','right');
+  rectangle(14,44,W-28,12,[242,247,247]);
+  str('FECHA INICIAL',19,49,7,muted,'bold');
+  str(isoDate(config.startDate),19,54,9,dark,'bold');
+  str('FECHA LÍMITE',118,49,7,muted,'bold');
+  str(isoDate(config.deadline),118,54,9,dark,'bold');
+  str('CORTE DEL REPORTE',217,49,7,muted,'bold');
+  str(isoDate(todayISO()),217,54,9,dark,'bold');
+  const cards=[
+   ['TOTAL REGISTRADO',fmt(total),primary],
+   ['META TOTAL',overall?fmt(overall.amount):'Sin meta',dark],
+   ['IDEAL A LA FECHA',overall?fmt(overall.ideal):'Sin meta',dark],
+   ['DIFERENCIA',overall?diff(overall.variance):'Sin meta',overall&&overall.variance<-.5?red:green]
+  ];
+  const gap=8,cw=(W-28-gap*3)/4;
+  cards.forEach(([title,value,color],i)=>{
+   const x=14+i*(cw+gap);
+   rectangle(x,63,cw,27,[248,251,251]);
+   pdf.setDrawColor(220,231,230);pdf.rect(x,63,cw,27,'S');
+   str(title,x+5,71,8,muted,'bold');
+   str(value,x+5,83,15,color,'bold');
+  });
+  str('DETALLE POR MATERIAL',14,103,12,primary,'bold');
+  const widths=[51,45,44,46,47,36];
+  const colX=[14];for(const w of widths)colX.push(colX[colX.length-1]+w);
+  rectangle(14,109,W-28,13,primary);
+  const heads=['MATERIAL','TOTAL TONELADAS','META','IDEAL A LA FECHA','DIFERENCIA','% DE META'];
+  heads.forEach((label,i)=>str(label,i===0?colX[i]+4:colX[i+1]-4,117,8,[255,255,255],'bold',i===0?'left':'right'));
+  types.forEach((item,i)=>{
+   const y=122+i*21,value=Number(breakdown[item.id]||0),calc=goalCalculation(year,item.id,value,config);
+   rectangle(14,y,W-28,21,i%2===0?[248,251,251]:[237,245,243]);
+   const display=[item.label,fmt(value),calc?fmt(calc.amount):'Sin meta',calc?fmt(calc.ideal):'-',calc?diff(calc.variance):'-',calc?pct(calc.progress):'-'];
+   display.forEach((v,j)=>str(v,j===0?colX[j]+4:colX[j+1]-4,y+12,10,j===4&&calc?(calc.variance<-.5?red:green):dark,j===0||j===4?'bold':'normal',j===0?'left':'right'));
+  });
+  pdf.setDrawColor(220,230,227);pdf.line(14,185,W-14,185);
+  const msg='Ideal calculado proporcionalmente por días desde la fecha inicial hasta la fecha límite, con corte a hoy.';
+  str(msg,14,191,8,muted);
+  if(String(year)==='2027')str('Madera: el total registrado incluye las 2,000 t de saldo inicial.',14,198,8,muted);
+  const original=goalConfig(year);
+  const unsaved=JSON.stringify(config)!==JSON.stringify(original);
+  if(unsaved)str('NOTA: el reporte utiliza cambios de metas aún no guardados en Supabase.',W-14,198,7.5,red,'bold','right');
+  str(`Página 1 de 1`,W-14,H-5,7,muted,'normal','right');
+  pdf.save(`reporte_materiales_${year}_${todayISO()}.pdf`);
+  toast('Reporte por material generado en PDF.');
+ }catch(err){console.error('Generar reporte de materiales:',err);toast('No se pudo generar el reporte PDF: '+(err.message||'Error inesperado.'))}
+}
+
 function updateDetailHeader(){const b=$('#detailBackBtn');if(currentDetailMode==='material'){$('#detailModalTitle').textContent='Detalle por material';b.classList.remove('show')}else{$('#detailModalTitle').textContent='Detalle por proveedor';b.classList.add('show')}}
-function openMaterialDetail(year){currentDetailYear=String(year);currentDetailMode='material';updateDetailHeader();const br=getYearBreakdown(currentDetailYear),total=yearTotal(currentDetailYear);const items=[{type:'CASCARILLA',value:+br.CASCARILLA||0},{type:'MADERA',value:+br.MADERA||0},{type:'RAQUIN',value:+br.RAQUIN||0}];$('#detailBody').innerHTML=`<div class="detail-header"><div><div class="detail-year">Año ${currentDetailYear}</div><div class="detail-help">Toca cada material para ver proveedores e histórico por año.</div></div><div class="detail-total"><span>Total acumulado</span><b>${fmt0(total)}</b></div></div><div class="detail-grid">${items.map(x=>donutCard(x.type,x.value,total,currentDetailYear)).join('')}</div>`;$$('#detailBody [data-provider-type]').forEach(card=>card.onclick=()=>openProviderTypeDetail(currentDetailYear,card.dataset.providerType));$('#detailModal').classList.add('show')}
+function openMaterialDetail(year){currentDetailYear=String(year);currentDetailMode='material';updateDetailHeader();const br=getYearBreakdown(currentDetailYear),total=yearTotal(currentDetailYear);const items=[{type:'CASCARILLA',value:+br.CASCARILLA||0},{type:'MADERA',value:+br.MADERA||0},{type:'RAQUIN',value:+br.RAQUIN||0}];$('#detailBody').innerHTML=`<div class="detail-header"><div><div class="detail-year">Año ${currentDetailYear}</div><div class="detail-help">Toca cada material para ver proveedores e histórico por año.</div><div class="detail-heading-actions"><button id="generateMaterialReport" class="detail-report-btn" type="button">▤ Generar reporte PDF</button></div></div><div class="detail-total detail-total-with-goal"><span>Total acumulado</span><b>${fmt0(total)}</b><div id="goalOverallDisplay">${goalOverallHtml(currentDetailYear,total,goalConfig(currentDetailYear))}</div></div></div>${renderGoalEditor(currentDetailYear,goalConfig(currentDetailYear))}<div class="detail-grid">${items.map(x=>donutCard(x.type,x.value,total,currentDetailYear,goalConfig(currentDetailYear))).join('')}</div>`;$$('#detailBody [data-provider-type]').forEach(card=>card.onclick=()=>openProviderTypeDetail(currentDetailYear,card.dataset.providerType));bindGoalEditor(currentDetailYear);$('#generateMaterialReport').addEventListener('click',e=>{e.stopPropagation();generateMaterialReportPdf(currentDetailYear)});$('#detailModal').classList.add('show')}
 function openProviderTypeDetail(year,type){currentDetailYear=String(year);currentDetailMode='provider';updateDetailHeader();const totalYear=yearTotal(currentDetailYear),breakdown=getYearBreakdown(currentDetailYear),materialTotal=Number(breakdown[type]||0),label=type==='RAQUIN'?'RAQUÍN':type,color=TYPE_COLORS[type]?.main||'#6f7f82',providers=getYearProviderBreakdown(currentDetailYear).filter(x=>x.tipo===type).sort((a,b)=>b.toneladas-a.toneladas),history=getMaterialHistory(type),maxHistory=Math.max(1,...history.map(x=>x.value));$('#detailModalTitle').textContent=`Detalle · ${label}`;$('#detailBody').innerHTML=`<div class="detail-header"><div class="provider-detail-heading"><img class="provider-detail-icon" src="${MATERIAL_ICONS[type]}" alt="Icono de ${label}"><div><div class="detail-year">${label} · Año ${currentDetailYear}</div><div class="detail-help">Proveedores del año seleccionado e histórico del material. Toca una barra anual para ver las toneladas acarreadas por mes.</div></div></div><div class="detail-total"><span>Total ${label}</span><b>${fmt0(materialTotal)}</b></div></div><div class="provider-section-title"><h4>Proveedores · ${currentDetailYear}</h4><span>${providers.length} proveedor${providers.length===1?'':'es'}</span></div>${providers.length?`<div class="provider-list">${providers.map(item=>{const pm=materialTotal>0?item.toneladas/materialTotal*100:0,py=totalYear>0?item.toneladas/totalYear*100:0;return `<div class="provider-item"><div class="provider-row"><div><div class="provider-name">${esc(item.proveedor)}</div><div class="provider-type" style="color:${color}">${label}</div></div><div class="compare-percent" style="color:${color}">${fmtPct(pm)}</div></div><div class="compare-bar"><i style="width:${Math.min(100,Math.max(0,pm))}%;background:${color}"></i></div><div class="provider-tons">${fmt0(item.toneladas)} · ${fmtPct(py)} del total del año</div></div>`}).join('')}</div>`:`<div class="empty-state">No hay proveedores con toneladas registradas para ${label} en ${currentDetailYear}.</div>`}<div class="material-history"><div class="material-history-title"><div><h4>Histórico de ${label}</h4><p>Toneladas del material y porcentaje dentro de cada año. Toca una barra para abrir el detalle mensual.</p></div></div><div class="history-list">${history.map(item=>`<div class="history-row history-year-action ${item.year===currentDetailYear?'history-selected':''}" data-history-year="${item.year}" role="button" tabindex="0" aria-label="Ver detalle mensual de ${label} ${item.year}"><div class="history-year">${item.year}</div><div><div class="history-bar"><i style="width:${item.value?Math.max(2,item.value/maxHistory*100):0}%;background:${color}"></i></div><div class="history-sub"><span>${fmtPct(item.pct)} del año</span><span>${SEASON_LABELS[item.year]}</span></div></div><div class="history-value"><b>${fmt0(item.value)}</b><span>${item.year===currentDetailYear?'Seleccionado':'Ver meses'}</span></div></div>`).join('')}</div><div id="monthlyMaterialDetail" class="monthly-detail"></div></div>`;bindHistoryYearClicks(type,color)}
 function resetUploadCounters(){['rRead','rTotal','rNew','rDup'].forEach(id=>$('#'+id).textContent='0')}
 function parseCsv(text){const lines=[];let row=[],cell='',q=false;for(let i=0;i<text.length;i++){const ch=text[i];if(q){if(ch==='"'&&text[i+1]==='"'){cell+='"';i++}else if(ch==='"')q=false;else cell+=ch}else{if(ch==='"')q=true;else if(ch===','||ch===';'){const delim=(text.split(/\r?\n/)[0].match(/;/g)||[]).length>(text.split(/\r?\n/)[0].match(/,/g)||[]).length?';':',';if(ch===delim){row.push(cell);cell=''}else cell+=ch}else if(ch==='\n'){row.push(cell.replace(/\r$/,''));lines.push(row);row=[];cell=''}else cell+=ch}}if(cell||row.length){row.push(cell);lines.push(row)}return matrixToRows(lines)}
@@ -466,7 +1051,7 @@ function bind(){
  $('#openTrips').onclick=openTripsView;$('#backDashboard').onclick=closeTripsView;$('#applyTripFilters').onclick=applyTripSearch;$('#clearTripFilters').onclick=resetTripFilters;$('#tripPlateButton').onclick=e=>{e.stopPropagation();setPlateDropdown($('#tripPlateDropdown').hidden)};$('#tripPlateSearch').addEventListener('input',renderTripPlateOptions);$('#tripPlateSearch').addEventListener('click',e=>e.stopPropagation());$('#tripPlateAll').onchange=e=>{const all=getTripPlateList();if(e.target.checked)all.forEach(p=>selectedTripPlates.add(p));else selectedTripPlates.clear();renderTripPlateOptions()};$('#tripPlateClear').onclick=e=>{e.stopPropagation();selectedTripPlates.clear();renderTripPlateOptions()};$('#tripPlateDone').onclick=e=>{e.stopPropagation();setPlateDropdown(false)};document.addEventListener('click',e=>{if(!$('#plateMulti')?.contains(e.target))setPlateDropdown(false)});$('#generateTripReport').onclick=generateTripReport;$('#printTripReport').onclick=printTripReport;$('#downloadTripReportPdf').onclick=downloadTripReportPdf;$('#closeTripReport').onclick=()=>{$('#tripReport').hidden=true};
  $('#openUpload').onclick=()=>{resetUploadCounters();$('#uploadModal').classList.add('show')};$('#closeUpload').onclick=()=>$('#uploadModal').classList.remove('show');$('#closeDetail').onclick=()=>$('#detailModal').classList.remove('show');$('#detailBackBtn').onclick=()=>openMaterialDetail(currentDetailYear);const closeLoad=()=>$('#loadResultModal').classList.remove('show');$('#closeLoadResult').onclick=closeLoad;$('#okLoadResult').onclick=closeLoad;$('#dropZone').onclick=()=>$('#fileInput').click();$('#fileInput').onchange=e=>{const f=e.target.files?.[0];if(f)importFile(f);e.target.value=''};const dz=$('#dropZone');['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('drag')}));['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('drag')}));dz.addEventListener('drop',e=>{const f=e.dataTransfer.files?.[0];if(f)importFile(f)});$$('.modalbg').forEach(bg=>bg.addEventListener('click',e=>{if(e.target===bg)bg.classList.remove('show')}));document.addEventListener('keydown',e=>{if(e.key==='Escape')$$('.modalbg.show').forEach(x=>x.classList.remove('show'))})
 }
-async function start(){try{bind();await loadStored();render()}catch(e){console.error(e);toast('Se recuperó la aplicación después de un error de inicio.')}finally{$('#loading').classList.add('hide')}}
+async function start(){try{bind();await loadStored();render();startHourlySync()}catch(e){console.error(e);toast('Se recuperó la aplicación después de un error de inicio.')}finally{$('#loading').classList.add('hide')}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>start(),{once:true});else start();setTimeout(()=>$('#loading')?.classList.add('hide'),5000);
 </script>
 
