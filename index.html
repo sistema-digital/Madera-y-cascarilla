@@ -202,6 +202,139 @@ button{-webkit-tap-highlight-color:transparent}
 .goal-editor-content[hidden]{display:none!important}
 @media(max-width:640px){.detail-report-btn{width:100%}.goal-editor-toggle-title{font-size:15px}.goal-editor-toggle-description{font-size:11px}}
 
+
+/* Consulta y reporte: cada placa en su propio bloque; mismas columnas y subtotales. */
+.trip-plate-groups{display:grid;gap:17px}
+.trip-plate-card{border:1px solid #d9e5e4;background:#fff;border-radius:14px;overflow:hidden;min-width:0}
+.trip-plate-card[open]>.trip-plate-heading{border-bottom:1px solid #d8e6e3}
+.trip-plate-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;list-style:none;padding:13px 16px;background:#173e40;color:#fff;cursor:pointer}
+.trip-plate-heading::-webkit-details-marker{display:none}
+.trip-plate-heading.static-heading{cursor:default}
+.trip-plate-heading-main{display:flex;align-items:center;gap:11px;min-width:0}
+.trip-plate-symbol{background:rgba(255,255,255,.13);width:41px;height:41px;display:grid;place-items:center;border-radius:11px;font-size:22px}
+.trip-plate-caption{display:block;font-size:10px;font-weight:800;letter-spacing:.065em;color:#c8dedb}
+.trip-plate-name{display:block;font-size:20px;font-weight:900;letter-spacing:.01em}
+.trip-plate-metrics{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:wrap;font-size:12px;font-weight:800;text-align:right}
+.trip-plate-metrics strong{font-size:18px;color:#fff;white-space:nowrap}
+.trip-plate-chevron{font-size:16px;color:#d2e7e5;transition:transform .15s ease}
+.trip-plate-card[open] .trip-plate-chevron{transform:rotate(180deg)}
+.trip-plate-table-wrap{overflow-x:auto;scrollbar-width:thin}
+.trip-by-plate-table{border-collapse:collapse;width:100%;min-width:780px;table-layout:fixed;font-size:12px}
+.trip-by-plate-table th{background:#eaf2f2;color:#27494b;text-transform:uppercase;font-size:10px;font-weight:900;letter-spacing:.015em;text-align:left;padding:11px 10px;white-space:nowrap}
+.trip-by-plate-table td{padding:11px 10px;color:#31474a;vertical-align:top;border-top:1px solid #e8eeee;overflow-wrap:anywhere}
+.trip-by-plate-table tbody tr:nth-child(even){background:#f9fbfb}
+.trip-by-plate-table th:nth-child(1),.trip-by-plate-table td:nth-child(1){width:5%;text-align:center}
+.trip-by-plate-table th:nth-child(2),.trip-by-plate-table td:nth-child(2){width:14%;white-space:nowrap}
+.trip-by-plate-table th:nth-child(3),.trip-by-plate-table td:nth-child(3){width:20%}
+.trip-by-plate-table th:nth-child(4),.trip-by-plate-table td:nth-child(4){width:13%;text-align:right;white-space:nowrap;font-weight:900}
+.trip-by-plate-table th:nth-child(5),.trip-by-plate-table td:nth-child(5){width:22%}
+.trip-by-plate-table th:nth-child(6),.trip-by-plate-table td:nth-child(6){width:26%}
+.trip-by-plate-table tfoot td{background:#eaf6f4;color:#173e40;font-weight:900;border-top:2px solid #b8ddd6;padding:13px 10px}
+.trip-by-plate-table tfoot td:last-child{text-align:right;font-size:15px;white-space:nowrap}
+.report-by-plate-summary{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.trip-plate-report-groups{margin-top:8px}
+.trip-plate-report-groups .trip-plate-heading{cursor:default}
+
+.trip-data-note{margin:0 0 13px;padding:9px 12px;border:1px solid #d5e7e5;background:#f1f8f6;color:#355d5a;border-radius:10px;font-size:12px;font-weight:700;line-height:1.5}
+.trip-data-note[hidden]{display:none!important}
+@media(max-width:800px){
+ .trip-plate-table-wrap{overflow:visible}
+ .trip-by-plate-table{display:block;min-width:0!important;width:100%;font-size:12px}
+ .trip-by-plate-table colgroup,.trip-by-plate-table thead{display:none}
+ .trip-by-plate-table tbody{display:grid;gap:10px;padding:10px;background:#f5f8f8}
+ .trip-by-plate-table tbody tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;border:1px solid #e0e9e9;border-radius:10px;padding:12px;background:#fff!important}
+ .trip-by-plate-table tbody td{display:block;width:auto!important;text-align:left!important;white-space:normal!important;min-width:0;border:0;padding:0;color:#263e41;overflow-wrap:anywhere}
+ .trip-by-plate-table tbody td::before{content:attr(data-label);display:block;font-weight:900;font-size:10px;text-transform:uppercase;color:#708184;margin-bottom:5px}
+ .trip-by-plate-table tbody td:nth-child(5),.trip-by-plate-table tbody td:nth-child(6){grid-column:1/-1}
+ .trip-by-plate-table tfoot{display:block}.trip-by-plate-table tfoot tr{display:flex;justify-content:space-between;flex-wrap:wrap}
+ .trip-by-plate-table tfoot td{display:block;white-space:normal!important}
+}
+@media print{
+ .trip-by-plate-table{display:table!important}
+ .trip-by-plate-table colgroup{display:table-column-group!important}
+ .trip-by-plate-table thead{display:table-header-group!important}
+ .trip-by-plate-table tbody{display:table-row-group!important;padding:0!important}
+ .trip-by-plate-table tbody tr{display:table-row!important;border:0!important;padding:0!important}
+ .trip-by-plate-table tbody td{display:table-cell!important;width:auto!important;padding:6px 5px!important}
+ .trip-by-plate-table tbody td::before{display:none!important}
+ .trip-by-plate-table tfoot{display:table-footer-group!important}.trip-by-plate-table tfoot tr{display:table-row!important}.trip-by-plate-table tfoot td{display:table-cell!important}
+ .trip-data-note{display:none!important}
+}
+@media(max-width:600px){.trip-plate-heading{align-items:flex-start;padding:12px;flex-direction:column}.trip-plate-metrics{align-self:stretch;justify-content:space-between}.trip-plate-name{font-size:18px}.trip-plate-symbol{width:36px;height:36px}.report-by-plate-summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media print{
+ @page{size:A4 landscape;margin:9mm}
+ #tripReport{zoom:1!important;break-inside:auto!important;page-break-inside:auto!important;padding:0!important;margin:0!important;width:100%!important}
+ #reportTripGroups{display:block!important}
+ .trip-plate-card{border-radius:0!important;margin-bottom:12px!important;break-inside:auto!important;page-break-inside:auto!important;overflow:visible!important}
+ .trip-plate-heading{background:#173e40!important;color:#fff!important;break-after:avoid!important;page-break-after:avoid!important}
+ .trip-plate-table-wrap{overflow:visible!important}
+ .trip-by-plate-table{min-width:0!important;font-size:9px!important;table-layout:fixed}
+ .trip-by-plate-table th,.trip-by-plate-table td{padding:6px 5px!important}
+ .trip-by-plate-table thead{display:table-header-group!important}
+ .trip-by-plate-table tbody tr,.trip-by-plate-table tfoot tr{break-inside:avoid!important;page-break-inside:avoid!important}
+ .trip-by-plate-table tfoot td{font-size:10px!important}
+ .report-by-plate-summary{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ .report-summary-item{padding:9px!important}
+}
+
+
+/* VIAJES_REPORTE_CARTA_VERTICAL_V2 */
+/* Papel carta (8,5 x 11 pulgadas), vertical, márgenes estrechos. */
+@page { size: letter portrait; margin: 6mm; }
+@media print {
+  html,body { width:auto!important; padding:0!important; margin:0!important; }
+  #tripsView { width:100%!important;max-width:none!important; }
+  #tripReport {width:100%!important;padding:0!important;margin:0!important;zoom:1!important;
+               border:0!important;box-shadow:none!important;}
+  #tripReport .report-head {padding-bottom:5px!important;border-bottom:1px solid #ccd9d7!important;}
+  #tripReport .report-head h2 {font-size:12px!important;font-weight:700!important;letter-spacing:0!important;margin:2px 0!important;}
+  #tripReport .report-eyebrow {font-size:6.5px!important;letter-spacing:.04em!important;font-weight:600!important;}
+  #tripReport .report-head p {font-size:8px!important;}
+  #tripReport .report-filter-summary {gap:3px!important;margin-top:3px!important;}
+  #tripReport .report-chip {font-size:7px!important;font-weight:500!important;padding:2px 5px!important;}
+  #tripReport .report-summary-grid {display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:5px!important;margin:6px 0!important;}
+  #tripReport .report-summary-item {padding:5px 7px!important;border-radius:3px!important;}
+  #tripReport .report-summary-item span {font-size:7px!important;font-weight:600!important;}
+  #tripReport .report-summary-item b {font-size:11px!important;font-weight:700!important;margin-top:1px!important;}
+  #tripReport .trip-plate-groups {display:block!important;}
+  #tripReport .trip-plate-card {border:1px solid #d5dddd!important;margin-bottom:7px!important;box-shadow:none!important;border-radius:2px!important;break-inside:auto!important;overflow:visible!important;}
+  #tripReport .trip-plate-heading {background:#eaf2f2!important;color:#173e40!important;padding:3px 6px!important;min-height:0!important;gap:6px!important;border:0!important;border-bottom:1px solid #cbd9d8!important;flex-direction:row!important;align-items:center!important;break-after:avoid!important;}
+  #tripReport .trip-plate-heading-main {gap:0!important;}
+  #tripReport .trip-plate-symbol,#tripReport .trip-plate-caption,#tripReport .trip-plate-chevron {display:none!important;}
+  #tripReport .trip-plate-name {color:#173e40!important;font-size:10px!important;font-weight:700!important;line-height:1.15!important;}
+  #tripReport .trip-plate-metrics {gap:8px!important;align-self:auto!important;justify-content:flex-end!important;color:#36565a!important;font-size:8px!important;font-weight:500!important;}
+  #tripReport .trip-plate-metrics strong {font-size:8.5px!important;color:#173e40!important;font-weight:700!important;}
+  #tripReport .trip-plate-table-wrap {overflow:visible!important;}
+  #tripReport .trip-by-plate-table {display:table!important;table-layout:fixed!important;width:100%!important;min-width:0!important;font-size:7.6px!important;line-height:1.25!important;}
+  #tripReport .trip-by-plate-table colgroup {display:table-column-group!important;}
+  #tripReport .trip-by-plate-table thead {display:table-header-group!important;}
+  #tripReport .trip-by-plate-table tbody {display:table-row-group!important;padding:0!important;background:transparent!important;}
+  #tripReport .trip-by-plate-table tr {display:table-row!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+  #tripReport .trip-by-plate-table th {padding:3px 3px!important;font-size:7.1px!important;font-weight:600!important;letter-spacing:0!important;line-height:1.2!important;white-space:normal!important;}
+  #tripReport .trip-by-plate-table td {display:table-cell!important;padding:3px 3px!important;font-size:7.6px!important;line-height:1.22!important;font-weight:400!important;white-space:normal!important;overflow-wrap:anywhere!important;}
+  #tripReport .trip-by-plate-table td::before {display:none!important;}
+  #tripReport .trip-by-plate-table tbody td:nth-child(2),#tripReport .trip-by-plate-table tbody td:nth-child(4) {white-space:nowrap!important;}
+  #tripReport .trip-by-plate-table tbody td:nth-child(4) {font-weight:600!important;}
+  /* El subtotal va sólo al final de la placa, no repetido en cada página. */
+  #tripReport .trip-by-plate-table tfoot {display:table-row-group!important;}
+  #tripReport .trip-by-plate-table tfoot td {padding:4px 3px!important;font-size:8px!important;font-weight:700!important;}
+  #tripReport .report-generated {font-size:7px!important;margin-top:5px!important;}
+}
+
+/* MADERA_ACCIONES_PDF_EN_RESULTADOS_V1 */
+.trip-result-title{display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-width:0}
+.trip-result-title h2{margin:0}
+.trip-result-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.trip-result-actions[hidden]{display:none!important}
+.trip-table-head{flex-wrap:wrap;align-items:center;row-gap:10px}
+/* La versión completa para imprimir se construye al buscar, pero no se duplica en pantalla. */
+@media screen{#tripReport{display:none!important}}
+@media print{#tripReport:not([hidden]){display:block!important}}
+@media(max-width:620px){
+ .trip-result-title{width:100%}
+ .trip-result-actions{width:100%;justify-content:stretch}
+ .trip-result-actions .report-print-btn,.trip-result-actions .report-pdf-btn{flex:1;min-width:0}
+}
 </style>
 </head>
 <body>
@@ -218,7 +351,6 @@ button{-webkit-tap-highlight-color:transparent}
       <button class="back-link" id="backDashboard">← Volver al análisis</button>
       <div class="title trips-title"><h1>Consulta de viajes</h1><p>Consulta los registros por rango de fechas, selección múltiple de placas y descripción por código.</p></div>
     </div>
-    <button class="export-btn report-main-btn" id="generateTripReport">▥ Generar reporte</button>
   </div>
 
   <section class="trip-filter-panel">
@@ -261,42 +393,28 @@ button{-webkit-tap-highlight-color:transparent}
     <div class="report-head">
       <div>
         <div class="report-eyebrow">REPORTE DEL PERÍODO</div>
-        <h2>Resumen de acarreo</h2>
+        <h2>Detalle de viajes por placa</h2>
         <p id="reportPeriodText"></p>
         <div class="report-filter-summary" id="reportFilterSummary"></div>
       </div>
-      <div class="report-actions">
-        <button type="button" class="report-print-btn" id="printTripReport">▣ Imprimir / PDF</button>
-        <button type="button" class="report-pdf-btn" id="downloadTripReportPdf">⬇ Descargar PDF</button>
-        <button type="button" class="report-close-btn" id="closeTripReport">✕</button>
-      </div>
     </div>
-    <div class="report-summary-grid" id="reportSummaryGrid"></div>
-    <div class="report-grid">
-      <article class="report-chart-card report-wide">
-        <div class="report-chart-title"><div><h3 id="reportTimelineTitle">Toneladas por mes</h3><p>Comparativo mensual de TN cortas transportadas y cantidad de viajes.</p></div></div>
-        <div id="reportTimelineChart"></div>
-      </article>
-      <article class="report-chart-card">
-        <div class="report-chart-title"><div><h3>Toneladas por placa / equipo</h3><p>Participación de cada equipo dentro del período consultado.</p></div></div>
-        <div id="reportPlateChart"></div>
-      </article>
-      <article class="report-chart-card">
-        <div class="report-chart-title"><div><h3>Toneladas por descripción</h3><p>Distribución por código y proveedor del material transportado.</p></div></div>
-        <div id="reportDescriptionChart"></div>
-      </article>
-    </div>
+    <div class="report-summary-grid report-by-plate-summary" id="reportSummaryGrid"></div>
+    <div id="reportTripGroups" class="trip-plate-groups trip-plate-report-groups"></div>
+    <div class="report-generated" id="reportGenerated"></div>
   </section>
 
   <section class="trip-table-card">
-    <div class="trip-table-head"><h2>☷ Detalle de viajes</h2><span id="tripResultLabel">0 viajes</span></div>
-    <div class="trip-table-wrap">
-      <table class="trip-table">
-        <thead><tr><th>#</th><th>Fecha</th><th>Placa</th><th>Conductor</th><th>Destino</th><th>Descripción</th><th>TN cortas</th></tr></thead>
-        <tbody id="tripTableBody"></tbody>
-      </table>
-      <div class="trip-empty" id="tripEmpty">Seleccione un rango de fechas y por lo menos una placa o una descripción, luego presione Buscar.</div>
+    <div class="trip-table-head">
+      <div class="trip-result-title"><h2>☷ Detalle de viajes por placa</h2><span id="tripResultLabel">0 viajes</span></div>
+      <div class="report-actions trip-result-actions" id="tripResultsActions" hidden>
+        <button type="button" class="report-print-btn" id="printTripReport">▣ Imprimir / PDF</button>
+        <button type="button" class="report-pdf-btn" id="downloadTripReportPdf">⬇ Descargar PDF</button>
+        <button type="button" class="report-close-btn" id="closeTripReport" title="Cerrar resultados" aria-label="Cerrar resultados">✕</button>
+      </div>
     </div>
+    <div class="trip-data-note" id="tripDataNote" aria-live="polite" hidden></div>
+    <div class="trip-plate-groups" id="tripPlateDetails"></div>
+    <div class="trip-empty" id="tripEmpty">Seleccione un rango de fechas y por lo menos una placa o una descripción, luego presione Buscar.</div>
     <div class="trip-pagination"><span id="tripShowing">Mostrando 0 viajes</span><div class="pager" id="tripPager"></div></div>
   </section>
 </main>
@@ -341,7 +459,7 @@ const CODE_TO_META=Object.fromEntries(MATERIAL_CATALOG.map(x=>[x.codigo,x]));
 const PROVIDER_TO_CODE=Object.fromEntries(MATERIAL_CATALOG.map(x=>[normalizeKey(x.proveedor),x.codigo]));
 const DESCRIPTION_FILTER_CODES=['M001','M002','M003','M004','M005','M006','M007','MD01','MD02','MD03','MD04','RQ01','RQ02','RQ03'];
 const DESCRIPTION_FILTER_OPTIONS=DESCRIPTION_FILTER_CODES.map(c=>CODE_TO_META[c]).filter(Boolean);
-let allData=[];let currentDetailYear='2027';let currentDetailMode='material';let tripPage=1;const TRIP_PAGE_SIZE=10;let tripFiltersInitialized=false;let tripSearchPerformed=false;let tripSearchResults=[];let selectedTripPlates=new Set();let tripDatePicker=null,tripDateStart='',tripDateEnd='';
+let allData=[];let currentDetailYear='2027';let currentDetailMode='material';let tripPage=1;const TRIP_PAGE_SIZE=10;let tripFiltersInitialized=false;let tripSearchPerformed=false;let tripSearchResults=[];let selectedTripPlates=new Set();let tripDatePicker=null,tripDateStart='',tripDateEnd='';let tripAppliedFilters=null,tripSearchSource='',tripSearchRequestId=0;
 const $=s=>document.querySelector(s);
 const $$=s=>[...document.querySelectorAll(s)];
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
@@ -561,10 +679,10 @@ function refreshSyncedView(){
    }
    refreshGoalPreview(currentDetailYear);
  }
- if(!$('#tripsView')?.hidden&&tripSearchPerformed){
+ if(!$('#tripsView')?.hidden&&tripSearchPerformed&&tripSearchSource!=='supabase'){
    // Conserva los filtros aplicados y vuelve a calcular la tabla si había una consulta activa.
-   const f=tripFilterState();const plateKeys=new Set(f.plates.map(normalizeKey));
-   tripSearchResults=tripData().filter(r=>r.fecha&&r.fecha>=f.from&&r.fecha<=f.to&&(!plateKeys.size||plateKeys.has(normalizeKey(r.placa)))&&(!f.descCode||tripDescriptionCode(r)===f.descCode));
+   const f=tripFilterState();const plateKeys=new Set(f.plates.map(normalizeTripPlate));
+   tripSearchResults=tripData().filter(r=>r.fecha&&r.fecha>=f.from&&r.fecha<=f.to&&(!plateKeys.size||plateKeys.has(normalizeTripPlate(r.placa)))&&(!f.descCode||tripDescriptionCode(r)===f.descCode));
    tripSearchResults.sort((a,b)=>String(b.fecha||'').localeCompare(String(a.fecha||''))||String(b.seq||'').localeCompare(String(a.seq||''),undefined,{numeric:true}));
    renderTripsTable();
  }
@@ -677,19 +795,117 @@ function tripDescriptionCode(r){
  return fromDesc||fromProvider||''
 }
 function populateTripDescriptions(){const sel=$('#tripDescription');if(!sel)return;const current=sel.value;sel.innerHTML='<option value="">Seleccione una descripción</option>'+DESCRIPTION_FILTER_OPTIONS.map(x=>`<option value="${esc(x.codigo)}">${esc(x.proveedor)} — ${esc(x.codigo)}</option>`).join('');if(DESCRIPTION_FILTER_CODES.includes(current))sel.value=current}
+function normalizeTripPlate(v){return norm(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase().replace(/[^A-Z0-9]/g,'')}
 function tripData(){return allData.filter(r=>!isInitial2027Record(r))}
-function getTripPlateList(){return [...new Set(tripData().map(r=>norm(r.placa)).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es',{numeric:true,sensitivity:'base'}))}
+function getTripPlateList(){const map=new Map();tripData().forEach(r=>{const plate=norm(r.placa),key=normalizeTripPlate(plate);if(key&&!map.has(key))map.set(key,plate)});return [...map.values()].sort((a,b)=>a.localeCompare(b,'es',{numeric:true,sensitivity:'base'}))}
 function updateTripPlateButton(){const list=[...selectedTripPlates];const label=$('#tripPlateLabel'),count=$('#tripPlateCount');if(!list.length){label.textContent='Seleccione una o más placas';count.hidden=true}else{label.textContent=list.length<=2?list.join(', '):`${list.length} placas seleccionadas`;count.textContent=String(list.length);count.hidden=false}const all=getTripPlateList(),allBox=$('#tripPlateAll');if(allBox){allBox.checked=all.length>0&&list.length===all.length;allBox.indeterminate=list.length>0&&list.length<all.length}}
 function renderTripPlateOptions(){const container=$('#tripPlateOptions');if(!container)return;const query=normalizeKey($('#tripPlateSearch')?.value||''),plates=getTripPlateList(),visible=plates.filter(p=>!query||normalizeKey(p).includes(query));container.innerHTML='';if(!visible.length){const e=document.createElement('div');e.className='plate-none';e.textContent='No se encontraron placas.';container.appendChild(e)}else visible.forEach(plate=>{const label=document.createElement('label');label.className='plate-option';const input=document.createElement('input');input.type='checkbox';input.checked=selectedTripPlates.has(plate);input.dataset.plate=plate;input.addEventListener('change',()=>{if(input.checked)selectedTripPlates.add(plate);else selectedTripPlates.delete(plate);updateTripPlateButton()});const span=document.createElement('span');span.textContent=plate;label.append(input,span);container.appendChild(label)});updateTripPlateButton()}
 function populateTripPlates(){const available=new Set(getTripPlateList());selectedTripPlates=new Set([...selectedTripPlates].filter(p=>available.has(p)));renderTripPlateOptions();updateTripPlateButton()}
 function setPlateDropdown(open){const drop=$('#tripPlateDropdown'),btn=$('#tripPlateButton');if(!drop||!btn)return;drop.hidden=!open;btn.classList.toggle('open',open);btn.setAttribute('aria-expanded',String(open));if(open){renderTripPlateOptions();setTimeout(()=>$('#tripPlateSearch')?.focus(),0)}}
 function initTripDatePickers(){if(tripFiltersInitialized)return;tripFiltersInitialized=true;if(!window.flatpickr){toast('No se pudo cargar el calendario visual. Verifica la conexión a internet.');return}const locale=window.flatpickr?.l10ns?.es||'es';tripDatePicker=flatpickr('#tripDateRange',{locale,mode:'range',dateFormat:'Y-m-d',altInput:true,altFormat:'d/m/Y',disableMobile:true,allowInput:false,maxDate:'today',monthSelectorType:'static',conjunction:' a ',onChange:(dates)=>{tripDateStart=dates[0]?dateISO(dates[0]):'';tripDateEnd=dates[1]?dateISO(dates[1]):''}})}
-function clearTripResults(message='Seleccione un rango de fechas y por lo menos una placa o una descripción, luego presione Buscar.'){hideTripReport();tripSearchPerformed=false;tripSearchResults=[];tripPage=1;renderTripsTable(message)}
+function clearTripResults(message='Seleccione un rango de fechas y por lo menos una placa o una descripción, luego presione Buscar.'){
+ tripSearchRequestId++;hideTripReport();tripSearchPerformed=false;tripSearchResults=[];tripSearchSource='';tripAppliedFilters=null;tripPage=1;
+ const info=$('#tripDataNote');if(info){info.textContent='';info.hidden=true}
+ renderTripsTable(message);
+}
 function tripFilterState(){const from=tripDateStart,to=tripDateEnd,plates=[...selectedTripPlates],descCode=norm($('#tripDescription').value).toUpperCase();return{from,to,plates,descCode,hasDates:Boolean(from&&to),hasOther:Boolean(plates.length||descCode)}}
-function applyTripSearch(){hideTripReport();const f=tripFilterState();if(!f.hasDates){clearTripResults('Debes seleccionar una fecha inicial y una fecha final en el rango antes de realizar la consulta.');toast('Selecciona el rango completo de fechas.');return}if(f.from>f.to){clearTripResults('La fecha inicial no puede ser posterior a la fecha final.');toast('Revisa el rango de fechas.');return}if(!f.hasOther){clearTripResults('Además del rango de fechas, selecciona una o más placas o una descripción.');toast('Selecciona al menos una placa o una descripción.');return}const plateKeys=new Set(f.plates.map(normalizeKey));tripSearchResults=tripData().filter(r=>r.fecha&&r.fecha>=f.from&&r.fecha<=f.to&&(!plateKeys.size||plateKeys.has(normalizeKey(r.placa)))&&(!f.descCode||tripDescriptionCode(r)===f.descCode)).sort((a,b)=>String(b.fecha||'').localeCompare(String(a.fecha||''))||String(b.seq||'').localeCompare(String(a.seq||''),undefined,{numeric:true}));tripSearchPerformed=true;tripPage=1;renderTripsTable()}
+// Consulta el período directamente a Supabase: no usa la caché horaria.
+// Cada página de 500 filas se descarga y se comprueba contra el conteo exacto.
+async function fetchCompleteTripPeriod(from,to){
+ if(!supabaseClient)throw new Error('Supabase no está disponible en este navegador.');
+ const size=500,received=[];let expected=null;
+ for(let offset=0;offset<1000000;offset+=size){
+  const {data,error,count}=await supabaseClient.from(SUPABASE_TABLE)
+   .select(SYNC_COLUMNS,offset===0?{count:'exact'}:{})
+   .gte('fecha',from).lte('fecha',to)
+   .order('fecha',{ascending:false}).order('secuencia_salida',{ascending:false})
+   .range(offset,offset+size-1);
+  if(error)throw error;
+  if(!Array.isArray(data))throw new Error('Supabase no devolvió una lista de viajes.');
+  if(offset===0&&Number.isInteger(count))expected=count;
+  received.push(...data);
+  if(data.length<size)break;
+  if(expected!==null&&received.length>=expected)break;
+ }
+ if(expected!==null&&received.length!==expected)
+  throw new Error(`La consulta devolvió ${received.length} de ${expected} registros. No se mostrará una consulta incompleta.`);
+ const seen=new Set();
+ for(const r of received){
+  const key=String(r.secuencia_salida??'');
+  if(seen.has(key))throw new Error('Se detectaron registros repetidos entre páginas. Repite la búsqueda.');
+  seen.add(key);
+ }
+ return received.map(dbToRecord).filter(r=>!isInitial2027Record(r));
+}
+function tripRowsForFilters(rows,f){
+ const plateKeys=new Set(f.plates.map(normalizeTripPlate));
+ return rows.filter(r=>r.fecha&&r.fecha>=f.from&&r.fecha<=f.to
+  &&(!plateKeys.size||plateKeys.has(normalizeTripPlate(r.placa)))
+  &&(!f.descCode||tripDescriptionCode(r)===f.descCode))
+  .sort((a,b)=>String(b.fecha||'').localeCompare(String(a.fecha||''))||String(b.seq||'').localeCompare(String(a.seq||''),undefined,{numeric:true}));
+}
+async function applyTripSearch(){
+ hideTripReport();const f=tripFilterState();
+ if(!f.hasDates){clearTripResults('Debes seleccionar una fecha inicial y una fecha final en el rango antes de realizar la consulta.');toast('Selecciona el rango completo de fechas.');return}
+ if(f.from>f.to){clearTripResults('La fecha inicial no puede ser posterior a la fecha final.');toast('Revisa el rango de fechas.');return}
+ if(!f.hasOther){clearTripResults('Además del rango de fechas, selecciona una o más placas o una descripción.');toast('Selecciona al menos una placa o una descripción.');return}
+ const id=++tripSearchRequestId,btn=$('#applyTripFilters'),info=$('#tripDataNote');
+ tripSearchPerformed=false;tripSearchResults=[];tripAppliedFilters=null;renderTripsTable('Consultando viajes del período…');
+ btn.disabled=true;btn.textContent='Consultando…';
+ if(info){info.hidden=false;info.textContent='Obteniendo todos los viajes del período desde Supabase…'}
+ try{
+  const periodRows=await fetchCompleteTripPeriod(f.from,f.to);
+  if(id!==tripSearchRequestId)return;
+  tripAppliedFilters={...f,plates:[...f.plates]};
+  tripSearchResults=tripRowsForFilters(periodRows,f);
+  tripSearchSource='supabase';tripSearchPerformed=true;tripPage=1;
+  renderTripsTable();
+  if(tripSearchResults.length)generateTripReport(); // Preparar automáticamente la versión imprimible.
+  if(info){info.hidden=false;info.textContent=`Consulta completa desde Supabase · ${periodRows.length} registros revisados en el período · ${tripSearchResults.length} viajes coincidentes.`}
+ }catch(error){
+  if(id!==tripSearchRequestId)return;
+  console.error('Consulta completa de viajes:',error);
+  tripSearchPerformed=false;tripSearchSource='';tripAppliedFilters=null;tripSearchResults=[];
+  renderTripsTable('No se pudo obtener la información completa desde Supabase. Comprueba tu conexión y vuelve a Buscar.');
+  if(info){info.hidden=false;info.textContent='Consulta no completada: '+(error.message||'Error de conexión. No se usaron datos antiguos de caché.')}
+  toast('No se pudo completar la consulta de viajes.');
+ }finally{if(id===tripSearchRequestId){btn.disabled=false;btn.textContent='⌕ Buscar'}}
+}
 function getFilteredTrips(){return tripSearchPerformed?tripSearchResults:[]}
 function buildTripPager(totalPages){const p=$('#tripPager');p.innerHTML='';if(totalPages<=1)return;const add=(label,page,active=false,disabled=false,cls='')=>{const b=document.createElement('button');b.className='page-btn '+cls+(active?' active':'');b.textContent=label;b.disabled=disabled;b.onclick=()=>{tripPage=page;renderTripsTable()};p.appendChild(b)};add('‹',Math.max(1,tripPage-1),false,tripPage===1);const pages=[];for(let i=1;i<=totalPages;i++){if(i===1||i===totalPages||Math.abs(i-tripPage)<=1)pages.push(i)}let prev=0;for(const i of pages){if(prev&&i-prev>1){const e=document.createElement('span');e.className='page-ellipsis';e.textContent='…';p.appendChild(e)}add(String(i),i,i===tripPage);prev=i}add('›',Math.min(totalPages,tripPage+1),false,tripPage===totalPages)}
-function renderTripsTable(emptyMessage='No hay registros que coincidan con los filtros seleccionados.'){const rows=getFilteredTrips(),total=rows.length,totalPages=Math.max(1,Math.ceil(total/TRIP_PAGE_SIZE));if(tripPage>totalPages)tripPage=totalPages;const start=(tripPage-1)*TRIP_PAGE_SIZE,pageRows=rows.slice(start,start+TRIP_PAGE_SIZE);$('#tripTableBody').innerHTML=pageRows.map((r,i)=>`<tr><td>${start+i+1}</td><td>${esc(displayTripDate(r))}</td><td><b>${esc(r.placa||'-')}</b></td><td>${esc(r.conductor||'-')}</td><td>${esc(r.destino||'-')}</td><td>${esc(tripDescription(r)||'-')}</td><td>${fmtTons(r.tc)}</td></tr>`).join('');const empty=$('#tripEmpty');empty.textContent=tripSearchPerformed?(total?emptyMessage:'No hay registros que coincidan con los filtros seleccionados.'):emptyMessage;empty.hidden=total!==0;$('#tripCount').textContent=new Intl.NumberFormat('es-PA').format(total);$('#plateCount').textContent=new Intl.NumberFormat('es-PA').format(new Set(rows.map(r=>normalizeKey(r.placa)).filter(Boolean)).size);$('#driverCount').textContent=new Intl.NumberFormat('es-PA').format(new Set(rows.map(r=>normalizeKey(r.conductor)).filter(Boolean)).size);$('#shortTonCount').textContent=fmtTons(tons(rows));$('#tripResultLabel').textContent=tripSearchPerformed?`${total} viaje${total===1?'':'s'}`:'Consulta pendiente';$('#tripShowing').textContent=total?`Mostrando ${start+1} a ${Math.min(start+TRIP_PAGE_SIZE,total)} de ${total} viajes`:(tripSearchPerformed?'Mostrando 0 viajes':'Sin consulta ejecutada');buildTripPager(totalPages)}
+// Mostrar todas las placas consultadas sin ocultar equipos en páginas adicionales.
+function groupTripsByPlate(rows){
+ const groups=new Map();
+ rows.forEach(r=>{
+  const plate=norm(r.placa)||'SIN PLACA';
+  const key=normalizeTripPlate(plate);
+  if(!groups.has(key))groups.set(key,{plate,rows:[],total:0});
+  const g=groups.get(key);g.rows.push(r);g.total+=Number(r.tc||0);
+ });
+ return [...groups.values()].sort((a,b)=>a.plate.localeCompare(b.plate,'es',{numeric:true,sensitivity:'base'}));
+}
+function tripPlateCard(g,{collapsible=true}={}){
+ const heading=`<div class="trip-plate-heading${collapsible?'':' static-heading'}"><span class="trip-plate-heading-main"><span class="trip-plate-symbol" aria-hidden="true">▰</span><span><span class="trip-plate-caption">PLACA / EQUIPO</span><span class="trip-plate-name">${esc(g.plate)}</span></span></span><span class="trip-plate-metrics"><span>${g.rows.length} viaje${g.rows.length===1?'':'s'}</span><strong>${fmtTons(g.total)} TN cortas</strong>${collapsible?'<span class="trip-plate-chevron" aria-hidden="true">⌄</span>':''}</span></div>`;
+ const cols='<colgroup><col style="width:5%"><col style="width:14%"><col style="width:20%"><col style="width:13%"><col style="width:22%"><col style="width:26%"></colgroup>';
+ const head='<thead><tr><th>#</th><th>Fecha</th><th>Conductor</th><th>TN cortas</th><th>Destino</th><th>Descripción</th></tr></thead>';
+ const body=g.rows.map((r,i)=>`<tr><td data-label="#">${i+1}</td><td data-label="Fecha">${esc(displayTripDate(r))}</td><td data-label="Conductor">${esc(r.conductor||'-')}</td><td data-label="TN cortas">${fmtTons(r.tc)}</td><td data-label="Destino">${esc(r.destino||'-')}</td><td data-label="Descripción">${esc(tripDescription(r)||'-')}</td></tr>`).join('');
+ const foot=`<tfoot><tr><td colspan="3">TOTAL · ${esc(g.plate)} · ${g.rows.length} viaje${g.rows.length===1?'':'s'}</td><td colspan="3">${fmtTons(g.total)} TN cortas</td></tr></tfoot>`;
+ const table=`<div class="trip-plate-table-wrap"><table class="trip-by-plate-table">${cols}${head}<tbody>${body}</tbody>${foot}</table></div>`;
+ return collapsible?`<details class="trip-plate-card" open><summary class="trip-plate-heading"><span class="trip-plate-heading-main"><span class="trip-plate-symbol" aria-hidden="true">▰</span><span><span class="trip-plate-caption">PLACA / EQUIPO</span><span class="trip-plate-name">${esc(g.plate)}</span></span></span><span class="trip-plate-metrics"><span>${g.rows.length} viaje${g.rows.length===1?'':'s'}</span><strong>${fmtTons(g.total)} TN cortas</strong><span class="trip-plate-chevron" aria-hidden="true">⌄</span></span></summary>${table}</details>`:`<article class="trip-plate-card">${heading}${table}</article>`;
+}
+function renderTripsTable(emptyMessage='No hay registros que coincidan con los filtros seleccionados.'){
+ const rows=getFilteredTrips(),total=rows.length,groups=groupTripsByPlate(rows);
+ $('#tripPlateDetails').innerHTML=groups.map(g=>tripPlateCard(g)).join('');
+ const empty=$('#tripEmpty');empty.textContent=tripSearchPerformed?(total?emptyMessage:'No hay registros que coincidan con los filtros seleccionados.'):emptyMessage;empty.hidden=total!==0;
+ $('#tripCount').textContent=new Intl.NumberFormat('es-PA').format(total);
+ $('#plateCount').textContent=new Intl.NumberFormat('es-PA').format(groups.filter(g=>g.plate!=='SIN PLACA').length);
+ $('#driverCount').textContent=new Intl.NumberFormat('es-PA').format(new Set(rows.map(r=>normalizeKey(r.conductor)).filter(Boolean)).size);
+ $('#shortTonCount').textContent=fmtTons(tons(rows));
+ $('#tripResultLabel').textContent=tripSearchPerformed?`${total} viaje${total===1?'':'s'} · ${groups.length} placa${groups.length===1?'':'s'}`:'Consulta pendiente';
+ $('#tripShowing').textContent=tripSearchPerformed?`Mostrando los ${total} viajes completos de ${groups.length} placa${groups.length===1?'':'s'}`:'Sin consulta ejecutada';
+ $('#tripResultsActions').hidden=!(tripSearchPerformed&&total>0);
+ buildTripPager(1);
+}
 function openTripsView(){populateTripPlates();populateTripDescriptions();initTripDatePickers();resetTripFilters();$('#dashboardView').hidden=true;$('#tripsView').hidden=false;window.scrollTo({top:0,behavior:'smooth'})}
 function closeTripsView(){setPlateDropdown(false);$('#tripsView').hidden=true;$('#dashboardView').hidden=false;window.scrollTo({top:0,behavior:'smooth'})}
 function resetTripFilters(){if(tripDatePicker)tripDatePicker.clear();else if($('#tripDateRange'))$('#tripDateRange').value='';tripDateStart='';tripDateEnd='';selectedTripPlates.clear();$('#tripPlateSearch').value='';$('#tripDescription').value='';populateTripPlates();populateTripDescriptions();setPlateDropdown(false);clearTripResults()}
@@ -722,46 +938,136 @@ function renderReportHBars(items){
  items.forEach((x,i)=>{const top=T+i*rowH,label=svgEsc(x.label),tons=fmtTons(x.tons),trips=new Intl.NumberFormat('es-PA').format(x.trips),w=x.tons?Math.max(3,x.tons/max*barW):0,fill=i%2?'#2f8d57':'#2f5fb3';s+=`<g><title>${label} · ${tons} TN · ${trips} viajes</title><text x="0" y="${top+13}" font-size="11" font-weight="800" font-family="Arial,sans-serif" fill="#263c40">${label}</text><text x="${W-2}" y="${top+13}" text-anchor="end" font-size="11" font-weight="800" font-family="Arial,sans-serif" fill="#263c40">${tons} t · ${trips} viajes</text><rect x="0" y="${top+22}" width="${barW}" height="15" rx="7.5" fill="#edf2f2"/><rect x="0" y="${top+22}" width="${w}" height="15" rx="7.5" fill="${fill}"/><text x="${Math.min(Math.max(28,w-6),barW-8)}" y="${top+33}" text-anchor="end" font-size="9" font-weight="800" font-family="Arial,sans-serif" fill="${w>85?'#ffffff':'#334a4d'}">${x.tons?Math.round(x.tons/max*100):0}%</text></g>`});
  s+='</svg></div>';return s
 }
-function hideTripReport(){const box=$('#tripReport');if(box)box.hidden=true}
-function generateTripReport(){const rows=getFilteredTrips();if(!tripSearchPerformed){toast('Primero realiza una búsqueda con los filtros.');return}if(!rows.length){toast('La consulta no tiene datos para generar el reporte.');return}const f=tripFilterState(),totalTons=tons(rows),plates=new Set(rows.map(r=>normalizeKey(r.placa)).filter(Boolean)).size,drivers=new Set(rows.map(r=>normalizeKey(r.conductor)).filter(Boolean)).size,avg=rows.length?totalTons/rows.length:0,timeline=reportTimeline(rows,f.from,f.to),plateData=reportAggregate(rows,r=>norm(r.placa)||'SIN PLACA',null,8),descData=reportAggregate(rows,r=>tripDescriptionCode(r)||norm(r.descripcion)||'SIN CÓDIGO',(r,key)=>{const meta=CODE_TO_META[key];return meta?`${meta.proveedor} · ${key}`:(norm(r.descripcion)||key)},8);$('#reportPeriodText').textContent=`Del ${formatReportDate(f.from)} al ${formatReportDate(f.to)}`;const chips=[f.plates.length?`Placas: ${f.plates.join(', ')}`:'Todas las placas',f.descCode?`Descripción: ${CODE_TO_META[f.descCode]?.proveedor||f.descCode} · ${f.descCode}`:'Todas las descripciones'];$('#reportFilterSummary').innerHTML=chips.map(x=>`<span class="report-chip">${esc(x)}</span>`).join('');$('#reportSummaryGrid').innerHTML=[['TN cortas',`${fmtTons(totalTons)} t`],['Promedio / viaje',`${fmtTons(avg)} t`]].map(([a,b])=>`<div class="report-summary-item"><span>${a}</span><b>${b}</b></div>`).join('');$('#reportTimelineTitle').textContent='Toneladas por mes';$('#reportTimelineChart').innerHTML=renderReportColumns(timeline.data);$('#reportPlateChart').innerHTML=renderReportHBars(plateData);$('#reportDescriptionChart').innerHTML=renderReportHBars(descData)+`<div class="report-generated">Generado ${new Date().toLocaleString('es-PA')}</div>`;const box=$('#tripReport');box.hidden=false;setTimeout(()=>box.scrollIntoView({behavior:'smooth',block:'start'}),0)}
+function hideTripReport(){const box=$('#tripReport');if(box)box.hidden=true;const actions=$('#tripResultsActions');if(actions)actions.hidden=true}
+function generateTripReport(){
+ const rows=getFilteredTrips();
+ if(!tripSearchPerformed){toast('Primero realiza una búsqueda con los filtros.');return}
+ if(!rows.length){toast('La consulta no tiene datos para generar el reporte.');return}
+ const f=tripAppliedFilters||tripFilterState(),groups=groupTripsByPlate(rows),totalTons=tons(rows);
+ $('#reportPeriodText').textContent=`Del ${formatReportDate(f.from)} al ${formatReportDate(f.to)}`;
+ const chips=[f.plates.length?`Placas: ${f.plates.join(', ')}`:'Todas las placas',f.descCode?`Descripción: ${CODE_TO_META[f.descCode]?.proveedor||f.descCode} · ${f.descCode}`:'Todas las descripciones'];
+ $('#reportFilterSummary').innerHTML=chips.map(x=>`<span class="report-chip">${esc(x)}</span>`).join('');
+ $('#reportSummaryGrid').innerHTML=[['Viajes',String(rows.length)],['Placas',String(groups.length)],['TN cortas',`${fmtTons(totalTons)} t`]].map(([a,b])=>`<div class="report-summary-item"><span>${a}</span><b>${b}</b></div>`).join('');
+ $('#reportTripGroups').innerHTML=groups.map(g=>tripPlateCard(g,{collapsible:false})).join('');
+ $('#reportGenerated').textContent=`Generado ${new Date().toLocaleString('es-PA')}`;
+ const box=$('#tripReport');box.hidden=false;
+ // No desplazar ni mostrar otro bloque: las acciones están en Detalle de viajes por placa.
+}
 function printTripReport(){
  if($('#tripReport')?.hidden){toast('Primero genera el reporte.');return}
- const root=document.documentElement,report=$('#tripReport');
- root.classList.add('printing-report');
- root.style.removeProperty('--report-print-zoom');
- requestAnimationFrame(()=>requestAnimationFrame(()=>{
-   const rect=report.getBoundingClientRect();
-   const targetHeight=735,targetWidth=1100;
-   const scale=Math.min(1,targetHeight/Math.max(1,rect.height),targetWidth/Math.max(1,rect.width));
-   root.style.setProperty('--report-print-zoom',String(Math.max(.56,Math.min(.94,scale*.97))));
-   requestAnimationFrame(()=>window.print());
- }))
+ window.print();
 }
-window.addEventListener('afterprint',()=>{document.documentElement.classList.remove('printing-report');document.documentElement.style.removeProperty('--report-print-zoom')})
 async function downloadTripReportPdf(){
  const report=$('#tripReport'),btn=$('#downloadTripReportPdf');
  if(!report||report.hidden){toast('Primero genera el reporte.');return}
- if(typeof html2canvas!=='function'||!window.jspdf?.jsPDF){toast('No se pudo cargar el generador de PDF. Verifica tu conexión a internet.');return}
- const oldText=btn.textContent;
- btn.disabled=true;btn.textContent='Generando PDF…';report.classList.add('pdf-exporting');
+ if(!window.jspdf?.jsPDF){toast('No se pudo cargar el generador de PDF. Verifica tu conexión a internet.');return}
+ const oldText=btn.textContent;btn.disabled=true;btn.textContent='Generando PDF…';
  try{
-   await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
-   const canvas=await html2canvas(report,{scale:2,backgroundColor:'#ffffff',useCORS:true,logging:false,windowWidth:Math.max(document.documentElement.clientWidth,1200),scrollX:0,scrollY:-window.scrollY});
-   const {jsPDF}=window.jspdf;
-   const pdf=new jsPDF({orientation:'landscape',unit:'mm',format:'a4',compress:true});
-   const pageW=pdf.internal.pageSize.getWidth(),pageH=pdf.internal.pageSize.getHeight(),margin=5;
-   const maxW=pageW-margin*2,maxH=pageH-margin*2;
-   const ratio=Math.min(maxW/canvas.width,maxH/canvas.height);
-   const imgW=canvas.width*ratio,imgH=canvas.height*ratio;
-   const x=(pageW-imgW)/2,y=(pageH-imgH)/2;
-   pdf.addImage(canvas.toDataURL('image/jpeg',0.94),'JPEG',x,y,imgW,imgH,undefined,'FAST');
-   const f=tripFilterState();
-   const safeFrom=(f.from||'inicio').replaceAll('-',''),safeTo=(f.to||'fin').replaceAll('-','');
-   pdf.save(`reporte_acarreo_${safeFrom}_${safeTo}.pdf`);
-   toast('Reporte PDF descargado.');
- }catch(err){console.error(err);toast('No fue posible generar el PDF. Intenta nuevamente.')}finally{report.classList.remove('pdf-exporting');btn.disabled=false;btn.textContent=oldText}
+  const rows=getFilteredTrips(),groups=groupTripsByPlate(rows),f=tripAppliedFilters||tripFilterState();
+  if(!groups.length)throw new Error('No hay registros para descargar.');
+  const {jsPDF}=window.jspdf;
+  // Carta vertical: 215,9 x 279,4 mm. Márgenes laterales estrechos de 7 mm.
+  const pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'letter',compress:true});
+  const W=pdf.internal.pageSize.getWidth(),H=pdf.internal.pageSize.getHeight(),M=7,BOTTOM=H-14;
+  const contentWidth=W-2*M;
+  // Columna Descripción absorbe el ancho restante para conservar toda la información.
+  const cols=[{title:'#',w:8},{title:'Fecha',w:25},{title:'Conductor',w:37},
+              {title:'TN cortas',w:23},{title:'Destino',w:42},
+              {title:'Descripción',w:contentWidth-135}];
+  const xPos=[M];cols.forEach(c=>xPos.push(xPos[xPos.length-1]+c.w));
+  const dark=[23,62,64],ink=[39,60,64],light=[234,246,244],muted=[97,116,120];
+  const LINE=3.15,ROW_FONT=7.25,MIN_ROW=5.6,HEADING_H=7.5,COL_H=6.3;
+  let y=0,page=0;
+  function pageHeader(){
+   if(page)pdf.addPage();page++;
+   // Encabezado del documento delgado, sin banda gruesa.
+   pdf.setFillColor(246,249,249);pdf.rect(0,0,W,17.5,'F');
+   pdf.setFont('helvetica','bold');pdf.setFontSize(11);pdf.setTextColor(...dark);
+   pdf.text('DETALLE DE VIAJES POR PLACA',M,9.2);
+   pdf.setFont('helvetica','normal');pdf.setFontSize(7.2);pdf.setTextColor(...muted);
+   pdf.text(`Del ${formatReportDate(f.from)} al ${formatReportDate(f.to)}`,M,14.1);
+   pdf.text('ANÁLISIS DE TONELADAS',W-M,9.2,{align:'right'});
+   pdf.setDrawColor(201,217,215);pdf.line(M,18.6,W-M,18.6);
+   y=22;
+  }
+  function drawColumnHeader(){
+   pdf.setFillColor(234,242,242);pdf.rect(M,y,contentWidth,COL_H,'F');
+   pdf.setFont('helvetica','normal');pdf.setFontSize(7.2);pdf.setTextColor(...ink);
+   cols.forEach((c,i)=>pdf.text(c.title,xPos[i]+1.5,y+4.2));
+   y+=COL_H;
+  }
+  function drawPlateTitle(g,continued=false){
+   if(y+HEADING_H+COL_H+MIN_ROW>BOTTOM)pageHeader();
+   pdf.setFillColor(...light);pdf.rect(M,y,contentWidth,HEADING_H,'F');
+   pdf.setDrawColor(204,222,218);pdf.line(M,y+HEADING_H,W-M,y+HEADING_H);
+   pdf.setFont('helvetica','bold');pdf.setFontSize(8.9);pdf.setTextColor(...dark);
+   const plateText=`PLACA: ${g.plate}${continued?' (continuación)':''}`;
+   pdf.text(plateText,M+2,y+4.9);
+   pdf.setFont('helvetica','normal');pdf.setFontSize(7.6);
+   pdf.text(`${g.rows.length} viajes  ·  ${fmtTons(g.total)} TN cortas`,W-M-2,y+4.9,{align:'right'});
+   y+=HEADING_H;
+   drawColumnHeader();
+  }
+  function drawSummary(){
+   const h=10.2;
+   pdf.setFillColor(247,249,249);pdf.rect(M,y,contentWidth,h,'F');
+   pdf.setFont('helvetica','normal');pdf.setFontSize(8.2);pdf.setTextColor(...dark);
+   pdf.text(`VIAJES: ${rows.length}`,M+3,y+6.5);
+   pdf.text(`PLACAS: ${groups.length}`,M+59,y+6.5);
+   pdf.setFont('helvetica','bold');
+   pdf.text(`TOTAL: ${fmtTons(tons(rows))} TN cortas`,W-M-3,y+6.5,{align:'right'});
+   y+=h+5;
+  }
+  pageHeader();drawSummary();
+  for(const g of groups){
+   if(y+HEADING_H+COL_H+MIN_ROW>BOTTOM)pageHeader();
+   drawPlateTitle(g);
+   for(let i=0;i<g.rows.length;i++){
+    const r=g.rows[i];
+    const cells=[String(i+1),displayTripDate(r),norm(r.conductor)||'-',fmtTons(r.tc),norm(r.destino)||'-',tripDescription(r)||'-'];
+    pdf.setFont('helvetica','normal');pdf.setFontSize(ROW_FONT);
+    const split=cells.map((value,k)=>pdf.splitTextToSize(String(value),cols[k].w-3));
+    const maxLines=Math.max(1,...split.map(a=>a.length));
+    // Fragmentar las celdas muy largas por páginas, sin cortar el destino ni la descripción.
+    for(let offset=0;offset<maxLines;){
+     if(y+MIN_ROW>BOTTOM){pageHeader();drawPlateTitle(g,true)}
+     const available=Math.max(1,Math.floor((BOTTOM-y-2.3)/LINE));
+     const count=Math.min(24,available,maxLines-offset);
+     const rowH=Math.max(MIN_ROW,count*LINE+2.1);
+     if(y+rowH>BOTTOM){pageHeader();drawPlateTitle(g,true);continue}
+     pdf.setFillColor(...(i%2?[250,251,251]:[255,255,255]));pdf.rect(M,y,contentWidth,rowH,'F');
+     pdf.setDrawColor(232,237,237);pdf.line(M,y+rowH,W-M,y+rowH);
+     pdf.setFontSize(ROW_FONT);pdf.setTextColor(...ink);
+     split.forEach((arr,k)=>{
+      const text=arr.slice(offset,offset+count);
+      if(!text.length)return;
+      pdf.setFont('helvetica',k===3?'bold':'normal');
+      if(k===3)pdf.text(text,xPos[k+1]-1.7,y+3.85,{align:'right',lineHeightFactor:1.18});
+      else pdf.text(text,xPos[k]+1.5,y+3.85,{lineHeightFactor:1.18});
+     });
+     y+=rowH;offset+=count;
+    }
+   }
+   if(y+7.8>BOTTOM){pageHeader();drawPlateTitle(g,true)}
+   pdf.setFillColor(...light);pdf.rect(M,y,contentWidth,7.8,'F');
+   pdf.setFont('helvetica','bold');pdf.setFontSize(8);pdf.setTextColor(...dark);
+   pdf.text(`TOTAL · ${g.plate} · ${g.rows.length} viajes`,M+2,y+5.1);
+   pdf.text(`${fmtTons(g.total)} TN cortas`,W-M-2,y+5.1,{align:'right'});
+   y+=12;
+  }
+  const pages=pdf.internal.getNumberOfPages();
+  for(let i=1;i<=pages;i++){
+   pdf.setPage(i);pdf.setDrawColor(220,231,230);pdf.line(M,H-10,W-M,H-10);
+   pdf.setFont('helvetica','normal');pdf.setFontSize(7);pdf.setTextColor(...muted);
+   pdf.text(`Generado ${new Date().toLocaleString('es-PA')}`,M,H-6);
+   pdf.text(`Página ${i} de ${pages}`,W-M,H-6,{align:'right'});
+  }
+  const safeFrom=(f.from||'inicio').replaceAll('-',''),safeTo=(f.to||'fin').replaceAll('-','');
+  pdf.save(`detalle_viajes_por_placa_${safeFrom}_${safeTo}.pdf`);
+  toast('Reporte carta vertical descargado en PDF.');
+ }catch(err){console.error('PDF de viajes por placa:',err);toast('No fue posible generar el PDF: '+(err.message||'Error inesperado.'))}
+ finally{btn.disabled=false;btn.textContent=oldText}
 }
-
 function render(){renderYearCards();renderYearChart();renderClassChart();populateTripPlates();if(!$('#tripsView').hidden&&!tripSearchPerformed)renderTripsTable()}
 function renderYearCards(){$('#yearCards').innerHTML=YEARS.map(y=>`<div class="card clickable" data-year="${y}"><div class="label">MATERIAL ${y}</div><div class="value">${fmt0(yearTotal(y))}</div><div class="sub">${SEASON_LABELS[y]}</div></div>`).join('');$$('#yearCards [data-year]').forEach(el=>el.onclick=()=>openMaterialDetail(el.dataset.year))}
 function renderYearChart(){
@@ -1048,7 +1354,7 @@ function matrixToRows(matrix){let hi=matrix.findIndex((r,i)=>i<100&&r.map(normal
 async function extractRows(file){if(file.name.toLowerCase().endsWith('.csv'))return parseCsv(await file.text());if(!window.XLSX)throw new Error('No se pudo cargar el lector de Excel. Verifica la conexión a internet o usa CSV.');const buf=await file.arrayBuffer(),wb=XLSX.read(buf,{type:'array',cellDates:true});let rows=[];wb.SheetNames.forEach(name=>{const matrix=XLSX.utils.sheet_to_json(wb.Sheets[name],{header:1,defval:'',raw:true});rows.push(...matrixToRows(matrix))});return rows}
 async function importFile(file){try{setDbStatus('loading','Guardando en BD…');const rows=await extractRows(file);const hasPlateColumn=rows.some(row=>Object.keys(row||{}).some(k=>normalizeKey(k)==='codig_placa'));if(!hasPlateColumn)throw new Error('No se encontró la columna codig_placa en el archivo.');const records=rows.map(rowToRecord).filter(Boolean);const end=todayISO(),inRange=records.filter(r=>r.fecha&&r.fecha>=IMPORT_START_DATE&&r.fecha<=end);const rowsWithPlate=inRange.filter(r=>norm(r.placa)).length;const uniquePlates=new Set(inRange.map(r=>norm(r.placa)).filter(Boolean));const existingMap=new Map(allData.map(r=>[String(r.seq),r])),seen=new Set();const added=[],changed=[];let dup=0,enriched=0,platesUpdated=0;for(const r of inRange){const k=String(r.seq);if(seen.has(k)){dup++;continue}seen.add(k);if(existingMap.has(k)){dup++;const ex=existingMap.get(k);let modified=false;const incomingPlate=norm(r.placa);if(incomingPlate&&norm(ex.placa)!==incomingPlate){ex.placa=incomingPlate;modified=true;platesUpdated++}['fechaTexto','conductor','destino','descripcion'].forEach(field=>{if(!norm(ex[field])&&norm(r[field])){ex[field]=r[field];modified=true}});if(modified){enriched++;changed.push(ex)}continue}added.push(r);existingMap.set(k,r)}const toSave=[...added,...changed];if(toSave.length)await saveStored(toSave);allData=[...existingMap.values()];setDbStatus('ok','Supabase conectado');$('#rRead').textContent=records.length;$('#rTotal').textContent=inRange.length;$('#rNew').textContent=added.length;$('#rDup').textContent=dup;render();$('#uploadModal').classList.remove('show');const omitted=Math.max(0,records.length-inRange.length);$('#lrRead').textContent=records.length;$('#lrRange').textContent=inRange.length;$('#lrNew').textContent=added.length;$('#lrDup').textContent=dup;$('#lrOmitted').textContent=omitted;$('#lrTons').textContent=fmt0(yearTotal('2027'));$('#lrMessage').textContent=`Carga finalizada en Supabase. La columna codig_placa fue detectada: ${rowsWithPlate} registros del rango tienen placa, correspondientes a ${uniquePlates.size} placas diferentes. Se agregaron ${added.length} registros nuevos y se actualizaron ${platesUpdated} placas en registros existentes. Se detectaron ${dup} secuencias ya existentes o repetidas.`;$('#loadResultModal').classList.add('show')}catch(e){console.error(e);setDbStatus('error','Error de BD');toast('No se pudo guardar en Supabase: '+(e.message||e))}}
 function bind(){
- $('#openTrips').onclick=openTripsView;$('#backDashboard').onclick=closeTripsView;$('#applyTripFilters').onclick=applyTripSearch;$('#clearTripFilters').onclick=resetTripFilters;$('#tripPlateButton').onclick=e=>{e.stopPropagation();setPlateDropdown($('#tripPlateDropdown').hidden)};$('#tripPlateSearch').addEventListener('input',renderTripPlateOptions);$('#tripPlateSearch').addEventListener('click',e=>e.stopPropagation());$('#tripPlateAll').onchange=e=>{const all=getTripPlateList();if(e.target.checked)all.forEach(p=>selectedTripPlates.add(p));else selectedTripPlates.clear();renderTripPlateOptions()};$('#tripPlateClear').onclick=e=>{e.stopPropagation();selectedTripPlates.clear();renderTripPlateOptions()};$('#tripPlateDone').onclick=e=>{e.stopPropagation();setPlateDropdown(false)};document.addEventListener('click',e=>{if(!$('#plateMulti')?.contains(e.target))setPlateDropdown(false)});$('#generateTripReport').onclick=generateTripReport;$('#printTripReport').onclick=printTripReport;$('#downloadTripReportPdf').onclick=downloadTripReportPdf;$('#closeTripReport').onclick=()=>{$('#tripReport').hidden=true};
+ $('#openTrips').onclick=openTripsView;$('#backDashboard').onclick=closeTripsView;$('#applyTripFilters').onclick=applyTripSearch;$('#clearTripFilters').onclick=resetTripFilters;$('#tripPlateButton').onclick=e=>{e.stopPropagation();setPlateDropdown($('#tripPlateDropdown').hidden)};$('#tripPlateSearch').addEventListener('input',renderTripPlateOptions);$('#tripPlateSearch').addEventListener('click',e=>e.stopPropagation());$('#tripPlateAll').onchange=e=>{const all=getTripPlateList();if(e.target.checked)all.forEach(p=>selectedTripPlates.add(p));else selectedTripPlates.clear();renderTripPlateOptions()};$('#tripPlateClear').onclick=e=>{e.stopPropagation();selectedTripPlates.clear();renderTripPlateOptions()};$('#tripPlateDone').onclick=e=>{e.stopPropagation();setPlateDropdown(false)};document.addEventListener('click',e=>{if(!$('#plateMulti')?.contains(e.target))setPlateDropdown(false)});$('#printTripReport').onclick=printTripReport;$('#downloadTripReportPdf').onclick=downloadTripReportPdf;$('#closeTripReport').onclick=()=>clearTripResults('Resultados cerrados. Presiona Buscar para consultar nuevamente.');
  $('#openUpload').onclick=()=>{resetUploadCounters();$('#uploadModal').classList.add('show')};$('#closeUpload').onclick=()=>$('#uploadModal').classList.remove('show');$('#closeDetail').onclick=()=>$('#detailModal').classList.remove('show');$('#detailBackBtn').onclick=()=>openMaterialDetail(currentDetailYear);const closeLoad=()=>$('#loadResultModal').classList.remove('show');$('#closeLoadResult').onclick=closeLoad;$('#okLoadResult').onclick=closeLoad;$('#dropZone').onclick=()=>$('#fileInput').click();$('#fileInput').onchange=e=>{const f=e.target.files?.[0];if(f)importFile(f);e.target.value=''};const dz=$('#dropZone');['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('drag')}));['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('drag')}));dz.addEventListener('drop',e=>{const f=e.dataTransfer.files?.[0];if(f)importFile(f)});$$('.modalbg').forEach(bg=>bg.addEventListener('click',e=>{if(e.target===bg)bg.classList.remove('show')}));document.addEventListener('keydown',e=>{if(e.key==='Escape')$$('.modalbg.show').forEach(x=>x.classList.remove('show'))})
 }
 async function start(){try{bind();await loadStored();render();startHourlySync()}catch(e){console.error(e);toast('Se recuperó la aplicación después de un error de inicio.')}finally{$('#loading').classList.add('hide')}}
