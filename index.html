@@ -349,6 +349,22 @@ button{-webkit-tap-highlight-color:transparent}
 .meter-metric span{font-weight:800;color:#56706f;font-size:12px;display:block}
 .meter-metric strong{display:block;font-size:clamp(20px,2.7vw,30px);color:#173e40;margin-top:9px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .meter-metric small{display:block;font-size:10px;color:#778a8c;margin-top:5px}
+/* MADERA_DONA_HOROMETROS_V1 · gráfico independiente de los registros reales */
+.meter-comparison{display:grid;grid-template-columns:180px minmax(0,1fr);align-items:center;gap:20px}
+.meter-comparison-heading{font-size:15px;color:#173e40;margin:0 0 6px;font-weight:900}
+.meter-comparison-description{font-size:11px;line-height:1.55;color:#6d8082;margin:0 0 14px}
+.meter-donut{width:170px;height:170px;position:relative;margin:auto}
+.meter-donut svg{display:block;width:100%;height:100%}
+.meter-donut-value{position:absolute;left:17px;right:17px;top:50%;transform:translateY(-45%);color:#173e40;font-size:25px;font-weight:900;letter-spacing:-.04em;text-align:center;font-variant-numeric:tabular-nums}
+.meter-donut-caption{position:absolute;top:61%;width:100%;color:#6f8582;font-size:10px;font-weight:800;text-align:center}
+.meter-donut-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.meter-donut-stat{border:1px solid #e4eeeb;background:#f8fbfa;border-radius:12px;padding:12px;min-width:0}
+.meter-donut-stat span{display:block;font-size:10px;color:#6b7e7e;font-weight:800}
+.meter-donut-stat b{display:block;font-size:18px;color:#173e40;margin-top:6px;font-variant-numeric:tabular-nums}
+.meter-donut-legend{display:flex;gap:7px;align-items:center;font-size:11px;color:#56736b;font-weight:800;margin:13px 0 0}
+.meter-donut-legend:before{content:'';width:9px;height:9px;border-radius:50%;background:#16957a;flex:0 0 auto}
+@media(max-width:600px){.meter-comparison{grid-template-columns:1fr;gap:10px}.meter-comparison-heading{text-align:center}.meter-comparison-description{text-align:center;margin-bottom:10px}.meter-donut{width:160px;height:160px}.meter-donut-value{font-size:23px}.meter-donut-stats{gap:8px}.meter-donut-stat{padding:10px}.meter-donut-stat b{font-size:16px}}
+
 .meter-form-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:17px}
 .meter-last-line{font-size:11px;color:#607477;font-weight:700}.meter-last-line b{color:#173e40;font-size:14px}
 .meter-form-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) auto;gap:12px;align-items:end}
@@ -461,8 +477,29 @@ button{-webkit-tap-highlight-color:transparent}
   <div class="meter-metric"><span>Toneladas estimadas</span><strong id="meterTons">—</strong><small>15 tn / 1,5 h</small></div>
   <div class="meter-metric"><span>Diésel estimado</span><strong id="meterDiesel">—</strong><small>20 gal / 1,5 h</small></div>
  </div>
+ <section class="meter-panel" aria-labelledby="meterShareHeading">
+  <div class="meter-comparison">
+   <div class="meter-donut" role="img" id="meterDonutAccessible" aria-label="Porcentaje de toneladas estimadas frente a MADERA 2027">
+    <svg viewBox="0 0 160 160" aria-hidden="true" focusable="false">
+     <circle cx="80" cy="80" r="57" fill="none" stroke="#e3efea" stroke-width="15"/>
+     <circle id="meterDonutArc" cx="80" cy="80" r="57" fill="none" stroke="#16957a" stroke-width="15" stroke-linecap="round" transform="rotate(-90 80 80)" pathLength="100" stroke-dasharray="0 100" style="transition:stroke-dasharray .35s ease"/>
+    </svg>
+    <div class="meter-donut-value" id="meterDonutPct">—</div>
+    <div class="meter-donut-caption">de MADERA 2027</div>
+   </div>
+   <div>
+    <h2 class="meter-comparison-heading" id="meterShareHeading">Toneladas estimadas vs. MADERA 2027</h2>
+    <p class="meter-comparison-description">Comparación exclusivamente contra MADERA del año 2027, incluido el saldo inicial de 2,000 t. Las estimaciones no se suman a los viajes reales.</p>
+    <div class="meter-donut-stats">
+     <div class="meter-donut-stat"><span>Toneladas estimadas</span><b id="meterDonutEstimated">—</b></div>
+     <div class="meter-donut-stat"><span>MADERA 2027</span><b id="meterDonutActual">—</b></div>
+    </div>
+    <p class="meter-donut-legend" id="meterDonutMessage">Calculando equivalencia…</p>
+   </div>
+  </div>
+ </section>
  <section class="meter-panel">
-  <div class="meter-form-head"><h2>Registrar lectura</h2><div class="meter-last-line" id="meterLastWrap">Último horómetro en BD: <b id="meterLast">Cargando…</b></div></div>
+  <div class="meter-form-head"><h2>Registrar lectura</h2><div class="meter-last-line" id="meterLastWrap"><span id="meterLastLabel">Último horómetro en BD:</span> <b id="meterLast">—</b></div></div>
   <div class="meter-equipment-row" id="meterEquipmentRow" hidden>
     <label class="meter-field">Equipo (necesario si existen varios)<select id="meterEquipmentSelect"><option value="">Seleccionar equipo</option></select></label>
   </div>
@@ -829,6 +866,12 @@ function startHourlySync(){
 function tons(rows){return rows.reduce((s,r)=>s+Number(r.tc||0),0)}
 function yearTotal(year){if(year!=='2027')return Number(FIXED_YEAR_TOTALS[year]||0);const b=getYearBreakdown('2027');return b.CASCARILLA+b.MADERA+b.RAQUIN}
 function getYearBreakdown(year){if(year!=='2027')return HISTORICAL_TYPE_TOTALS[year]||{CASCARILLA:0,MADERA:0,RAQUIN:0};const out={CASCARILLA:0,MADERA:0,RAQUIN:0};allData.forEach(r=>{const tipo=isInitial2027Record(r)?'MADERA':(r.tipo||inferType(r.codigo,r.proveedor)).toUpperCase();if(out[tipo]!=null)out[tipo]+=isInitial2027Record(r)?INITIAL_2027_TONS:Number(r.tc||0)});return out}
+// El módulo de horómetros lee este mismo acumulado que usa el análisis.
+// No altera toneladas registradas ni inserta datos estimados en viajes.
+window.MADERA_TOTAL_2027 = () => {
+ const subtotal = Number(getYearBreakdown('2027')?.MADERA);
+ return Number.isFinite(subtotal) && subtotal > 0 ? subtotal : NaN;
+};
 function getYearProviderBreakdown(year){
  if(year!=='2027')return PROVIDER_HISTORY.filter(x=>x.year===year&&Number(x.toneladas||0)>0);
  const map=new Map();allData.forEach(r=>{const tipo=isInitial2027Record(r)?'MADERA':(r.tipo||inferType(r.codigo,r.proveedor)).toUpperCase();if(!tipo)return;const key=tipo+'|'+(r.proveedor||r.codigo||'SIN PROVEEDOR');if(!map.has(key))map.set(key,{tipo,proveedor:r.proveedor||r.codigo||'SIN PROVEEDOR',toneladas:0,year:'2027'});map.get(key).toneladas+=isInitial2027Record(r)?INITIAL_2027_TONS:Number(r.tc||0)});return [...map.values()].filter(x=>x.toneladas>0)
@@ -1124,7 +1167,7 @@ async function downloadTripReportPdf(){
  }catch(err){console.error('PDF de viajes por placa:',err);toast('No fue posible generar el PDF: '+(err.message||'Error inesperado.'))}
  finally{btn.disabled=false;btn.textContent=oldText}
 }
-function render(){renderYearCards();renderYearChart();renderClassChart();populateTripPlates();if(!$('#tripsView').hidden&&!tripSearchPerformed)renderTripsTable()}
+function render(){renderYearCards();renderYearChart();renderClassChart();populateTripPlates();if(!$('#tripsView').hidden&&!tripSearchPerformed)renderTripsTable();window.dispatchEvent(new Event('madera:totales-actualizados'))}
 function renderYearCards(){$('#yearCards').innerHTML=YEARS.map(y=>`<div class="card clickable" data-year="${y}"><div class="label">MATERIAL ${y}</div><div class="value">${fmt0(yearTotal(y))}</div><div class="sub">${SEASON_LABELS[y]}</div></div>`).join('');$$('#yearCards [data-year]').forEach(el=>el.onclick=()=>openMaterialDetail(el.dataset.year))}
 function renderYearChart(){
  const vals=YEARS.map(yearTotal),max=Math.max(...vals,1),W=1000,H=310,L=58,R=22,T=28,B=55,plotH=H-T-B,gap=22,bw=(W-L-R-gap*(YEARS.length-1))/YEARS.length;
@@ -1418,111 +1461,105 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 </script>
 
 <script>
-/* Horómetros MADERA: pantalla rápida, lectura desde Supabase, sin campos extra */
+/* MADERA Horómetros — conexión pública controlada, sin inicio de sesión ni bucle infinito */
 (()=>{
  'use strict';
  const $=id=>document.getElementById(id);
  if(!$('horometersView'))return;
- const LEGACY_ID='madera-horometros-4564-4632-16-tramos-v1';
- const GENERAL='MADERA_GENERAL'; // Identificador técnico cuando el historial antiguo no tiene placa asignada.
+ const LOT_ID='madera-horometros-4564-4632-16-tramos-v1';
+ const GENERAL='MADERA_GENERAL';
+ const TRAMOS=[[4564.3,4567],[4567,4570.3],[4570.3,4573.3],[4573.3,4578],[4578,4588.3],[4588.3,4592.2],[4592.2,4595],[4595,4600.7],[4600.7,4609.3],[4609.3,4611.7],[4611.7,4615.5],[4615.5,4617.6],[4617.6,4621.1],[4621.1,4625.5],[4625.5,4628.3],[4628.3,4632.9]];
+ const BASE={id:LOT_ID,equipo:null,primer_horometro:4564.3,ultimo_horometro:4632.9,tramos:TRAMOS};
  const fmt=(value,dec=2)=>Number(value).toLocaleString('es-PA',{minimumFractionDigits:dec,maximumFractionDigits:dec});
- const round3=n=>Math.round(Number(n)*1000);
- const diff=(a,b)=>(round3(a)-round3(b))/1000;
- const estimate=h=>({hours:h,tons:h/1.5*15,diesel:h/1.5*20});
- const localDate=dt=>{const d=new Date(dt);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
- const today=()=>localDate(new Date());
- let client=null,session=null,loading=false,loaded=false,team='',rows=[],legacy=null,last=null,legacyMessage='',multiple=false;
- function status(message='',kind='info'){const node=$('meterStatus');node.textContent=message;node.dataset.kind=kind;node.hidden=!message}
- function busy(value){loading=value;$('meterSave').disabled=value||!loaded||!session||!team}
- function showTotals(hours){const result=estimate(hours);$('meterHours').textContent=fmt(result.hours,2)+' h';$('meterTons').textContent=fmt(result.tons,2)+' tn';$('meterDiesel').textContent=fmt(result.diesel,2)+' gal'}
- function oldHours(){
-   if(!legacy)return 0;
-   // Los 16 intervalos no tienen fechas; solo se incluyen para su equipo vinculado,
-   // o para el registro general sin equipo si el lote aún no se ha vinculado.
-   if(legacy.equipo===team||(!legacy.equipo&&team===GENERAL))return diff(legacy.ultimo_horometro,legacy.primer_horometro);
-   return 0;
- }
- function baseReading(){return legacy && (legacy.equipo===team||(!legacy.equipo&&team===GENERAL))?Number(legacy.ultimo_horometro):null}
- function totalHours(){let prev=baseReading(),sum=oldHours();for(const row of rows){if(prev!==null)sum+=diff(row.horometro,prev);prev=row.horometro}return sum}
- function paint(){last=rows.length?Number(rows[rows.length-1].horometro):baseReading();$('meterLast').textContent=last===null?'Sin lectura inicial':fmt(last,3);$('meterContext').textContent=team?('Datos de Supabase · '+(team===GENERAL?'registro general sin placa asignada':team)):'Selecciona un equipo para cargar su última lectura.';showTotals(totalHours());preview()}
- function preview(){const text=$('meterCurrent').value;const value=Number(text);if(!text||!Number.isFinite(value)||last===null||value<=last){$('meterPreview').hidden=true;showTotals(totalHours());return}showTotals(totalHours()+diff(value,last));$('meterPreview').hidden=false}
- async function auth(){if(!client)throw new Error('No se cargó la conexión a Supabase.');const result=await client.auth.getSession();if(result.error)throw result.error;session=result.data?.session?.user||null;if(!session){const login=await client.auth.signInAnonymously();if(login.error)throw login.error;session=login.data?.user||login.data?.session?.user||null}if(!session?.id)throw new Error('No se pudo abrir la sesión automática de Supabase.')}
- async function loadLegacy(){const q=await client.from('horometros_lotes_previos').select('id,equipo,primer_horometro,ultimo_horometro,tramos').eq('id',LEGACY_ID).maybeSingle();if(q.error)throw q.error;const data=q.data;if(!data)throw new Error('Falta importar a Supabase el historial previo de 16 lecturas.');if(Number(data.primer_horometro)!==4564.3||Number(data.ultimo_horometro)!==4632.9||!Array.isArray(data.tramos)||data.tramos.length!==16)throw new Error('El historial previo guardado en Supabase no coincide con las 16 lecturas.');return data}
- async function discover(){
-  const found=new Set();let start=0;
-  while(start<10000){const query=await client.from('horometros_lecturas').select('equipo').order('equipo',{ascending:true}).range(start,start+499);if(query.error)throw query.error;for(const r of query.data||[])if(r.equipo)found.add(String(r.equipo).toUpperCase());if((query.data||[]).length<500)break;start+=500}
-  return [...found].sort();
- }
- async function loadRows(){
-  if(!team){rows=[];return}
-  const list=[];let start=0;
-  while(start<100000){const res=await client.from('horometros_lecturas').select('id,equipo,fecha_hora,horometro').eq('equipo',team).order('fecha_hora',{ascending:true}).range(start,start+499);if(res.error)throw res.error;list.push(...res.data||[]);if((res.data||[]).length<500)break;start+=500}
-  if(start>=100000)throw new Error('La consulta superó el límite de seguridad; no se puede asegurar que el historial esté completo.');
-  rows=list.map(r=>({...r,horometro:Number(r.horometro)}));
-  if(rows.some((r,i)=>!Number.isFinite(r.horometro)||(i>0&&r.horometro<=rows[i-1].horometro)))throw new Error('Lecturas no consecutivas en Supabase; revisa el historial antes de guardar.');
-  if(rows.length&&baseReading()!==null&&rows[0].horometro<=baseReading())throw new Error('La primera lectura es inferior al histórico previo; revisa el equipo vinculado.');
- }
- async function refresh(selectPreviously=true){
-  if(loading)return;busy(true);loaded=false;status('Consultando último horómetro en Supabase…');
-  try{
-   await auth();
-   try{legacy=await loadLegacy();legacyMessage=''}catch(e){legacy=null;legacyMessage=e.message||String(e)}
-   const choices=await discover();
-   // Prioridad: equipo vinculado en el historial, selección anterior, único equipo existente, registro general.
-   if(legacy?.equipo)team=String(legacy.equipo).toUpperCase();
-   else if(selectPreviously&&team&&choices.includes(team)){} 
-   else if(choices.length===1)team=choices[0];
-   else if(choices.length===0)team=GENERAL;
+ const milli=n=>Math.round(Number(n)*1000);
+ const delta=(a,b)=>(milli(a)-milli(b))/1000;
+ const calc=h=>({hours:h,tons:h*10,diesel:h*20/1.5});
+ const dateISO=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+ const today=()=>dateISO(new Date());
+ let db=null,team=GENERAL,legacy=BASE,rows=[],last=null,loaded=false,busyFlag=false,active=false,fromServer=false,lastDisplayedHours=0;
+ function notice(text='',kind='info') {const el=$('meterStatus');el.textContent=text;el.dataset.kind=kind;el.hidden=!text;}
+ function busy(v) {busyFlag=v;$('meterSave').disabled=v||!loaded||!team;}
+ function updateMaderaDonut(estimatedTons) {
+ const getter = window.MADERA_TOTAL_2027;
+ const realMadera = typeof getter === 'function' ? Number(getter()) : NaN;
+ const pct = Number.isFinite(realMadera) && realMadera > 0 ? estimatedTons / realMadera * 100 : NaN;
+ const text = Number.isFinite(pct) ? fmt(pct) + '%' : '—';
+ $('meterDonutPct').textContent = text;
+ $('meterDonutEstimated').textContent = fmt(estimatedTons) + ' tn';
+ $('meterDonutActual').textContent = Number.isFinite(realMadera) ? fmt(realMadera) + ' tn' : 'No disponible';
+ $('meterDonutArc').setAttribute('stroke-dasharray', `${Number.isFinite(pct) ? Math.min(100,Math.max(0,pct)) : 0} 100`);
+ $('meterDonutAccessible').setAttribute('aria-label', Number.isFinite(pct) ? `${text} de equivalencia: ${fmt(estimatedTons)} toneladas estimadas frente a ${fmt(realMadera)} toneladas de MADERA del año 2027` : 'Total de MADERA 2027 no disponible');
+ $('meterDonutMessage').textContent = !Number.isFinite(pct) ? 'No se ha podido cargar el total de MADERA 2027 para calcular el porcentaje.' : pct>100 ? 'La estimación supera el total MADERA 2027; la dona se completa al 100 %.' : 'Porcentaje respecto al total de MADERA 2027.';
+}
+function totals(hours) {lastDisplayedHours=hours;const c=calc(hours);$('meterHours').textContent=fmt(c.hours)+' h';$('meterTons').textContent=fmt(c.tons)+' tn';$('meterDiesel').textContent=fmt(c.diesel)+' gal';updateMaderaDonut(c.tons);}
+ function inLegacy(){return !!legacy&&(legacy.equipo===team||(!legacy.equipo&&team===GENERAL));}
+ function historical(){return inLegacy()?delta(legacy.ultimo_horometro,legacy.primer_horometro):0;}
+ function baseline(){return inLegacy()?Number(legacy.ultimo_horometro):null;}
+ function currentHours(){let prev=baseline(),h=historical();for(const r of rows){if(prev!==null)h+=delta(r.horometro,prev);prev=r.horometro;}return h;}
+ function paint(){last=rows.length?rows.at(-1).horometro:baseline();$('meterLast').textContent=last===null?'Sin lectura inicial':fmt(last,3);$('meterLastLabel').textContent=fromServer?'Último horómetro en BD:':'Referencia histórica (sin verificar):';$('meterContext').textContent=fromServer?(team===GENERAL?'Historial recuperado · registro general':'Historial recuperado · '+team):'Los 16 tramos se muestran como referencia. El guardado requiere conexión a Supabase.';totals(currentHours());preview();}
+ function preview(){const text=$('meterCurrent').value;const n=Number(text);if(!loaded||!text||!Number.isFinite(n)||last===null||n<=last){$('meterPreview').hidden=true;totals(currentHours());return;}totals(currentHours()+delta(n,last));$('meterPreview').hidden=false;}
+ async function guarded(promise) {let timeout;try{return await Promise.race([Promise.resolve(promise),new Promise((_,reject)=>{timeout=setTimeout(()=>reject(new Error('La consulta a Supabase tardó demasiado. Comprueba tu conexión y vuelve a entrar.')),12000);})]);}finally{clearTimeout(timeout)}}
+ function requireResult(result){if(result?.error)throw result.error;return result.data;}
+ async function readHistorical(){const res=await guarded(db.from('horometros_lotes_previos').select('id,equipo,primer_horometro,ultimo_horometro,tramos').eq('id',LOT_ID).maybeSingle());const item=requireResult(res);if(!item)throw new Error('No se encontró el histórico previo en la base de datos.');if(Number(item.primer_horometro)!==4564.3||Number(item.ultimo_horometro)!==4632.9||!Array.isArray(item.tramos)||item.tramos.length!==16)throw new Error('El histórico almacenado no coincide con los 16 tramos.');return item;}
+ async function allTeams(){let skip=0;const found=new Set();while(skip<20000){const res=await guarded(db.from('horometros_lecturas').select('equipo').order('equipo',{ascending:true}).range(skip,skip+499));const list=requireResult(res)||[];list.forEach(x=>{if(x.equipo)found.add(String(x.equipo).toUpperCase())});if(list.length<500)return [...found].sort();skip+=500;}throw new Error('Hay demasiados registros para identificar el equipo.');}
+ async function allReadings(key){let skip=0,items=[];while(skip<100000){const res=await guarded(db.from('horometros_lecturas').select('id,equipo,fecha_hora,horometro').eq('equipo',key).order('fecha_hora',{ascending:true}).range(skip,skip+499));const part=requireResult(res)||[];items.push(...part);if(part.length<500)break;skip+=500;}if(skip>=100000)throw new Error('No se pudo leer todo el historial.');const parsed=items.map(r=>({...r,horometro:Number(r.horometro)}));if(parsed.some((r,i)=>!Number.isFinite(r.horometro)||(i>0&&r.horometro<=parsed[i-1].horometro)))throw new Error('Hay lecturas fuera de orden en la BD.');if(parsed.length&&baseline()!==null&&parsed[0].horometro<=baseline())throw new Error('La primera lectura guardada no supera el histórico previo.');return parsed;}
+ async function refresh(){if(busyFlag)return;busy(true);loaded=false;fromServer=false;legacy=BASE;rows=[];team=GENERAL;paint();notice('Consultando Supabase…');try{
+   if(!db)throw new Error('No se cargó la librería de Supabase.');
+   // No se llama a auth.signInAnonymously(): la conexión pública usa la ANON KEY existente.
+   legacy=await readHistorical();
+   const options=await allTeams();
+   if(legacy.equipo)team=String(legacy.equipo).toUpperCase();
+   else if(options.length===1)team=options[0];
+   else if(options.length===0)team=GENERAL;
    else team='';
    const select=$('meterEquipmentSelect');select.replaceChildren();const blank=document.createElement('option');blank.value='';blank.textContent='Seleccionar equipo';select.append(blank);
-   choices.forEach(e=>{const opt=document.createElement('option');opt.value=e;opt.textContent=e;select.append(opt)});
-   multiple=choices.length>1&&!legacy?.equipo;
-   $('meterEquipmentRow').hidden=!multiple;
-   if(multiple&&team)select.value=team;
-   if(multiple&&!team){rows=[];paint();loaded=false;status('Hay varios equipos en Supabase. Selecciona uno para evitar mezclar horómetros.','error');return}
-   await loadRows();
-   loaded=true;paint();
-   if(last===null){status('No existe horómetro inicial en Supabase para este equipo. Debes cargar una lectura inicial antes de calcular diferencias.','error')}
-   else if(legacyMessage&&!rows.length)status('No se recuperó el historial previo desde Supabase: '+legacyMessage,'error');
-   else status('');
-  }catch(e){loaded=false;last=null;status('No se pudo recuperar la lectura desde Supabase: '+(e.message||e),'error')}
-  finally{busy(false)}
- }
- async function changeTeam(){if(loading)return;team=$('meterEquipmentSelect').value;loaded=false;rows=[];last=null;$('meterCurrent').value='';await refresh(true)}
- function timestampFor(date){const chosen=new Date(`${date}T00:00:00`);if(!Number.isFinite(chosen.getTime())||localDate(chosen)!==date)return null;const clock=date===today()?new Date():new Date(`${date}T12:00:00`);return clock}
- async function save(ev){ev.preventDefault();if(loading||!loaded||!session||!team)return;
-  const date=$('meterDate').value,currentText=$('meterCurrent').value,value=Number(currentText);
-  if(!date||date>today()){status('Selecciona una fecha válida, no futura.','error');return}
-  if(!/^\d+(?:\.\d{1,3})?$/.test(currentText)||!Number.isFinite(value)||value<0){status('Introduce un horómetro válido con hasta tres decimales.','error');return}
-  const stamp=timestampFor(date);if(!stamp){status('La fecha seleccionada es inválida.','error');return}
-  busy(true);status('Comprobando la última lectura antes de guardar…');
-  try{
-   // Validar contra las lecturas actuales del servidor antes de insertar, no solo contra el cálculo local.
-   await loadRows();paint();
-   if(last===null)throw new Error('No existe horómetro anterior en Supabase; no se puede calcular con seguridad.');
-   if(value<=last)throw new Error('El horómetro actual debe ser mayor que el último: '+fmt(last,3));
-   if(rows.some(r=>localDate(r.fecha_hora)===date))throw new Error('Ya existe un registro en esa fecha. No se permiten duplicados diarios.');
-   if(rows.length&&stamp.getTime()<=new Date(rows[rows.length-1].fecha_hora).getTime())throw new Error('La fecha debe ser posterior a la última lectura guardada.');
-   const response=await client.from('horometros_lecturas').insert({equipo:team,fecha_hora:stamp.toISOString(),horometro:value,observacion:''}).select('id,fecha_hora,horometro').single();
-   if(response.error)throw response.error;
-   const insertedId=response.data?.id;if(!insertedId)throw new Error('Supabase no confirmó el guardado.');
-   await loadRows();const verified=rows.some(r=>r.id===insertedId&&round3(r.horometro)===round3(value));if(!verified)throw new Error('El registro fue enviado, pero no se pudo recuperar. Consulta nuevamente antes de reintentar.');
-   $('meterCurrent').value='';$('meterDate').value=today();paint();$('meterPreview').hidden=true;status('Lectura guardada y recuperada correctamente desde Supabase.','success');
-  }catch(e){paint();status('No se guardó: '+(e.message||e),'error')}
-  finally{busy(false)}
- }
- async function open(){ $('dashboardView').hidden=true;$('tripsView').hidden=true;$('horometersView').hidden=false;window.scrollTo(0,0);await refresh() }
- function close(){ $('horometersView').hidden=true;$('dashboardView').hidden=false;window.scrollTo(0,0) }
+   options.forEach(key=>{const opt=document.createElement('option');opt.value=key;opt.textContent=key;select.append(opt)});
+   if(legacy.equipo&&!options.includes(team)){const opt=document.createElement('option');opt.value=team;opt.textContent=team;select.append(opt);}
+   $('meterEquipmentRow').hidden=!(options.length>1&&!legacy.equipo);
+   select.value=team;
+   if(!team){fromServer=true;paint();notice('Hay varios equipos: elige uno para no mezclar sus horómetros.');return;}
+   rows=await allReadings(team);
+   loaded=true;fromServer=true;paint();
+   if(last===null)notice('No existe una lectura inicial para este equipo.','error');else notice('');
+ }catch(err){loaded=false;fromServer=false;legacy=BASE;rows=[];team=GENERAL;paint();
+    const msg=String(err?.message||err);
+    const setup=/permission denied|42501|PGRST|does not exist|42P01|schema cache|not found/i.test(msg);
+    notice((setup?'Falta instalar los permisos de horómetros en Supabase. Ejecuta reparar_horometros_sin_login.sql. ':'No se pudo conectar con Supabase. ')+msg,'error');
+ }finally{busy(false);}}
+ async function save(e){e.preventDefault();if(busyFlag)return;if(!loaded){notice('La base de datos no está conectada. No se guardó la lectura.','error');return;}
+   const date=$('meterDate').value,raw=$('meterCurrent').value,value=Number(raw);
+   if(!date||date>today()){notice('Selecciona una fecha válida y no futura.','error');return;}
+   if(!/^\d+(?:\.\d{1,3})?$/.test(raw)||!Number.isFinite(value)){notice('Introduce un horómetro válido de hasta tres decimales.','error');return;}
+   const stamp=date===today()?new Date():new Date(date+'T12:00:00');
+   if(!Number.isFinite(stamp.getTime())||dateISO(stamp)!==date){notice('Fecha inválida.','error');return;}
+   busy(true);notice('Comprobando el horómetro más reciente…');try{
+     rows=await allReadings(team);fromServer=true;paint();
+     if(last===null)throw new Error('No existe lectura inicial registrada.');
+     if(value<=last)throw new Error('El valor actual debe ser mayor que '+fmt(last,3));
+     if(rows.some(r=>dateISO(new Date(r.fecha_hora))===date))throw new Error('Ya existe una lectura guardada en esa fecha.');
+     if(rows.length&&stamp<=new Date(rows.at(-1).fecha_hora))throw new Error('La fecha es anterior a la última registrada.');
+     const result=await guarded(db.from('horometros_lecturas').insert({equipo:team,fecha_hora:stamp.toISOString(),horometro:value,observacion:''}).select('id,equipo,fecha_hora,horometro').single());
+     const saved=requireResult(result);
+     if(!saved?.id)throw new Error('Supabase no confirmó el guardado.');
+     rows=await allReadings(team);if(!rows.some(r=>r.id===saved.id&&milli(r.horometro)===milli(value)))throw new Error('No se pudo confirmar la lectura. Revisa la BD antes de reintentar.');
+     $('meterCurrent').value='';$('meterDate').value=today();paint();notice('Lectura guardada y verificada en Supabase.','success');
+   }catch(err){paint();notice('No se pudo guardar: '+(err?.message||err),'error');}finally{busy(false);}}
+ function open(){active=true;$('dashboardView').hidden=true;$('tripsView').hidden=true;$('horometersView').hidden=false;window.scrollTo(0,0);refresh();}
+ function close(){active=false;$('horometersView').hidden=true;$('dashboardView').hidden=false;window.scrollTo(0,0);}
  function init(){
   $('meterDate').value=today();
-  try{client=window.supabase?.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:'madera-horometros-auth-20261024'}})||null}catch(e){status('Error al conectar Supabase: '+e.message,'error')}
+  // Cliente separado sin sesión, correo ni contraseña. Solo la clave pública actual del proyecto.
+  try{db=window.supabase?.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}})||null;}catch(e){notice('No se pudo crear la conexión: '+e.message,'error');}
   $('openHorometers').addEventListener('click',open);
   $('meterBack').addEventListener('click',close);
   $('meterForm').addEventListener('submit',save);
   $('meterCurrent').addEventListener('input',preview);
-  $('meterEquipmentSelect').addEventListener('change',changeTeam);
+  window.addEventListener('madera:totales-actualizados',()=>updateMaderaDonut(calc(lastDisplayedHours).tons));
+  $('meterEquipmentSelect').addEventListener('change',async()=>{if(busyFlag)return;team=$('meterEquipmentSelect').value;rows=[];fromServer=false;loaded=false;busy(true);notice('Cargando equipo…');try{rows=await allReadings(team);loaded=true;fromServer=true;paint();notice('');}catch(e){notice('No se pudo cargar el equipo: '+e.message,'error');}finally{busy(false);}});
+  // Mostrar los valores conocidos inmediatamente sin insinuar que están confirmados en la BD.
+  paint();
  }
- window.MADERA_HOROMETROS={calcular:(prev,current)=>estimate(diff(current,prev)),tramosPrevios:()=>[[4564.3,4567],[4567,4570.3],[4570.3,4573.3],[4573.3,4578],[4578,4588.3],[4588.3,4592.2],[4592.2,4595],[4595,4600.7],[4600.7,4609.3],[4609.3,4611.7],[4611.7,4615.5],[4615.5,4617.6],[4617.6,4621.1],[4621.1,4625.5],[4625.5,4628.3],[4628.3,4632.9]].map(([a,b])=>({anterior:a,actual:b,...estimate(diff(b,a))})), estado:()=>({equipo:team,last,loaded,rows:rows.length})};
+ window.MADERA_HOROMETROS={calcular:(a,b)=>calc(delta(b,a)),tramosPrevios:()=>TRAMOS.map(([a,b])=>({anterior:a,actual:b,...calc(delta(b,a))})),estado:()=>({equipo:team,last,loaded,fromServer,rows:rows.length})};
  init();
 })();
 </script>
@@ -1557,7 +1594,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js?v=horometros-20261024-v4-simple', { scope: './' })
+      navigator.serviceWorker.register('./sw.js?v=horometros-20261024-v9-dona-madera-2027', { scope: './' })
         .catch((error) => console.error('No se pudo registrar el Service Worker:', error));
     });
   }
