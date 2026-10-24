@@ -1,92 +1,19 @@
-const CACHE_VERSION = 'toneladas-pwa-v1';
-const APP_CACHE = `${CACHE_VERSION}-app`;
-const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
-
-const APP_SHELL = [
-  './',
-  './index.html',
-  './manifest.json',
-  './icons/icon-180.png',
-  './icons/icon-192.png',
-  './icons/icon-512.png'
-];
-
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(APP_CACHE)
-      .then((cache) => cache.addAll(APP_SHELL))
-      .then(() => self.skipWaiting())
-  );
+/* PWA Madera y Cascarilla · CACHE BUST 2026-10-24 horómetros v2 sin formulario de acceso
+   Usar junto al index.html actualizado. No mezcla estimaciones y viajes. */
+const CACHE_VERSION='madera-horometros-v20261024-2';
+self.addEventListener('install',event=>{
+ event.waitUntil((async()=>{const cache=await caches.open(CACHE_VERSION);try{await cache.add('./index.html')}catch(e){console.warn('Sin precarga de index',e)}await self.skipWaiting()})());
 });
-
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys()
-      .then((keys) => Promise.all(
-        keys
-          .filter((key) => key !== APP_CACHE && key !== RUNTIME_CACHE)
-          .map((key) => caches.delete(key))
-      ))
-      .then(() => self.clients.claim())
-  );
+self.addEventListener('activate',event=>{
+ event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('madera-horometros-')&&k!==CACHE_VERSION).map(k=>caches.delete(k)));await self.clients.claim()})());
 });
-
-self.addEventListener('fetch', (event) => {
-  const request = event.request;
-
-  if (request.method !== 'GET') return;
-
-  const url = new URL(request.url);
-
-  // Supabase y otras APIs deben trabajar siempre contra la red.
-  if (url.hostname.includes('supabase.co')) return;
-
-  // Navegación: red primero y, si falla, abrir la app instalada.
-  if (request.mode === 'navigate') {
-    event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const copy = response.clone();
-          caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, copy));
-          return response;
-        })
-        .catch(async () => {
-          return (await caches.match(request))
-            || (await caches.match('./index.html'))
-            || (await caches.match('./'));
-        })
-    );
-    return;
-  }
-
-  // Recursos locales: caché primero.
-  if (url.origin === self.location.origin) {
-    event.respondWith(
-      caches.match(request).then((cached) => {
-        if (cached) return cached;
-        return fetch(request).then((response) => {
-          if (!response || response.status !== 200) return response;
-          const copy = response.clone();
-          caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, copy));
-          return response;
-        });
-      })
-    );
-    return;
-  }
-
-  // CDN (XLSX, Flatpickr, jsPDF, etc.): stale-while-revalidate.
-  event.respondWith(
-    caches.open(RUNTIME_CACHE).then(async (cache) => {
-      const cached = await cache.match(request);
-      const networkFetch = fetch(request)
-        .then((response) => {
-          if (response) cache.put(request, response.clone()).catch(() => {});
-          return response;
-        })
-        .catch(() => cached);
-
-      return cached || networkFetch;
-    })
-  );
+self.addEventListener('fetch',event=>{
+ const req=event.request;
+ if(req.method!=='GET'||new URL(req.url).origin!==self.location.origin)return;
+ if(req.mode==='navigate'||new URL(req.url).pathname.endsWith('/index.html')){
+  event.respondWith((async()=>{
+   try{const res=await fetch(req,{cache:'no-store'});if(res.ok){const cache=await caches.open(CACHE_VERSION);await cache.put('./index.html',res.clone())}return res}
+   catch(e){const cache=await caches.open(CACHE_VERSION);const backup=await cache.match('./index.html');if(backup)return backup;throw e}
+  })());
+ }
 });

@@ -335,12 +335,63 @@ button{-webkit-tap-highlight-color:transparent}
  .trip-result-actions{width:100%;justify-content:stretch}
  .trip-result-actions .report-print-btn,.trip-result-actions .report-pdf-btn{flex:1;min-width:0}
 }
+\n/* MODULO_HOROMETROS_MADERA_V1 */
+.horometers-page{max-width:1160px}
+.horometers-page[hidden],.horometers-page [hidden]{display:none!important}
+.meter-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:17px;flex-wrap:wrap}
+.meter-bar h1{font-size:25px;margin:9px 0 5px}.meter-bar p{font-size:12px;color:#748587;margin:0}
+.meter-panel{border:1px solid #e1e9e8;background:#fff;border-radius:17px;box-shadow:var(--shadow);padding:17px;margin-bottom:14px}
+.meter-panel h2{font-size:16px;margin:0 0 11px;color:#173e40}
+.meter-panel p.meter-help{font-size:11px;color:#738689;line-height:1.5;margin:7px 0 0}
+.meter-form-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:end}
+.meter-field{display:flex;flex-direction:column;min-width:0;gap:5px;font-size:11px;color:#526a6e;font-weight:800}
+.meter-field input,.meter-field textarea{min-width:0;width:100%;font:inherit;color:#243b3d;font-size:13px;font-weight:650;border:1px solid #d7e3e2;border-radius:10px;background:white;padding:10px;min-height:41px;outline:0}
+.meter-field textarea{resize:vertical;min-height:66px}.meter-field input:focus,.meter-field textarea:focus{border-color:#12988a;box-shadow:0 0 0 3px rgba(19,151,137,.13)}
+.meter-field input[readonly]{background:#f2f6f6;color:#617579}
+.meter-btn{background:#173e40;color:#fff;border:0;border-radius:10px;font-weight:850;padding:11px 14px;min-height:41px;cursor:pointer;white-space:nowrap}
+.meter-btn.secondary{color:#173e40;background:white;border:1px solid #cfdcda}
+.meter-btn:disabled{opacity:.45;cursor:wait}
+.meter-auto-access{display:flex;justify-content:space-between;gap:9px;align-items:center;flex-wrap:wrap;font-size:11px;color:#597578;margin:0 0 12px;padding:0 2px}
+.meter-auto-access details{max-width:100%;font-size:10px}.meter-auto-access summary{cursor:pointer;color:#657f82}.meter-auto-access code{user-select:all;word-break:break-all}.meter-copy-id{border:1px solid #d4e1df;border-radius:7px;background:#fff;padding:5px 8px;cursor:pointer;color:#284e51;font-size:10px}
+.meter-lookup{display:grid;grid-template-columns:minmax(170px,1.7fr) auto minmax(150px,.9fr);gap:11px;align-items:end}
+.meter-last{border:1px solid #d9e8e4;background:#eef8f5;border-radius:11px;padding:8px 12px;min-height:53px}
+.meter-last small{display:block;color:#537773;font-size:10px;font-weight:800}.meter-last b{display:block;font-size:18px;color:#123f3c}.meter-last em{display:block;font-size:10px;color:#6e8985;font-style:normal}
+.meter-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:13px 0}
+.meter-metric{padding:13px;border-radius:13px;border:1px solid #dbe7e6;background:#f6fafa;min-width:0}
+.meter-metric:nth-child(2){background:#f0f8f3;border-color:#d5e9d8}.meter-metric:nth-child(3){background:#fff9ee;border-color:#eee4ce}
+.meter-metric span{display:block;font-size:11px;font-weight:800;color:#647a79}.meter-metric strong{display:block;margin:6px 0 2px;font-size:24px;color:#173e40;white-space:nowrap}.meter-metric small{font-size:10px;color:#78908c}
+.meter-actions{display:flex;gap:9px;align-items:center;justify-content:flex-end;margin-top:10px;flex-wrap:wrap}
+.meter-note{font-size:11px;color:#657b7c;margin-top:9px;line-height:1.45}
+.meter-status{padding:11px 13px;border:1px solid #d5e4e1;border-radius:10px;margin-bottom:13px;background:#f2f8f7;color:#3b6963;font-size:12px;font-weight:750;line-height:1.4}
+.meter-status[data-kind="error"]{background:#fff2ef;color:#a44736;border-color:#f1d2ca}
+.meter-status[data-kind="success"]{background:#eff9f3;color:#176b51;border-color:#ccead5}
+.meter-history-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:11px}
+.meter-history-head h2{margin:0}.meter-history-filter{display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap}
+.meter-history-filter .meter-field{min-width:128px}
+.meter-history-filter input{min-height:35px;padding:7px;font-size:12px}
+.meter-total-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:12px}
+.meter-total-cards div{padding:10px;border:1px solid #dbe7e5;border-radius:10px;background:#f9fbfb}
+.meter-total-cards small{display:block;font-size:10px;color:#7b8b8e;font-weight:850}
+.meter-total-cards b{display:block;margin-top:5px;font-size:19px;color:#163b3c}
+.meter-tablewrap{width:100%;overflow:auto;border:1px solid #e0e9e8;border-radius:10px}
+.meter-table{border-collapse:collapse;width:100%;min-width:880px;font-size:11px}
+.meter-table th{background:#eaf2f2;color:#365456;text-align:left;padding:8px 9px;font-weight:750;white-space:nowrap}
+.meter-table td{border-top:1px solid #e8efee;padding:9px;vertical-align:top;color:#31494a}
+.meter-table tbody tr:nth-child(even){background:#fafcfc}
+.meter-right{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.meter-edit{border:1px solid #bfcecd;background:white;color:#173e40;padding:6px 8px;font-size:10px;border-radius:7px;cursor:pointer;font-weight:800}
+.meter-empty{color:#7a8e90;text-align:center;padding:19px;font-size:12px}
+.meter-edit-box{margin-top:10px;padding:10px;border:1px solid #eddfb9;border-radius:10px;background:#fffaf0}
+.meter-section-label{display:block;font-size:12px;font-weight:800;color:#586f71;margin:0 0 10px}
+@media(max-width:830px){.meter-form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.meter-lookup{grid-template-columns:1fr auto}.meter-last{grid-column:1/-1}}
+@media(max-width:530px){.meter-panel{padding:12px}.meter-form-grid{grid-template-columns:1fr 1fr;gap:8px}.meter-cards{grid-template-columns:1fr 1fr}.meter-metric:last-child{grid-column:1/-1}.meter-metric strong{font-size:21px}.meter-total-cards b{font-size:16px}.meter-lookup{grid-template-columns:1fr}.meter-lookup .meter-btn{width:100%}.meter-lookup .meter-last{grid-column:auto}.meter-history-filter{width:100%}.meter-history-filter .meter-field{flex:1;min-width:120px}}
+@media print{#horometersView{display:none!important}}
 </style>
 </head>
 <body>
 <div class="loading" id="loading"><div><div class="spinner"></div><b>Cargando análisis…</b></div></div>
 <main class="page" id="dashboardView">
-  <div class="top"><div class="title"><h1>Análisis de Toneladas</h1></div><div class="top-actions"><button class="btn btn-secondary" id="installPwa" hidden>⊕ <span>Instalar app</span></button><span class="db-status loading" id="dbStatus">Conectando BD…</span><button class="btn btn-secondary" id="openTrips">☷ <span>Consultar viajes</span></button><button class="btn" id="openUpload">⬆ <span>Actualizar datos</span></button></div></div>
+  <div class="top"><div class="title"><h1>Análisis de Toneladas</h1></div><div class="top-actions"><button class="btn btn-secondary" id="installPwa" hidden>⊕ <span>Instalar app</span></button><span class="db-status loading" id="dbStatus">Conectando BD…</span><button class="btn btn-secondary" id="openTrips">☷ <span>Consultar viajes</span></button><button class="btn btn-secondary" id="openHorometers">◷ <span>Horómetros</span></button><button class="btn" id="openUpload">⬆ <span>Actualizar datos</span></button></div></div>
   <section class="section"><div class="head"><div><h2>Toneladas por año</h2></div></div><div class="cards" id="yearCards"></div><div class="chart" id="yearChart"></div><div class="chart-note">Toca una barra o una tarjeta del año para ver el detalle por material. <span class="sync-hint" id="syncStatus" aria-live="polite">Comprobando datos…</span></div></section>
   <section class="section"><div class="head"><div><h2>Comparación por tipo de material</h2></div><div class="status">2026 · 2027</div></div><div class="legend"><span><i style="background:#173f6b"></i>Cascarilla</span><span><i style="background:#2e8b57"></i>Madera</span><span><i style="background:#e67e22"></i>Raquín</span><span style="margin-left:auto;font-size:11px;color:var(--muted);font-weight:800;">Periodos: Material 2026 · Material 2027</span></div><div class="chart small" id="classChart"></div></section>
 </main>
@@ -417,6 +468,56 @@ button{-webkit-tap-highlight-color:transparent}
     <div class="trip-empty" id="tripEmpty">Seleccione un rango de fechas y por lo menos una placa o una descripción, luego presione Buscar.</div>
     <div class="trip-pagination"><span id="tripShowing">Mostrando 0 viajes</span><div class="pager" id="tripPager"></div></div>
   </section>
+</main>
+
+
+<!-- MÓDULO DE HORÓMETROS: independiente de viajes -->
+<main class="page horometers-page" id="horometersView" hidden>
+ <div class="meter-bar"><div><button type="button" class="back-link" id="meterBack">← Volver al análisis</button><h1>Control de horómetros</h1><p>Madera y Cascarilla · Estimaciones de producción y diésel</p></div><span class="status">15 tn y 20 gal / 1 h 30 min</span></div>
+ <div class="meter-status" id="meterStatus" role="status" aria-live="polite">Conectando…</div>
+ <div id="meterMain">
+  <div id="meterWorkspace">
+   <div class="meter-auto-access" aria-label="Acceso automático a Horómetros">
+    <span id="meterAccessLabel">Conectando al historial…</span>
+    <details><summary>ID de dispositivo (para permisos de administrador)</summary><code id="meterDeviceId">—</code> <button id="meterCopyId" type="button" class="meter-copy-id">Copiar ID</button></details>
+   </div>
+   <section class="meter-panel">
+    <h2>Consulta por equipo o placa</h2>
+    <div class="meter-lookup">
+     <label class="meter-field">Equipo / placa<input type="text" id="meterEquipment" list="meterEquipments" maxlength="40" autocomplete="off" placeholder="Ej. BL8317" aria-label="Equipo o placa"><datalist id="meterEquipments"></datalist></label>
+     <button type="button" id="meterSearchBtn" class="meter-btn">⌕ Consultar</button>
+     <div class="meter-last"><small>ÚLTIMO HORÓMETRO</small><b id="meterLast">—</b><em id="meterLastDate">Sin lecturas</em></div>
+    </div>
+   </section>
+   <section class="meter-panel">
+    <h2 id="meterFormTitle">Registrar lectura</h2><span class="meter-section-label">Equipo seleccionado: <b id="meterFormEquipment">—</b></span>
+    <div class="meter-form-grid">
+     <label class="meter-field">Fecha<input id="meterDate" type="date" required></label>
+     <label class="meter-field">Hora<input id="meterTime" type="time" required></label>
+     <label class="meter-field">Horómetro anterior (automático)<input id="meterPrevious" readonly type="text" placeholder="Lectura inicial"></label>
+     <label class="meter-field">Horómetro actual<input id="meterCurrent" type="number" min="0" step="0.001" inputmode="decimal" placeholder="Ej. 4632.9" required></label>
+    </div>
+    <p class="meter-note" id="meterInitialNote">Primera lectura del equipo: establecerá el valor inicial.</p>
+    <div class="meter-cards">
+     <div class="meter-metric"><span>Horas trabajadas</span><strong id="meterHours">0,000 h</strong><small id="meterHoursSub">Sin diferencia calculada</small></div>
+     <div class="meter-metric"><span>Toneladas estimadas</span><strong id="meterTons">0,00 tn</strong><small>15 tn cada 1,5 h</small></div>
+     <div class="meter-metric"><span>Diésel estimado</span><strong id="meterDiesel">0,00 gal</strong><small>20 gal cada 1,5 h</small></div>
+    </div>
+    <label class="meter-field">Observación (opcional)<textarea id="meterObservation" maxlength="1000" rows="2" placeholder="Detalle del registro"></textarea></label>
+    <div class="meter-edit-box" id="meterEditBox" hidden>
+     <label class="meter-field">Motivo obligatorio de la corrección<input id="meterCorrectionReason" type="text" maxlength="300" placeholder="Indique la razón de la corrección"></label>
+     <p class="meter-help">Únicamente el administrador puede corregir una lectura. Se guarda una auditoría en Supabase y el historial posterior se recalcula automáticamente.</p>
+    </div>
+    <div class="meter-actions"><button class="meter-btn secondary" type="button" id="meterCancelEdit" hidden>Cancelar corrección</button><button class="meter-btn secondary" id="meterCalculate" type="button">Calcular</button><button class="meter-btn" id="meterSave" type="button">Guardar registro</button></div>
+   </section>
+   <section class="meter-panel">
+    <div class="meter-history-head"><div><h2>Historial por equipo</h2><span id="meterHistoryTotal" class="meter-note">0 lecturas</span></div><div class="meter-history-filter"><label class="meter-field">Desde<input type="date" id="meterFrom"></label><label class="meter-field">Hasta<input type="date" id="meterTo"></label><button type="button" class="meter-btn secondary" id="meterRefresh">Actualizar</button></div></div>
+    <div class="meter-total-cards"><div><small>Horas del período</small><b id="meterSumHours">0,000 h</b></div><div><small>Toneladas estimadas</small><b id="meterSumTons">0,00 tn</b></div><div><small>Diésel estimado</small><b id="meterSumDiesel">0,00 gal</b></div></div>
+    <div class="meter-tablewrap"><table class="meter-table"><thead><tr><th>Fecha y hora</th><th class="meter-right">Anterior</th><th class="meter-right">Actual</th><th class="meter-right">Horas</th><th class="meter-right">TN estimadas</th><th class="meter-right">Diésel (gal)</th><th>Observación</th><th id="meterColEdit">Corrección</th></tr></thead><tbody id="meterRows"></tbody></table><div id="meterEmpty" class="meter-empty">Consulta un equipo para ver su historial.</div></div>
+    <p class="meter-note" id="meterEditHeading"></p><p class="meter-help">Los totales suman las diferencias de las lecturas mostradas respecto a la lectura previa de cada registro, incluso si esa lectura anterior queda fuera del rango de fechas. No modifican los reportes reales de viajes.</p>
+   </section>
+  </div>
+ </div>
 </main>
 
 <div class="modalbg" id="uploadModal"><div class="modal"><div class="modalhead" style="grid-template-columns:1fr auto"><h3>Actualizar datos</h3><button class="close" id="closeUpload">✕</button></div><div class="modalbody"><input type="file" id="fileInput" accept=".xlsx,.xls,.xlsm,.xlsb,.ods,.csv" hidden><div class="drop" id="dropZone"><b>Seleccionar archivo Excel o CSV</b><span>Admite XLSX, XLS, XLSM, XLSB, ODS y CSV. También puedes arrastrarlo aquí.</span></div><div class="rule"><b>Rango de importación:</b> solo se tomarán registros desde el <b>23/03/2026</b> hasta <b>hoy</b>, ambos días incluidos. Las filas anteriores o con fechas futuras se omiten automáticamente.<br><b>Control de duplicados:</b> después de aplicar el rango de fechas se compara la columna <b>secuencia_salida</b>. Las secuencias que ya existen no se duplican; si les faltan datos de viaje, se completan al volver a cargar el archivo. La placa se toma directamente de la columna <b>codig_placa</b> y se vuelve a sincronizar aunque la secuencia ya exista en Supabase. El encabezado puede estar dentro de las primeras 100 filas de cualquier hoja.</div><div class="result" id="uploadResult"><div><b id="rRead">0</b><span>Filas leídas</span></div><div><b id="rTotal">0</b><span>En rango</span></div><div><b id="rNew">0</b><span>Nuevas</span></div><div><b id="rDup">0</b><span>Existentes</span></div></div></div></div></div>
@@ -1362,6 +1463,90 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 </script>
 
 <script>
+/* MADERA · Control de horómetros · 2026-10-24
+   Este módulo NO altera viajes ni totales de toneladas reales.
+   El historial guarda lecturas brutas; las estimaciones se derivan al consultarlo.
+*/
+(() => {
+ 'use strict';
+ const $m = s => document.querySelector(s);
+ const page=$m('#horometersView');
+ if(!page)return;
+ const $id=id=>document.getElementById(id);
+ const fmt=(n,dec=2)=>Number(n||0).toLocaleString('es-PA',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+ const escapeHTML=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const normalize=v=>String(v||'').trim().toUpperCase().replace(/\s+/g,'');
+ const number=v=>{const x=Number(v);return Number.isFinite(x)?x:NaN};
+ const ms=n=>Math.round(n*1000);
+ const difference=(a,b)=>(ms(a)-ms(b))/1000;
+ const estimate=hours=>({hours,tons:hours/1.5*15,diesel:hours/1.5*20});
+ const isoDate=d=>{const x=new Date(d);return Number.isFinite(x.getTime())?x.toLocaleString('es-PA',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}):'—'};
+ const formTimeNow=()=>{const d=new Date();return {date:[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-'),time:`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`}};
+ const periodFrom=()=>{const n=formTimeNow().date;return n.slice(0,8)+'01'};
+ const timeOf=r=>new Date(r.fecha_hora).getTime();
+ let client=null,sessionUser=null,role=null,loadedEquipment='',readingRows=[],editingId=null,busy=false;
+ function status(msg,kind='info'){const el=$id('meterStatus');el.textContent=msg;el.dataset.kind=kind;el.hidden=!msg}
+ function setBusy(b,msg){busy=b;$id('meterSave').disabled=b||!sessionUser;$id('meterSearchBtn').disabled=b||!sessionUser;if(msg)status(msg)}
+ function showConnection(){const ready=!!sessionUser;$id('meterMain').hidden=false;$id('meterWorkspace').hidden=false;$id('meterSave').disabled=busy||!ready;$id('meterSearchBtn').disabled=busy||!ready;$id('meterAccessLabel').textContent=ready?`Acceso automático · ${role==='admin'?'Administrador':'Operador'}`:'Conectando al historial…';$id('meterDeviceId').textContent=ready?sessionUser.id:'—'}
+ function clearDisplay(){readingRows=[];loadedEquipment='';editingId=null;$id('meterLast').textContent='—';$id('meterLastDate').textContent='Sin lecturas';$id('meterPrevious').value='';$id('meterRows').innerHTML='';$id('meterEmpty').hidden=false;$id('meterEmpty').textContent='Consulta un equipo para ver su historial.';$id('meterHistoryTotal').textContent='0 lecturas';$id('meterInitialNote').textContent='Primera lectura del equipo: establecerá el valor inicial.';renderCards(null);showEditMode(false)}
+ function showEditMode(yes){$id('meterEditBox').hidden=!yes;$id('meterSave').textContent=yes?'Guardar corrección':'Guardar registro';$id('meterCancelEdit').hidden=!yes}
+ function renderCards(result){$id('meterHours').textContent=result?fmt(result.hours,3)+' h':'0,000 h';$id('meterTons').textContent=result?fmt(result.tons)+' tn':'0,00 tn';$id('meterDiesel').textContent=result?fmt(result.diesel)+' gal':'0,00 gal';$id('meterHoursSub').textContent=result?`${Math.floor(Math.round(result.hours*60)/60)} h ${String(Math.round(result.hours*60)%60).padStart(2,'0')} min`:'Sin diferencia calculada'}
+ function open(){const dash=$id('dashboardView'),trips=$id('tripsView');dash.hidden=true;trips.hidden=true;page.hidden=false;window.scrollTo({top:0,behavior:'instant'});refreshAuth()}
+ function close(){page.hidden=true;$id('dashboardView').hidden=false;window.scrollTo({top:0,behavior:'instant'})}
+ const fromRow=r=>({id:r.id,equipo:r.equipo,fecha_hora:r.fecha_hora,horometro:number(r.horometro),observacion:r.observacion||'',creado_por:r.creado_por,motivo_correccion:r.motivo_correccion||''});
+ function buildHistory(){let prev=null;return [...readingRows].sort((a,b)=>timeOf(a)-timeOf(b)||a.id.localeCompare(b.id)).map(r=>{const hours=prev===null?0:difference(r.horometro,prev);const ans={...r,anterior:prev,initial:prev===null,...estimate(hours)};prev=r.horometro;return ans})}
+ function relevant(){const from=$id('meterFrom').value,to=$id('meterTo').value;return buildHistory().filter(r=>{const d=r.fecha_hora.slice(0,10); // Supabase returns UTC: date filter below uses local calendar instead
+    const local=new Date(r.fecha_hora);const y=local.getFullYear(),m=String(local.getMonth()+1).padStart(2,'0'),day=String(local.getDate()).padStart(2,'0'),date=`${y}-${m}-${day}`;
+    return (!from||date>=from)&&(!to||date<=to);});}
+ function loadPlateSuggestions(){try{if(typeof getTripPlateList!=='function')return;const list=getTripPlateList().slice(0,1000),node=$id('meterEquipments');node.replaceChildren(...list.map(p=>{const o=document.createElement('option');o.value=p;return o}))}catch(e){console.warn('No se cargaron sugerencias de placas',e)}}
+ let connecting=null;
+ async function refreshAuth(){
+  if(!client){sessionUser=null;role=null;showConnection();status('No se cargó Supabase. Revisa la conexión a internet.','error');return}
+  if(connecting)return connecting;
+  connecting=(async()=>{
+   status('Conectando a Supabase sin solicitar correo ni contraseña…');
+   try{
+    const current=await client.auth.getSession();
+    if(current.error)throw current.error;
+    let user=current.data?.session?.user||null;
+    if(!user){
+     const signin=await client.auth.signInAnonymously();
+     if(signin.error)throw signin.error;
+     user=signin.data?.user||signin.data?.session?.user||null;
+    }
+    if(!user?.id)throw new Error('Supabase no devolvió un identificador de sesión.');
+    sessionUser=user;
+    const resp=await client.from('horometros_autorizados').select('rol').eq('user_id',user.id).maybeSingle();
+    if(resp.error)throw resp.error;
+    role=resp.data?.rol==='admin'?'admin':'operador';
+    showConnection();
+    status('Conectado a Supabase. Puedes consultar y guardar horómetros sin iniciar sesión manualmente.','success');
+   }catch(e){sessionUser=null;role=null;showConnection();
+    const reason=String(e.message||e);
+    if(/anonymous|disabled|signups|signup|not allowed/i.test(reason))
+      status('Acceso automático no habilitado: activa Anonymous Sign-Ins en Supabase > Authentication > Providers y vuelve a abrir Horómetros. '+reason,'error');
+    else status('No se pudo conectar a Supabase: '+reason,'error');
+   }
+  })();
+  try{await connecting}finally{connecting=null}
+ }
+ async function loadRows(equipment){const rows=[],step=500;let countExpected=null;for(let start=0;start<1000000;start+=step){const query=client.from('horometros_lecturas').select('id,equipo,fecha_hora,horometro,observacion,creado_por,motivo_correccion',start===0?{count:'exact'}:{}).eq('equipo',equipment).order('fecha_hora',{ascending:true}).order('id',{ascending:true}).range(start,start+step-1);const {data,error,count}=await query;if(error)throw error;if(start===0&&Number.isInteger(count))countExpected=count;rows.push(...(data||[]).map(fromRow));if(!data?.length||data.length<step||(countExpected!==null&&rows.length>=countExpected))break}if(countExpected!==null&&rows.length!==countExpected)throw new Error(`Consulta incompleta: ${rows.length} de ${countExpected} lecturas.`);if(new Set(rows.map(x=>x.id)).size!==rows.length)throw new Error('Se encontraron lecturas duplicadas entre páginas.');return rows}
+ async function search(silent=false){const equipo=normalize($id('meterEquipment').value);if(busy||!role)return;if(!equipo||equipo.length>40){status('Escribe un número de equipo o placa válido (máximo 40 caracteres).','error');return}setBusy(true,'Cargando lecturas de '+equipo+' desde Supabase…');try{const rows=await loadRows(equipo);readingRows=rows;loadedEquipment=equipo;$id('meterEquipment').value=equipo;editingId=null;showEditMode(false);displayLast();renderHistory();refreshPrevious();status(rows.length?`Se recuperaron ${rows.length} lecturas de ${equipo} desde Supabase.`:`${equipo} no tiene lecturas. El primer registro será su lectura inicial.`,'success')}catch(e){clearDisplay();status('Error consultando Supabase: '+e.message,'error')}finally{setBusy(false)}}
+ function displayLast(){const latest=readingRows.at(-1);$id('meterLast').textContent=latest?fmt(latest.horometro,3):'—';$id('meterLastDate').textContent=latest?isoDate(latest.fecha_hora):'Sin lecturas'}
+ function refreshPrevious(){const equipo=normalize($id('meterEquipment').value);$id('meterFormEquipment').textContent=equipo||'—';if(equipo!==loadedEquipment){$id('meterPrevious').value='';renderCards(null);return}const d=$id('meterDate').value,t=$id('meterTime').value,dt=d&&t?new Date(`${d}T${t}:00`).getTime():NaN;let prev=null,next=null;for(const r of readingRows){if(r.id===editingId)continue;const tt=timeOf(r);if(tt<dt)prev=r;else if(tt>dt){next=r;break}}$id('meterPrevious').value=prev?String(prev.horometro.toFixed(3)):'';$id('meterInitialNote').textContent=prev?`Lectura previa: ${isoDate(prev.fecha_hora)}${next?' · Existe una lectura posterior.':''}`:'Lectura inicial: sin horas ni consumo hasta la próxima lectura.';calculate(false)}
+ function calculate(notify=true){const raw=$id('meterCurrent').value.replace(',','.'),curr=number(raw),prevRaw=$id('meterPrevious').value,prev=prevRaw===''?null:number(prevRaw);if(!raw||!Number.isFinite(curr)||curr<0){renderCards(null);if(notify)status('Introduce un horómetro actual numérico y no negativo.','error');return null}if(prev!==null&&curr<=prev){renderCards(null);if(notify)status('La nueva lectura debe ser superior a la anterior.','error');return null}const d=$id('meterDate').value,t=$id('meterTime').value,dt=d&&t?new Date(`${d}T${t}:00`).getTime():NaN;const next=readingRows.find(r=>r.id!==editingId&&timeOf(r)>dt);if(next&&curr>=next.horometro){renderCards(null);if(notify)status('La lectura debe ser menor que el siguiente registro cronológico ('+fmt(next.horometro,3)+').','error');return null}const hours=prev===null?0:difference(curr,prev);const result=estimate(hours);renderCards(result);if(notify)status(prev===null?'Lectura inicial: se guardará como línea base.':`Cálculo listo: ${fmt(hours,3)} h, ${fmt(result.tons)} tn y ${fmt(result.diesel)} gal.`,'success');return result}
+ function renderHistory(){const filtered=relevant();const qty=filtered.length,hours=filtered.reduce((a,x)=>a+x.hours,0);const tons=filtered.reduce((a,x)=>a+x.tons,0);const diesel=filtered.reduce((a,x)=>a+x.diesel,0);$id('meterHistoryTotal').textContent=`${qty} lecturas`;$id('meterSumHours').textContent=fmt(hours,3)+' h';$id('meterSumTons').textContent=fmt(tons)+' tn';$id('meterSumDiesel').textContent=fmt(diesel)+' gal';$id('meterEmpty').hidden=qty>0;$id('meterEmpty').textContent=readingRows.length?'No hay lecturas en las fechas seleccionadas.':'No hay lecturas registradas para este equipo.';$id('meterRows').innerHTML=filtered.map(row=>`<tr><td>${escapeHTML(isoDate(row.fecha_hora))}</td><td class="meter-right">${row.initial?'INICIAL':fmt(row.anterior,3)}</td><td class="meter-right">${fmt(row.horometro,3)}</td><td class="meter-right">${fmt(row.hours,3)}</td><td class="meter-right">${fmt(row.tons)}</td><td class="meter-right">${fmt(row.diesel)}</td><td>${escapeHTML(row.observacion||'—')}</td>${role==='admin'?`<td><button type="button" class="meter-edit" data-meter-id="${row.id}">Editar</button></td>`:''}</tr>`).join('');$id('meterEditHeading').textContent=role==='admin'?'Correcciones supervisadas':'';$id('meterColEdit').hidden=role!=='admin';$id('meterRows').querySelectorAll('[data-meter-id]').forEach(btn=>btn.addEventListener('click',()=>edit(btn.dataset.meterId)))}
+ function edit(id){if(role!=='admin')return;const row=readingRows.find(r=>r.id===id);if(!row)return;editingId=id;const date=new Date(row.fecha_hora);$id('meterDate').value=`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;$id('meterTime').value=`${String(date.getHours()).padStart(2,'0')}:${String(date.getMinutes()).padStart(2,'0')}`;$id('meterCurrent').value=String(row.horometro);$id('meterObservation').value=row.observacion;$id('meterCorrectionReason').value='';showEditMode(true);refreshPrevious();$id('meterFormTitle').scrollIntoView({behavior:'smooth',block:'start'});status('Corrigiendo registro existente. Es obligatorio indicar el motivo de la corrección.')} 
+ function cancelEdit(){editingId=null;showEditMode(false);$id('meterCorrectionReason').value='';$id('meterObservation').value='';$id('meterCurrent').value='';const {date,time}=formTimeNow();$id('meterDate').value=date;$id('meterTime').value=time;refreshPrevious()}
+ async function save(){if(busy||!role)return;const equipo=normalize($id('meterEquipment').value);if(!equipo||loadedEquipment!==equipo){status('Primero pulsa Consultar para cargar el historial completo de este equipo.','error');return}const date=$id('meterDate').value,time=$id('meterTime').value;if(!date||!time){status('Indica fecha y hora de la lectura.','error');return}const timestamp=new Date(`${date}T${time}:00`);if(!Number.isFinite(timestamp.getTime())||timestamp>new Date(Date.now()+5*60000)){status('Fecha y hora inválida o futura.','error');return}const value=number($id('meterCurrent').value.replace(',','.'));if(!Number.isFinite(value)||value<0||Math.round(value*1000)/1000!==value){status('Ingresa un valor no negativo con hasta tres decimales.','error');return}if(!calculate(false)){status('Lectura inválida: el valor debe superar el horómetro anterior.','error');return}if(readingRows.some(r=>r.id!==editingId&&(timeOf(r)===timestamp.getTime()||ms(r.horometro)===ms(value)))){status('Ya existe una lectura de este equipo con la misma fecha/hora o valor.','error');return}const reason=$id('meterCorrectionReason').value.trim();if(editingId&&(role!=='admin'||reason.length<5)){status('La corrección requiere rol administrador y un motivo de al menos 5 caracteres.','error');return}const payload={fecha_hora:timestamp.toISOString(),horometro:value,observacion:$id('meterObservation').value.trim()};setBusy(true,editingId?'Guardando corrección en Supabase…':'Guardando lectura en Supabase…');try{let response;if(editingId){response=await client.from('horometros_lecturas').update({...payload,motivo_correccion:reason}).eq('id',editingId).eq('equipo',equipo).select('id,horometro,fecha_hora').single()}else{response=await client.from('horometros_lecturas').insert({...payload,equipo}).select('id,horometro,fecha_hora').single()}if(response.error)throw response.error;if(!response.data?.id)throw new Error('No se confirmó el guardado en la base de datos.');const savedId=response.data.id;const rows=await loadRows(equipo);const verified=rows.find(r=>r.id===savedId);if(!verified||ms(verified.horometro)!==ms(value))throw new Error('Supabase confirmó la escritura, pero no se pudo verificar la lectura al recuperarla. Repite la consulta antes de intentar otro guardado.');readingRows=rows;editingId=null;showEditMode(false);$id('meterCurrent').value='';$id('meterObservation').value='';$id('meterCorrectionReason').value='';const nt=formTimeNow();$id('meterDate').value=nt.date;$id('meterTime').value=nt.time;displayLast();renderHistory();refreshPrevious();status('Registro guardado y recuperado correctamente desde Supabase · '+equipo+' · '+fmt(value,3),'success')}catch(e){status('Error guardando en Supabase: '+(e.message||e)+' · Comprueba el historial antes de reintentar.','error')}finally{setBusy(false)}}
+ function init(){const t=formTimeNow();$id('meterDate').value=t.date;$id('meterTime').value=t.time;$id('meterFrom').value=periodFrom();$id('meterTo').value=t.date;clearDisplay();showConnection();try{client=window.supabase?.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:'madera-horometros-auth-20261024'}})||null}catch(e){status('Error inicializando Supabase: '+e.message,'error')} $id('openHorometers').addEventListener('click',()=>{loadPlateSuggestions();open()});$id('meterBack').addEventListener('click',close);$id('meterCopyId').addEventListener('click',async()=>{const id=sessionUser?.id;if(!id)return;try{await navigator.clipboard.writeText(id);status('ID de dispositivo copiado. Compártelo únicamente con quien administra los permisos.','success')}catch(e){status('Selecciona y copia manualmente el ID de dispositivo.')}});$id('meterSearchBtn').addEventListener('click',()=>search());$id('meterEquipment').addEventListener('keydown',e=>{if(e.key==='Enter')search()});$id('meterEquipment').addEventListener('input',()=>{if(normalize($id('meterEquipment').value)!==loadedEquipment){readingRows=[];loadedEquipment='';editingId=null;showEditMode(false);refreshPrevious()}});['meterDate','meterTime'].forEach(id=>$id(id).addEventListener('change',refreshPrevious));$id('meterCurrent').addEventListener('input',()=>calculate(false));$id('meterCalculate').addEventListener('click',()=>calculate(true));$id('meterSave').addEventListener('click',save);$id('meterCancelEdit').addEventListener('click',cancelEdit);['meterFrom','meterTo'].forEach(id=>$id(id).addEventListener('change',()=>{if($id('meterFrom').value&&$id('meterTo').value&&$id('meterFrom').value>$id('meterTo').value){status('La fecha inicial del historial debe ser anterior a la final.','error');return}renderHistory()}));$id('meterRefresh').addEventListener('click',()=>search(true));}
+ // Para pruebas automatizadas de la regla sin depender de Supabase.
+ window.MADERA_HOROMETROS={calcular:(prev,next)=>estimate(difference(next,prev))};
+ init();
+})();
+</script>
+
+<script>
 (() => {
   let deferredInstallPrompt = null;
   const installButton = document.getElementById('installPwa');
@@ -1392,7 +1577,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js', { scope: './' })
+      navigator.serviceWorker.register('./sw.js?v=horometros-20261024-v2', { scope: './' })
         .catch((error) => console.error('No se pudo registrar el Service Worker:', error));
     });
   }
