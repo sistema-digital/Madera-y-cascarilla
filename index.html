@@ -386,6 +386,20 @@ button{-webkit-tap-highlight-color:transparent}
 @media(max-width:830px){.meter-form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.meter-lookup{grid-template-columns:1fr auto}.meter-last{grid-column:1/-1}}
 @media(max-width:530px){.meter-panel{padding:12px}.meter-form-grid{grid-template-columns:1fr 1fr;gap:8px}.meter-cards{grid-template-columns:1fr 1fr}.meter-metric:last-child{grid-column:1/-1}.meter-metric strong{font-size:21px}.meter-total-cards b{font-size:16px}.meter-lookup{grid-template-columns:1fr}.meter-lookup .meter-btn{width:100%}.meter-lookup .meter-last{grid-column:auto}.meter-history-filter{width:100%}.meter-history-filter .meter-field{flex:1;min-width:120px}}
 @media print{#horometersView{display:none!important}}
+
+/* MADERA · Historial previo de 16 tramos sin fecha */
+.meter-legacy-panel{border-color:#cbdcd7}
+.meter-legacy-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.meter-legacy-head .meter-help{margin:-3px 0 13px;color:#62787a}
+.meter-legacy-label{display:inline-flex;border-radius:999px;background:#f5efe0;color:#80610f;padding:6px 10px;font-size:10px;font-weight:900}
+.meter-legacy-label.assigned{background:#eaf6f0;color:#166d56}
+.meter-legacy-tools{align-items:center;margin:13px 0 10px;gap:10px}
+.meter-legacy-tools .meter-note{display:block;max-width:660px;line-height:1.5}
+.meter-legacy-tools button:disabled{opacity:.55;cursor:not-allowed}
+.meter-legacy-kpis{margin:7px 0 12px}
+.meter-legacy-table th,.meter-legacy-table td{padding:7px 10px!important;font-variant-numeric:tabular-nums}
+.meter-legacy-table tfoot th{background:#eef5f2;font-weight:900;border-top:2px solid #cbdeda}
+@media(max-width:680px){.meter-legacy-tools button{width:100%}.meter-legacy-panel{padding:12px}}
 </style>
 </head>
 <body>
@@ -488,6 +502,23 @@ button{-webkit-tap-highlight-color:transparent}
      <button type="button" id="meterSearchBtn" class="meter-btn">⌕ Consultar</button>
      <div class="meter-last"><small>ÚLTIMO HORÓMETRO</small><b id="meterLast">—</b><em id="meterLastDate">Sin lecturas</em></div>
     </div>
+   </section>
+
+   <section class="meter-panel meter-legacy-panel" id="meterLegacyPanel">
+    <div class="meter-legacy-head">
+     <div><h2>Historial previo recuperado</h2><p class="meter-help">16 tramos recibidos · sin fecha ni placa informada. Se mantienen separados del historial fechado.</p></div>
+     <span class="meter-legacy-label" id="meterLegacyLabel">Pendiente de asignar</span>
+    </div>
+    <div class="meter-total-cards meter-legacy-kpis">
+     <div><small>Horas previas</small><b id="meterLegacyHours">68,600 h</b></div>
+     <div><small>Toneladas estimadas</small><b id="meterLegacyTons">686,00 tn</b></div>
+     <div><small>Diésel estimado</small><b id="meterLegacyDiesel">914,67 gal</b></div>
+    </div>
+    <div class="meter-history-head meter-legacy-tools"><div><span class="meter-note" id="meterLegacyNotice">Los registros anteriores van de 4564.3 a 4632.9. No se han inventado fechas ni equipo.</span></div>
+     <button class="meter-btn secondary" type="button" id="meterLegacyAssign" disabled>Vincular al equipo consultado</button>
+    </div>
+    <div class="meter-tablewrap"><table class="meter-table meter-legacy-table"><thead><tr><th>#</th><th class="meter-right">Horómetro anterior</th><th class="meter-right">Horómetro actual</th><th class="meter-right">Horas</th><th class="meter-right">TN estimadas</th><th class="meter-right">Diésel (gal)</th></tr></thead><tbody id="meterLegacyRows"></tbody><tfoot><tr><th colspan="3">Total de los 16 tramos</th><th class="meter-right">68,600</th><th class="meter-right">686,00</th><th class="meter-right">914,67</th></tr></tfoot></table></div>
+    <p class="meter-help">Estos tramos no aparecen en los filtros por fecha porque sus fechas no fueron proporcionadas. Una vez vinculados, 4632.9 será el horómetro anterior de la siguiente lectura nueva de ese equipo. Las estimaciones no modifican los viajes reales.</p>
    </section>
    <section class="meter-panel">
     <h2 id="meterFormTitle">Registrar lectura</h2><span class="meter-section-label">Equipo seleccionado: <b id="meterFormEquipment">—</b></span>
@@ -1483,18 +1514,69 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  const isoDate=d=>{const x=new Date(d);return Number.isFinite(x.getTime())?x.toLocaleString('es-PA',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}):'—'};
  const formTimeNow=()=>{const d=new Date();return {date:[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-'),time:`${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`}};
  const periodFrom=()=>{const n=formTimeNow().date;return n.slice(0,8)+'01'};
+ // Datos del usuario: 16 tramos sin fechas ni identificador de equipo. No inventamos esos campos.
+ const LEGACY_ID='madera-horometros-4564-4632-16-tramos-v1';
+ const LEGACY_INTERVALS=[[4564.3,4567.0],[4567.0,4570.3],[4570.3,4573.3],[4573.3,4578.0],[4578.0,4588.3],[4588.3,4592.2],[4592.2,4595.0],[4595.0,4600.7],[4600.7,4609.3],[4609.3,4611.7],[4611.7,4615.5],[4615.5,4617.6],[4617.6,4621.1],[4621.1,4625.5],[4625.5,4628.3],[4628.3,4632.9]];
+ const LEGACY_END=4632.9;
+ let legacyRecord=null, legacyAvailable=false;
+ const legacyLinked=()=>legacyRecord?.equipo===loadedEquipment&&!!loadedEquipment;
+ function paintLegacy(){
+  const table=$id('meterLegacyRows');
+  table.innerHTML=LEGACY_INTERVALS.map(([a,b],i)=>{const h=difference(b,a),v=estimate(h);return `<tr><td>${i+1}</td><td class="meter-right">${fmt(a,1)}</td><td class="meter-right">${fmt(b,1)}</td><td class="meter-right">${fmt(h,3)}</td><td class="meter-right">${fmt(v.tons)}</td><td class="meter-right">${fmt(v.diesel)}</td></tr>`}).join('');
+  const totalHours=LEGACY_INTERVALS.reduce((sum,[a,b])=>sum+difference(b,a),0);
+  $id('meterLegacyHours').textContent=fmt(totalHours,3)+' h';
+  $id('meterLegacyTons').textContent=fmt(estimate(totalHours).tons)+' tn';
+  $id('meterLegacyDiesel').textContent=fmt(estimate(totalHours).diesel)+' gal';
+  const equip=legacyRecord?.equipo;
+  const label=$id('meterLegacyLabel');
+  label.textContent=equip?`Asignado a ${equip}`:'Pendiente de asignar';
+  label.classList.toggle('assigned',!!equip);
+  $id('meterLegacyNotice').textContent=!legacyAvailable?
+   'Los 16 tramos se muestran en la aplicación. Para guardarlos y asignarlos en Supabase, instala el SQL "instalar_historico_previo_madera.sql".':
+   equip?`Este historial previo está vinculado a ${equip}. Su último valor es ${fmt(LEGACY_END,1)}.`:
+   'Registros históricos sin equipo ni fecha. Consulta el equipo correcto y podrás vincularlos una sola vez.';
+  $id('meterLegacyAssign').disabled=busy||!sessionUser||!legacyAvailable||!!equip||!loadedEquipment||readingRows.length>0;
+  $id('meterLegacyAssign').textContent=equip?'Historial ya vinculado':loadedEquipment?`Vincular a ${loadedEquipment}`:'Vincular al equipo consultado';
+ }
+ async function loadLegacy(){
+  const {data,error}=await client.from('horometros_lotes_previos').select('id,equipo,primer_horometro,ultimo_horometro,tramos').eq('id',LEGACY_ID).maybeSingle();
+  if(error)throw error;
+  if(!data)throw new Error('No se encontró el lote previo en Supabase. Ejecuta instalar_historico_previo_madera.sql.');
+  if(Number(data.primer_horometro)!==4564.3||Number(data.ultimo_horometro)!==LEGACY_END || !Array.isArray(data.tramos) || data.tramos.length!==16 ||
+    data.tramos.some((item,i)=>Number(item[0])!==LEGACY_INTERVALS[i][0]||Number(item[1])!==LEGACY_INTERVALS[i][1]))
+    throw new Error('Los 16 tramos del servidor no coinciden con los originales. Revisa el lote de Supabase.');
+  legacyRecord=data;legacyAvailable=true;paintLegacy();return data;
+ }
+ async function linkLegacy(){
+  if(busy||!sessionUser||!legacyAvailable||legacyRecord?.equipo||!loadedEquipment||readingRows.length)return;
+  const equipo=loadedEquipment;
+  if(!window.confirm(`¿Vincular los 16 tramos anteriores (4564.3 a 4632.9) al equipo ${equipo}?\nEsta asignación se realiza una sola vez y sus fechas seguirán SIN INFORMAR.`))return;
+  setBusy(true,'Vinculando historial previo al equipo '+equipo+'…');paintLegacy();
+  try{
+   const {data,error}=await client.from('horometros_lotes_previos').update({equipo,asignado_por:sessionUser.id,asignado_en:new Date().toISOString()}).eq('id',LEGACY_ID).is('equipo',null).select('id,equipo').single();
+   if(error)throw error;
+   if(data?.equipo!==equipo)throw new Error('No se confirmó la asociación del lote.');
+   await loadLegacy();
+   displayLast();renderHistory();refreshPrevious();
+   status(`Historial previo vinculado a ${equipo} y verificado en Supabase. La próxima lectura partirá de 4632.9.`, 'success');
+  }catch(e){
+   try{await loadLegacy()}catch(ignore){}
+   status('No se vinculó el historial: '+(e.message||e),'error');
+  }finally{setBusy(false);paintLegacy()}
+ }
+
  const timeOf=r=>new Date(r.fecha_hora).getTime();
  let client=null,sessionUser=null,role=null,loadedEquipment='',readingRows=[],editingId=null,busy=false;
  function status(msg,kind='info'){const el=$id('meterStatus');el.textContent=msg;el.dataset.kind=kind;el.hidden=!msg}
- function setBusy(b,msg){busy=b;$id('meterSave').disabled=b||!sessionUser;$id('meterSearchBtn').disabled=b||!sessionUser;if(msg)status(msg)}
- function showConnection(){const ready=!!sessionUser;$id('meterMain').hidden=false;$id('meterWorkspace').hidden=false;$id('meterSave').disabled=busy||!ready;$id('meterSearchBtn').disabled=busy||!ready;$id('meterAccessLabel').textContent=ready?`Acceso automático · ${role==='admin'?'Administrador':'Operador'}`:'Conectando al historial…';$id('meterDeviceId').textContent=ready?sessionUser.id:'—'}
+ function setBusy(b,msg){busy=b;$id('meterSave').disabled=b||!sessionUser;$id('meterSearchBtn').disabled=b||!sessionUser;if(msg)status(msg);paintLegacy()}
+ function showConnection(){const ready=!!sessionUser;$id('meterMain').hidden=false;$id('meterWorkspace').hidden=false;$id('meterSave').disabled=busy||!ready;$id('meterSearchBtn').disabled=busy||!ready;$id('meterAccessLabel').textContent=ready?`Acceso automático · ${role==='admin'?'Administrador':'Operador'}`:'Conectando al historial…';$id('meterDeviceId').textContent=ready?sessionUser.id:'—';paintLegacy()}
  function clearDisplay(){readingRows=[];loadedEquipment='';editingId=null;$id('meterLast').textContent='—';$id('meterLastDate').textContent='Sin lecturas';$id('meterPrevious').value='';$id('meterRows').innerHTML='';$id('meterEmpty').hidden=false;$id('meterEmpty').textContent='Consulta un equipo para ver su historial.';$id('meterHistoryTotal').textContent='0 lecturas';$id('meterInitialNote').textContent='Primera lectura del equipo: establecerá el valor inicial.';renderCards(null);showEditMode(false)}
  function showEditMode(yes){$id('meterEditBox').hidden=!yes;$id('meterSave').textContent=yes?'Guardar corrección':'Guardar registro';$id('meterCancelEdit').hidden=!yes}
  function renderCards(result){$id('meterHours').textContent=result?fmt(result.hours,3)+' h':'0,000 h';$id('meterTons').textContent=result?fmt(result.tons)+' tn':'0,00 tn';$id('meterDiesel').textContent=result?fmt(result.diesel)+' gal':'0,00 gal';$id('meterHoursSub').textContent=result?`${Math.floor(Math.round(result.hours*60)/60)} h ${String(Math.round(result.hours*60)%60).padStart(2,'0')} min`:'Sin diferencia calculada'}
  function open(){const dash=$id('dashboardView'),trips=$id('tripsView');dash.hidden=true;trips.hidden=true;page.hidden=false;window.scrollTo({top:0,behavior:'instant'});refreshAuth()}
  function close(){page.hidden=true;$id('dashboardView').hidden=false;window.scrollTo({top:0,behavior:'instant'})}
  const fromRow=r=>({id:r.id,equipo:r.equipo,fecha_hora:r.fecha_hora,horometro:number(r.horometro),observacion:r.observacion||'',creado_por:r.creado_por,motivo_correccion:r.motivo_correccion||''});
- function buildHistory(){let prev=null;return [...readingRows].sort((a,b)=>timeOf(a)-timeOf(b)||a.id.localeCompare(b.id)).map(r=>{const hours=prev===null?0:difference(r.horometro,prev);const ans={...r,anterior:prev,initial:prev===null,...estimate(hours)};prev=r.horometro;return ans})}
+ function buildHistory(){let prev=legacyLinked()?LEGACY_END:null;return [...readingRows].sort((a,b)=>timeOf(a)-timeOf(b)||a.id.localeCompare(b.id)).map(r=>{const hours=prev===null?0:difference(r.horometro,prev);const ans={...r,anterior:prev,initial:prev===null,...estimate(hours)};prev=r.horometro;return ans})}
  function relevant(){const from=$id('meterFrom').value,to=$id('meterTo').value;return buildHistory().filter(r=>{const d=r.fecha_hora.slice(0,10); // Supabase returns UTC: date filter below uses local calendar instead
     const local=new Date(r.fecha_hora);const y=local.getFullYear(),m=String(local.getMonth()+1).padStart(2,'0'),day=String(local.getDate()).padStart(2,'0'),date=`${y}-${m}-${day}`;
     return (!from||date>=from)&&(!to||date<=to);});}
@@ -1531,17 +1613,26 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   try{await connecting}finally{connecting=null}
  }
  async function loadRows(equipment){const rows=[],step=500;let countExpected=null;for(let start=0;start<1000000;start+=step){const query=client.from('horometros_lecturas').select('id,equipo,fecha_hora,horometro,observacion,creado_por,motivo_correccion',start===0?{count:'exact'}:{}).eq('equipo',equipment).order('fecha_hora',{ascending:true}).order('id',{ascending:true}).range(start,start+step-1);const {data,error,count}=await query;if(error)throw error;if(start===0&&Number.isInteger(count))countExpected=count;rows.push(...(data||[]).map(fromRow));if(!data?.length||data.length<step||(countExpected!==null&&rows.length>=countExpected))break}if(countExpected!==null&&rows.length!==countExpected)throw new Error(`Consulta incompleta: ${rows.length} de ${countExpected} lecturas.`);if(new Set(rows.map(x=>x.id)).size!==rows.length)throw new Error('Se encontraron lecturas duplicadas entre páginas.');return rows}
- async function search(silent=false){const equipo=normalize($id('meterEquipment').value);if(busy||!role)return;if(!equipo||equipo.length>40){status('Escribe un número de equipo o placa válido (máximo 40 caracteres).','error');return}setBusy(true,'Cargando lecturas de '+equipo+' desde Supabase…');try{const rows=await loadRows(equipo);readingRows=rows;loadedEquipment=equipo;$id('meterEquipment').value=equipo;editingId=null;showEditMode(false);displayLast();renderHistory();refreshPrevious();status(rows.length?`Se recuperaron ${rows.length} lecturas de ${equipo} desde Supabase.`:`${equipo} no tiene lecturas. El primer registro será su lectura inicial.`,'success')}catch(e){clearDisplay();status('Error consultando Supabase: '+e.message,'error')}finally{setBusy(false)}}
- function displayLast(){const latest=readingRows.at(-1);$id('meterLast').textContent=latest?fmt(latest.horometro,3):'—';$id('meterLastDate').textContent=latest?isoDate(latest.fecha_hora):'Sin lecturas'}
- function refreshPrevious(){const equipo=normalize($id('meterEquipment').value);$id('meterFormEquipment').textContent=equipo||'—';if(equipo!==loadedEquipment){$id('meterPrevious').value='';renderCards(null);return}const d=$id('meterDate').value,t=$id('meterTime').value,dt=d&&t?new Date(`${d}T${t}:00`).getTime():NaN;let prev=null,next=null;for(const r of readingRows){if(r.id===editingId)continue;const tt=timeOf(r);if(tt<dt)prev=r;else if(tt>dt){next=r;break}}$id('meterPrevious').value=prev?String(prev.horometro.toFixed(3)):'';$id('meterInitialNote').textContent=prev?`Lectura previa: ${isoDate(prev.fecha_hora)}${next?' · Existe una lectura posterior.':''}`:'Lectura inicial: sin horas ni consumo hasta la próxima lectura.';calculate(false)}
+ async function search(silent=false){const equipo=normalize($id('meterEquipment').value);if(busy||!role)return;if(!equipo||equipo.length>40){status('Escribe un número de equipo o placa válido (máximo 40 caracteres).','error');return}setBusy(true,'Cargando lecturas de '+equipo+' desde Supabase…');try{const rows=await loadRows(equipo);
+  // El historial previo es un lote aparte sin fechas. Solo se usa como línea base si está asociado.
+  let legacyErr=null;
+  try{await loadLegacy()}catch(e){legacyRecord=null;legacyAvailable=false;legacyErr=e;paintLegacy()}
+  readingRows=rows;loadedEquipment=equipo;$id('meterEquipment').value=equipo;editingId=null;showEditMode(false);displayLast();renderHistory();refreshPrevious();paintLegacy();
+   const msg=legacyErr?`Historial fechado consultado; los 16 tramos previos aún no están conectados en Supabase: ${legacyErr.message}`:
+    rows.length?`Se recuperaron ${rows.length} lecturas de ${equipo}.`:
+    legacyLinked()?`Historial previo asociado a ${equipo}. El último horómetro es 4632.9.`:
+    `${equipo} no tiene lecturas fechadas. Puedes registrar su primera lectura o vincular los 16 tramos previos si corresponden.`;
+   status(msg,legacyErr?'error':'success')}catch(e){clearDisplay();status('Error consultando Supabase: '+e.message,'error')}finally{setBusy(false)}}
+ function displayLast(){const latest=readingRows.at(-1);$id('meterLast').textContent=latest?fmt(latest.horometro,3):legacyLinked()?fmt(LEGACY_END,3):'—';$id('meterLastDate').textContent=latest?isoDate(latest.fecha_hora):legacyLinked()?'Historial previo · sin fecha':'Sin lecturas'}
+ function refreshPrevious(){const equipo=normalize($id('meterEquipment').value);$id('meterFormEquipment').textContent=equipo||'—';if(equipo!==loadedEquipment){$id('meterPrevious').value='';renderCards(null);return}const d=$id('meterDate').value,t=$id('meterTime').value,dt=d&&t?new Date(`${d}T${t}:00`).getTime():NaN;let prev=null,next=null;for(const r of readingRows){if(r.id===editingId)continue;const tt=timeOf(r);if(tt<dt)prev=r;else if(tt>dt){next=r;break}}$id('meterPrevious').value=prev?String(prev.horometro.toFixed(3)):legacyLinked()?String(LEGACY_END):'';$id('meterInitialNote').textContent=prev?`Lectura previa: ${isoDate(prev.fecha_hora)}${next?' · Existe una lectura posterior.':''}`:legacyLinked()?'Lectura previa del historial recibido: 4632.9 · su fecha no fue informada.':'Lectura inicial: sin horas ni consumo hasta la próxima lectura.';calculate(false)}
  function calculate(notify=true){const raw=$id('meterCurrent').value.replace(',','.'),curr=number(raw),prevRaw=$id('meterPrevious').value,prev=prevRaw===''?null:number(prevRaw);if(!raw||!Number.isFinite(curr)||curr<0){renderCards(null);if(notify)status('Introduce un horómetro actual numérico y no negativo.','error');return null}if(prev!==null&&curr<=prev){renderCards(null);if(notify)status('La nueva lectura debe ser superior a la anterior.','error');return null}const d=$id('meterDate').value,t=$id('meterTime').value,dt=d&&t?new Date(`${d}T${t}:00`).getTime():NaN;const next=readingRows.find(r=>r.id!==editingId&&timeOf(r)>dt);if(next&&curr>=next.horometro){renderCards(null);if(notify)status('La lectura debe ser menor que el siguiente registro cronológico ('+fmt(next.horometro,3)+').','error');return null}const hours=prev===null?0:difference(curr,prev);const result=estimate(hours);renderCards(result);if(notify)status(prev===null?'Lectura inicial: se guardará como línea base.':`Cálculo listo: ${fmt(hours,3)} h, ${fmt(result.tons)} tn y ${fmt(result.diesel)} gal.`,'success');return result}
  function renderHistory(){const filtered=relevant();const qty=filtered.length,hours=filtered.reduce((a,x)=>a+x.hours,0);const tons=filtered.reduce((a,x)=>a+x.tons,0);const diesel=filtered.reduce((a,x)=>a+x.diesel,0);$id('meterHistoryTotal').textContent=`${qty} lecturas`;$id('meterSumHours').textContent=fmt(hours,3)+' h';$id('meterSumTons').textContent=fmt(tons)+' tn';$id('meterSumDiesel').textContent=fmt(diesel)+' gal';$id('meterEmpty').hidden=qty>0;$id('meterEmpty').textContent=readingRows.length?'No hay lecturas en las fechas seleccionadas.':'No hay lecturas registradas para este equipo.';$id('meterRows').innerHTML=filtered.map(row=>`<tr><td>${escapeHTML(isoDate(row.fecha_hora))}</td><td class="meter-right">${row.initial?'INICIAL':fmt(row.anterior,3)}</td><td class="meter-right">${fmt(row.horometro,3)}</td><td class="meter-right">${fmt(row.hours,3)}</td><td class="meter-right">${fmt(row.tons)}</td><td class="meter-right">${fmt(row.diesel)}</td><td>${escapeHTML(row.observacion||'—')}</td>${role==='admin'?`<td><button type="button" class="meter-edit" data-meter-id="${row.id}">Editar</button></td>`:''}</tr>`).join('');$id('meterEditHeading').textContent=role==='admin'?'Correcciones supervisadas':'';$id('meterColEdit').hidden=role!=='admin';$id('meterRows').querySelectorAll('[data-meter-id]').forEach(btn=>btn.addEventListener('click',()=>edit(btn.dataset.meterId)))}
  function edit(id){if(role!=='admin')return;const row=readingRows.find(r=>r.id===id);if(!row)return;editingId=id;const date=new Date(row.fecha_hora);$id('meterDate').value=`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;$id('meterTime').value=`${String(date.getHours()).padStart(2,'0')}:${String(date.getMinutes()).padStart(2,'0')}`;$id('meterCurrent').value=String(row.horometro);$id('meterObservation').value=row.observacion;$id('meterCorrectionReason').value='';showEditMode(true);refreshPrevious();$id('meterFormTitle').scrollIntoView({behavior:'smooth',block:'start'});status('Corrigiendo registro existente. Es obligatorio indicar el motivo de la corrección.')} 
  function cancelEdit(){editingId=null;showEditMode(false);$id('meterCorrectionReason').value='';$id('meterObservation').value='';$id('meterCurrent').value='';const {date,time}=formTimeNow();$id('meterDate').value=date;$id('meterTime').value=time;refreshPrevious()}
  async function save(){if(busy||!role)return;const equipo=normalize($id('meterEquipment').value);if(!equipo||loadedEquipment!==equipo){status('Primero pulsa Consultar para cargar el historial completo de este equipo.','error');return}const date=$id('meterDate').value,time=$id('meterTime').value;if(!date||!time){status('Indica fecha y hora de la lectura.','error');return}const timestamp=new Date(`${date}T${time}:00`);if(!Number.isFinite(timestamp.getTime())||timestamp>new Date(Date.now()+5*60000)){status('Fecha y hora inválida o futura.','error');return}const value=number($id('meterCurrent').value.replace(',','.'));if(!Number.isFinite(value)||value<0||Math.round(value*1000)/1000!==value){status('Ingresa un valor no negativo con hasta tres decimales.','error');return}if(!calculate(false)){status('Lectura inválida: el valor debe superar el horómetro anterior.','error');return}if(readingRows.some(r=>r.id!==editingId&&(timeOf(r)===timestamp.getTime()||ms(r.horometro)===ms(value)))){status('Ya existe una lectura de este equipo con la misma fecha/hora o valor.','error');return}const reason=$id('meterCorrectionReason').value.trim();if(editingId&&(role!=='admin'||reason.length<5)){status('La corrección requiere rol administrador y un motivo de al menos 5 caracteres.','error');return}const payload={fecha_hora:timestamp.toISOString(),horometro:value,observacion:$id('meterObservation').value.trim()};setBusy(true,editingId?'Guardando corrección en Supabase…':'Guardando lectura en Supabase…');try{let response;if(editingId){response=await client.from('horometros_lecturas').update({...payload,motivo_correccion:reason}).eq('id',editingId).eq('equipo',equipo).select('id,horometro,fecha_hora').single()}else{response=await client.from('horometros_lecturas').insert({...payload,equipo}).select('id,horometro,fecha_hora').single()}if(response.error)throw response.error;if(!response.data?.id)throw new Error('No se confirmó el guardado en la base de datos.');const savedId=response.data.id;const rows=await loadRows(equipo);const verified=rows.find(r=>r.id===savedId);if(!verified||ms(verified.horometro)!==ms(value))throw new Error('Supabase confirmó la escritura, pero no se pudo verificar la lectura al recuperarla. Repite la consulta antes de intentar otro guardado.');readingRows=rows;editingId=null;showEditMode(false);$id('meterCurrent').value='';$id('meterObservation').value='';$id('meterCorrectionReason').value='';const nt=formTimeNow();$id('meterDate').value=nt.date;$id('meterTime').value=nt.time;displayLast();renderHistory();refreshPrevious();status('Registro guardado y recuperado correctamente desde Supabase · '+equipo+' · '+fmt(value,3),'success')}catch(e){status('Error guardando en Supabase: '+(e.message||e)+' · Comprueba el historial antes de reintentar.','error')}finally{setBusy(false)}}
- function init(){const t=formTimeNow();$id('meterDate').value=t.date;$id('meterTime').value=t.time;$id('meterFrom').value=periodFrom();$id('meterTo').value=t.date;clearDisplay();showConnection();try{client=window.supabase?.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:'madera-horometros-auth-20261024'}})||null}catch(e){status('Error inicializando Supabase: '+e.message,'error')} $id('openHorometers').addEventListener('click',()=>{loadPlateSuggestions();open()});$id('meterBack').addEventListener('click',close);$id('meterCopyId').addEventListener('click',async()=>{const id=sessionUser?.id;if(!id)return;try{await navigator.clipboard.writeText(id);status('ID de dispositivo copiado. Compártelo únicamente con quien administra los permisos.','success')}catch(e){status('Selecciona y copia manualmente el ID de dispositivo.')}});$id('meterSearchBtn').addEventListener('click',()=>search());$id('meterEquipment').addEventListener('keydown',e=>{if(e.key==='Enter')search()});$id('meterEquipment').addEventListener('input',()=>{if(normalize($id('meterEquipment').value)!==loadedEquipment){readingRows=[];loadedEquipment='';editingId=null;showEditMode(false);refreshPrevious()}});['meterDate','meterTime'].forEach(id=>$id(id).addEventListener('change',refreshPrevious));$id('meterCurrent').addEventListener('input',()=>calculate(false));$id('meterCalculate').addEventListener('click',()=>calculate(true));$id('meterSave').addEventListener('click',save);$id('meterCancelEdit').addEventListener('click',cancelEdit);['meterFrom','meterTo'].forEach(id=>$id(id).addEventListener('change',()=>{if($id('meterFrom').value&&$id('meterTo').value&&$id('meterFrom').value>$id('meterTo').value){status('La fecha inicial del historial debe ser anterior a la final.','error');return}renderHistory()}));$id('meterRefresh').addEventListener('click',()=>search(true));}
+ function init(){paintLegacy();$id('meterLegacyAssign').addEventListener('click',linkLegacy);const t=formTimeNow();$id('meterDate').value=t.date;$id('meterTime').value=t.time;$id('meterFrom').value=periodFrom();$id('meterTo').value=t.date;clearDisplay();showConnection();try{client=window.supabase?.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:'madera-horometros-auth-20261024'}})||null}catch(e){status('Error inicializando Supabase: '+e.message,'error')} $id('openHorometers').addEventListener('click',()=>{loadPlateSuggestions();open()});$id('meterBack').addEventListener('click',close);$id('meterCopyId').addEventListener('click',async()=>{const id=sessionUser?.id;if(!id)return;try{await navigator.clipboard.writeText(id);status('ID de dispositivo copiado. Compártelo únicamente con quien administra los permisos.','success')}catch(e){status('Selecciona y copia manualmente el ID de dispositivo.')}});$id('meterSearchBtn').addEventListener('click',()=>search());$id('meterEquipment').addEventListener('keydown',e=>{if(e.key==='Enter')search()});$id('meterEquipment').addEventListener('input',()=>{if(normalize($id('meterEquipment').value)!==loadedEquipment){readingRows=[];loadedEquipment='';editingId=null;showEditMode(false);refreshPrevious();paintLegacy()}});['meterDate','meterTime'].forEach(id=>$id(id).addEventListener('change',refreshPrevious));$id('meterCurrent').addEventListener('input',()=>calculate(false));$id('meterCalculate').addEventListener('click',()=>calculate(true));$id('meterSave').addEventListener('click',save);$id('meterCancelEdit').addEventListener('click',cancelEdit);['meterFrom','meterTo'].forEach(id=>$id(id).addEventListener('change',()=>{if($id('meterFrom').value&&$id('meterTo').value&&$id('meterFrom').value>$id('meterTo').value){status('La fecha inicial del historial debe ser anterior a la final.','error');return}renderHistory()}));$id('meterRefresh').addEventListener('click',()=>search(true));}
  // Para pruebas automatizadas de la regla sin depender de Supabase.
- window.MADERA_HOROMETROS={calcular:(prev,next)=>estimate(difference(next,prev))};
+ window.MADERA_HOROMETROS={calcular:(prev,next)=>estimate(difference(next,prev)),tramosPrevios:()=>LEGACY_INTERVALS.map(([a,b])=>({anterior:a,actual:b,...estimate(difference(b,a))}))};
  init();
 })();
 </script>
@@ -1577,7 +1668,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js?v=horometros-20261024-v2', { scope: './' })
+      navigator.serviceWorker.register('./sw.js?v=horometros-20261024-v3-legacy', { scope: './' })
         .catch((error) => console.error('No se pudo registrar el Service Worker:', error));
     });
   }

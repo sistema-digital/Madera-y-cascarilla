@@ -1,6 +1,6 @@
-/* PWA Madera y Cascarilla · CACHE BUST 2026-10-24 horómetros v2 sin formulario de acceso
+/* PWA Madera y Cascarilla · CACHE BUST 2026-10-24 horómetros v3 · historial previo de 16 tramos
    Usar junto al index.html actualizado. No mezcla estimaciones y viajes. */
-const CACHE_VERSION='madera-horometros-v20261024-2';
+const CACHE_VERSION='madera-horometros-v20261024-3-historico';
 self.addEventListener('install',event=>{
  event.waitUntil((async()=>{const cache=await caches.open(CACHE_VERSION);try{await cache.add('./index.html')}catch(e){console.warn('Sin precarga de index',e)}await self.skipWaiting()})());
 });
